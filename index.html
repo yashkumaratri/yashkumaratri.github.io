@@ -278,7 +278,7 @@ class GridWorm
         this.pointsList = pointsList;  
         this.screenWidth = screenWidth; 
         this.screenHeight= screenHeight; 
-        this.speed   = 3;//the magnitude of the velocity
+        this.speed   = 1;//the magnitude of the velocity
         this.velocity= this.getVelocity(); 
         this.junctionMemory = [{point:point,velocity:this.velocity}];//memory of each junction visited(helps to construct the worm)
         //the maximum number of junctions a gridworm can keep in memory(this determines how long the gridworm will be)
