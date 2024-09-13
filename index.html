@@ -16,7 +16,7 @@
         width: 100%;
         height: 100%;
         z-index: -1;
-        opacity: 0.25; /* Adjust this value to make the background more or less faded */
+        opacity: 0.20; /* Adjust this value to make the background more or less faded */
       }
       
       body {
@@ -278,7 +278,7 @@ class GridWorm
         this.pointsList = pointsList;  
         this.screenWidth = screenWidth; 
         this.screenHeight= screenHeight; 
-        this.speed   = 5;//the magnitude of the velocity
+        this.speed   = 3;//the magnitude of the velocity
         this.velocity= this.getVelocity(); 
         this.junctionMemory = [{point:point,velocity:this.velocity}];//memory of each junction visited(helps to construct the worm)
         //the maximum number of junctions a gridworm can keep in memory(this determines how long the gridworm will be)
