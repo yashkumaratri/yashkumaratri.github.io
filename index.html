@@ -216,18 +216,6 @@
     </div>
   </div>
 
-  <!-- JavaScript toggle function -->
-  <script>
-    function toggleMoreNews() {
-      const items = [4, 5, 6, 7].map(i => document.getElementById(`news${i}`));
-      const isHidden = items[0].classList.contains("hidden");
-      items.forEach(item => item.classList.toggle("hidden"));
-      document.getElementById("moreNewsBtn").innerText = isHidden
-        ? "Show Less"
-        : "Show More";
-    }
-  </script>
-</body>
 
 
         <hr />
