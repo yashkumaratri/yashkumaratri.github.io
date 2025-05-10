@@ -31,18 +31,17 @@
   </head>
 <script>
   function toggleMoreNews() {
-    const moreNews = document.getElementById("extraNews");
-    const btn = document.getElementById("moreNewsBtn");
+    const hiddenItems = [
+      "news4", "news5", "news6", "news7"
+    ].map(id => document.getElementById(id));
 
-    if (moreNews.classList.contains("hidden")) {
-      moreNews.classList.remove("hidden");
-      btn.textContent = "Show Less";
-    } else {
-      moreNews.classList.add("hidden");
-      btn.textContent = "Show More";
-    }
+    const isHidden = hiddenItems[0].classList.contains("hidden");
+    hiddenItems.forEach(item => item.classList.toggle("hidden"));
+
+    document.getElementById("moreNewsBtn").textContent = isHidden ? "Show Less" : "Show More";
   }
 </script>
+
   <body>
     <canvas id="gridwormCanvas"></canvas>
     <div class="content">
@@ -80,65 +79,51 @@
                 >
               </div>
 
-              <!-- Collapsible News Section -->
-<!-- News Section -->
+           <!-- News Section -->
 <div class="mt-8 text-sm">
   <h3 class="text-2xl font-semibold mb-2">News</h3>
   <ul class="list-none pl-0 text-gray-600 space-y-1 text-justify">
     <li>
       <span class="font-semibold text-gray-800">Oct 2024</span> – Selected as
-      <a
-        href="https://www.daad.de/en/the-daad/postdocnet/fellows/fellows/"
-        class="text-blue-600 hover:underline"
-        target="_blank"
-        >DAAD AInet fellow 2024</a
-      >.
+      <a href="https://www.daad.de/en/the-daad/postdocnet/fellows/fellows/"
+         class="text-blue-600 hover:underline"
+         target="_blank">DAAD AInet fellow 2024</a>.
     </li>
     <li>
       <span class="font-semibold text-gray-800">June 2024</span> – Joined UVA as a postdoc.
     </li>
     <li>
       <span class="font-semibold text-gray-800">Feb 2024</span> – Presented at the
-      <a
-        href="https://event.india.acm.org/arcs/home/"
-        class="text-blue-600 hover:underline"
-        target="_blank"
-        >ACM ARCS symposium</a
-      > at NISER Bhubaneswar.
+      <a href="https://event.india.acm.org/arcs/home/"
+         class="text-blue-600 hover:underline"
+         target="_blank">ACM ARCS symposium</a> at NISER Bhubaneswar.
     </li>
 
-    <!-- Hidden extra news -->
-    <div id="extraNews" class="hidden space-y-1 mt-1">
-      <li>
-        <span class="font-semibold text-gray-800">Dec 2023</span> – Gave tutorial at
-        <a
-          href="https://ai4mh.github.io"
-          class="text-blue-600 hover:underline"
-          target="_blank"
-          >ICON 2023</a
-        >.
-      </li>
-      <li>
-        <span class="font-semibold text-gray-800">Nov 2023</span> – Microsoft Travel Grant for EMNLP.
-      </li>
-      <li>
-        <span class="font-semibold text-gray-800">Aug 2023</span> – Microsoft Travel Grant for SIGKDD.
-      </li>
-      <li>
-        <span class="font-semibold text-gray-800">Apr 2023</span> – Webchair for Intl. Conf. on Big Data & AI.
-      </li>
-    </div>
+    <!-- Hidden extra news (corrected to be part of the same <ul>) -->
+    <li class="hidden" id="news4">
+      <span class="font-semibold text-gray-800">Dec 2023</span> – Gave tutorial at
+      <a href="https://ai4mh.github.io"
+         class="text-blue-600 hover:underline"
+         target="_blank">ICON 2023</a>.
+    </li>
+    <li class="hidden" id="news5">
+      <span class="font-semibold text-gray-800">Nov 2023</span> – Microsoft Travel Grant for EMNLP.
+    </li>
+    <li class="hidden" id="news6">
+      <span class="font-semibold text-gray-800">Aug 2023</span> – Microsoft Travel Grant for SIGKDD.
+    </li>
+    <li class="hidden" id="news7">
+      <span class="font-semibold text-gray-800">Apr 2023</span> – Webchair for Intl. Conf. on Big Data & AI.
+    </li>
   </ul>
 
   <!-- Toggle button -->
-  <button
-    onclick="toggleMoreNews()"
-    id="moreNewsBtn"
-    class="mt-2 text-blue-600 hover:underline focus:outline-none"
-  >
+  <button onclick="toggleMoreNews()" id="moreNewsBtn"
+          class="mt-2 text-blue-600 hover:underline focus:outline-none">
     Show More
   </button>
 </div>
+
 
 
 
