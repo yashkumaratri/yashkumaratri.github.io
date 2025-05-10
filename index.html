@@ -29,176 +29,206 @@
       }
     </style>
   </head>
-<script>
-  function toggleMoreNews() {
-    const hiddenItems = [
-      "news4", "news5", "news6", "news7"
-    ].map(id => document.getElementById(id));
-
-    const isHidden = hiddenItems[0].classList.contains("hidden");
-    hiddenItems.forEach(item => item.classList.toggle("hidden"));
-
-    document.getElementById("moreNewsBtn").textContent = isHidden ? "Show Less" : "Show More";
-  }
-</script>
+  <script>
+    function toggleMoreNews() {
+      const items = [4, 5, 6, 7].map(i => document.getElementById(`news${i}`));
+      const isHidden = items[0].classList.contains("hidden");
+      items.forEach(item => item.classList.toggle("hidden"));
+      document.getElementById("moreNewsBtn").innerText = isHidden
+        ? "Show Less"
+        : "Show More";
+    }
+  </script>
 
   <body>
-    <canvas id="gridwormCanvas"></canvas>
-    <div class="content">
-      <div class="container mx-auto px-4 py-8">
-        <div class="bg-white rounded-lg p-8 md:px-24 space-y-12">
-          <div class="flex flex-col md:flex-row md:space-x-12">
-            <!-- Left column -->
-            <div class="md:w-1/3 text-center md:text-left">
-              <img
-                class="w-48 h-64 mb-4 mx-auto md:mx-0 rounded-full object-contain"
-                src="attachments/yash.jpg"
-              />
-              <h1 class="text-3xl font-semibold mt-2">Yash Kumar Atri</h1>
-              <h2 class="text-l font-medium text-gray-600">
-                &nbsp; &nbsp; &nbsp; University of Virginia
-              </h2>
-              <div class="mt-4 mb-6">
-                <a
-                  href="https://www.linkedin.com/in/yashkumaratri/"
-                  class="text-blue-600 hover:underline mr-4"
-                  target="_blank"
-                  >LinkedIn</a
-                >
-                <a
-                  href="https://twitter.com/yashkumaratri"
-                  class="text-blue-600 hover:underline mr-4"
-                  target="_blank"
-                  >Twitter</a
-                >
-                <a
-                  href="https://scholar.google.com/citations?user=sTyStXIAAAAJ&hl=en"
-                  class="text-blue-600 hover:underline mr-4"
-                  target="_blank"
-                  >GScholar</a
-                >
-              </div>
+  <canvas id="gridwormCanvas"></canvas>
+  <div class="content">
+    <div class="container mx-auto px-4 py-8">
+      <div class="bg-white rounded-lg p-8 md:px-24 space-y-12">
+        <div class="flex flex-col md:flex-row md:space-x-12">
+          <!-- Left column -->
+          <div class="md:w-1/3 text-center md:text-left">
+            <img
+              class="w-48 h-64 mb-4 mx-auto md:mx-0 rounded-full object-contain"
+              src="attachments/yash.jpg"
+              alt="Yash Kumar Atri"
+            />
+            <h1 class="text-3xl font-semibold mt-2">Yash Kumar Atri</h1>
+            <h2 class="text-l font-medium text-gray-600">
+              &nbsp; &nbsp; &nbsp; University of Virginia
+            </h2>
+            <div class="mt-4 mb-6">
+              <a
+                href="https://www.linkedin.com/in/yashkumaratri/"
+                class="text-blue-600 hover:underline mr-4"
+                target="_blank"
+                >LinkedIn</a
+              >
+              <a
+                href="https://twitter.com/yashkumaratri"
+                class="text-blue-600 hover:underline mr-4"
+                target="_blank"
+                >Twitter</a
+              >
+              <a
+                href="https://scholar.google.com/citations?user=sTyStXIAAAAJ&hl=en"
+                class="text-blue-600 hover:underline mr-4"
+                target="_blank"
+                >GScholar</a
+              >
+            </div>
 
-           <!-- News Section -->
-<div class="mt-8 text-sm">
-  <h3 class="text-2xl font-semibold mb-2">News</h3>
-  <ul class="list-none pl-0 text-gray-600 space-y-1 text-justify">
-    <li>
-      <span class="font-semibold text-gray-800">Oct 2024</span> – Selected as
-      <a href="https://www.daad.de/en/the-daad/postdocnet/fellows/fellows/"
-         class="text-blue-600 hover:underline"
-         target="_blank">DAAD AInet fellow 2024</a>.
-    </li>
-    <li>
-      <span class="font-semibold text-gray-800">June 2024</span> – Joined UVA as a postdoc.
-    </li>
-    <li>
-      <span class="font-semibold text-gray-800">Feb 2024</span> – Presented at the
-      <a href="https://event.india.acm.org/arcs/home/"
-         class="text-blue-600 hover:underline"
-         target="_blank">ACM ARCS symposium</a> at NISER Bhubaneswar.
-    </li>
-
-    <!-- Hidden extra news (corrected to be part of the same <ul>) -->
-    <li class="hidden" id="news4">
-      <span class="font-semibold text-gray-800">Dec 2023</span> – Gave tutorial at
-      <a href="https://ai4mh.github.io"
-         class="text-blue-600 hover:underline"
-         target="_blank">ICON 2023</a>.
-    </li>
-    <li class="hidden" id="news5">
-      <span class="font-semibold text-gray-800">Nov 2023</span> – Microsoft Travel Grant for EMNLP.
-    </li>
-    <li class="hidden" id="news6">
-      <span class="font-semibold text-gray-800">Aug 2023</span> – Microsoft Travel Grant for SIGKDD.
-    </li>
-    <li class="hidden" id="news7">
-      <span class="font-semibold text-gray-800">Apr 2023</span> – Webchair for Intl. Conf. on Big Data & AI.
-    </li>
-  </ul>
-
-  <!-- Toggle button -->
-  <button onclick="toggleMoreNews()" id="moreNewsBtn"
-          class="mt-2 text-blue-600 hover:underline focus:outline-none">
-    Show More
-  </button>
-</div>
-
-
-
-
-            <!-- Right column: About Me -->
-            <div class="md:w-2/3 text-justify mt-8 md:mt-0">
-              <div class="mb-8">
-                <h3 class="text-2xl font-semibold mb-2">About Me</h3>
-                <p class="text-gray-700 text-base leading-relaxed">
-                  Hi! I am a postdoc at the
+            <!-- News Section -->
+            <div class="mt-8 text-sm">
+              <h3 class="text-2xl font-semibold mb-2">News</h3>
+              <ul class="list-none pl-0 text-gray-600 space-y-1 text-justify">
+                <li>
+                  <span class="font-semibold text-gray-800">Oct 2024</span> –
+                  Selected as
                   <a
-                    href="https://datascience.virginia.edu"
-                    target="_blank"
+                    href="https://www.daad.de/en/the-daad/postdocnet/fellows/fellows/"
                     class="text-blue-600 hover:underline"
-                    >University of Virginia</a
-                  >, working with
+                    target="_blank"
+                    >DAAD AInet fellow 2024</a
+                  >.
+                </li>
+                <li>
+                  <span class="font-semibold text-gray-800">June 2024</span> –
+                  Joined UVA as a postdoc.
+                </li>
+                <li>
+                  <span class="font-semibold text-gray-800">Feb 2024</span> –
+                  Presented at the
                   <a
-                    href="https://www.tomhartvigsen.com"
-                    target="_blank"
+                    href="https://event.india.acm.org/arcs/home/"
                     class="text-blue-600 hover:underline"
-                    >Prof. Tom Hartvigsen</a
-                  >. Before joining UVA, I completed my PhD in Computer Science
-                  and Engineering at
-                  <a
-                    href="https://www.iiitd.ac.in"
                     target="_blank"
-                    class="text-blue-600 hover:underline"
-                    >IIIT Delhi</a
-                  >, India, where I was advised by
-                  <a
-                    href="https://www.iiitd.ac.in/vikram"
-                    target="_blank"
-                    class="text-blue-600 hover:underline"
-                    >Prof. Vikram Goyal</a
+                    >ACM ARCS symposium</a
                   >
-                  and
+                  at NISER Bhubaneswar.
+                </li>
+                <li class="hidden" id="news4">
+                  <span class="font-semibold text-gray-800">Dec 2023</span> –
+                  Gave tutorial at
                   <a
-                    href="https://www.tanmoychak.com"
-                    target="_blank"
-                    class="text-blue-600 hover:underline"
-                    >Prof. Tanmoy Chakraborty</a
-                  >. My research focuses on understanding and enhancing neural
-                  language generation models, particularly large language models
-                  (LLMs), and their applications in natural language processing
-                  tasks such as abstractive text summarization.
-                </p>
-
-                <h4 class="text-xl font-semibold text-gray-800 mt-6 mb-2">
-                  Research Interests
-                </h4>
-                <p class="text-gray-700 text-base leading-relaxed">
-                  <a
-                    href="https://drive.google.com/file/d/1ZJU-V7N3YFe5WNnj9pNzAMNWo16tApBj/view?usp=share_link"
+                    href="https://ai4mh.github.io"
                     class="text-blue-600 hover:underline"
                     target="_blank"
-                    >Resume</a
-                  >
-                  <br />
-                  I am interested in enabling language models to continuously
-                  learn and adapt beyond their initial pretraining. My current
-                  research explores model editing—developing methods to update
-                  language models with new information or corrections
-                  efficiently, without retraining them from scratch. I build
-                  modular systems that treat each update as a localized
-                  intervention, allowing the model to evolve while retaining
-                  what it already knows. My long-term vision is to build models
-                  that learn like humans, accumulating knowledge meaningfully,
-                  refining their understanding over time, and staying robust as
-                  languages, technologies, and societal values shift. Such
-                  systems could become trustworthy AI partners in critical
-                  domains like healthcare, education, and policy, where being
-                  outdated is not just a limitation but a serious risk.
-                </p>
-              </div>
+                    >ICON 2023</a
+                  >.
+                </li>
+                <li class="hidden" id="news5">
+                  <span class="font-semibold text-gray-800">Nov 2023</span> –
+                  Microsoft Travel Grant for EMNLP.
+                </li>
+                <li class="hidden" id="news6">
+                  <span class="font-semibold text-gray-800">Aug 2023</span> –
+                  Microsoft Travel Grant for SIGKDD.
+                </li>
+                <li class="hidden" id="news7">
+                  <span class="font-semibold text-gray-800">Apr 2023</span> –
+                  Webchair for Intl. Conf. on Big Data & AI.
+                </li>
+              </ul>
+              <button
+                onclick="toggleMoreNews()"
+                id="moreNewsBtn"
+                class="mt-2 text-blue-600 hover:underline focus:outline-none"
+              >
+                Show More
+              </button>
             </div>
           </div>
+
+          <!-- Right column: About Me -->
+          <div class="md:w-2/3 text-justify mt-8 md:mt-0">
+            <div class="mb-8">
+              <h3 class="text-2xl font-semibold mb-2">About Me</h3>
+              <p class="text-gray-700 text-base leading-relaxed">
+                Hi! I am a postdoc at the
+                <a
+                  href="https://datascience.virginia.edu"
+                  target="_blank"
+                  class="text-blue-600 hover:underline"
+                  >University of Virginia</a
+                >, working with
+                <a
+                  href="https://www.tomhartvigsen.com"
+                  target="_blank"
+                  class="text-blue-600 hover:underline"
+                  >Prof. Tom Hartvigsen</a
+                >. Before joining UVA, I completed my PhD in Computer Science
+                and Engineering at
+                <a
+                  href="https://www.iiitd.ac.in"
+                  target="_blank"
+                  class="text-blue-600 hover:underline"
+                  >IIIT Delhi</a
+                >, India, where I was advised by
+                <a
+                  href="https://www.iiitd.ac.in/vikram"
+                  target="_blank"
+                  class="text-blue-600 hover:underline"
+                  >Prof. Vikram Goyal</a
+                >
+                and
+                <a
+                  href="https://www.tanmoychak.com"
+                  target="_blank"
+                  class="text-blue-600 hover:underline"
+                  >Prof. Tanmoy Chakraborty</a
+                >. My research focuses on understanding and enhancing neural
+                language generation models, particularly large language models
+                (LLMs), and their applications in natural language processing
+                tasks such as abstractive text summarization.
+              </p>
+
+              <h4 class="text-xl font-semibold text-gray-800 mt-6 mb-2">
+                Research Interests
+              </h4>
+              <p class="text-gray-700 text-base leading-relaxed">
+                <a
+                  href="https://drive.google.com/file/d/1ZJU-V7N3YFe5WNnj9pNzAMNWo16tApBj/view?usp=share_link"
+                  class="text-blue-600 hover:underline"
+                  target="_blank"
+                  >Resume</a
+                >
+                <br />
+                I am interested in enabling language models to continuously
+                learn and adapt beyond their initial pretraining. My current
+                research explores model editing—developing methods to update
+                language models with new information or corrections efficiently,
+                without retraining them from scratch. I build modular systems
+                that treat each update as a localized intervention, allowing the
+                model to evolve while retaining what it already knows. My
+                long-term vision is to build models that learn like humans,
+                accumulating knowledge meaningfully, refining their
+                understanding over time, and staying robust as languages,
+                technologies, and societal values shift. Such systems could
+                become trustworthy AI partners in critical domains like
+                healthcare, education, and policy, where being outdated is not
+                just a limitation but a serious risk.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript toggle function -->
+  <script>
+    function toggleMoreNews() {
+      const items = [4, 5, 6, 7].map(i => document.getElementById(`news${i}`));
+      const isHidden = items[0].classList.contains("hidden");
+      items.forEach(item => item.classList.toggle("hidden"));
+      document.getElementById("moreNewsBtn").innerText = isHidden
+        ? "Show Less"
+        : "Show More";
+    }
+  </script>
+</body>
+
 
         <hr />
         <div class="mb-4">
