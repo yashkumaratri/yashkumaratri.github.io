@@ -29,7 +29,14 @@
       }
     </style>
   </head>
-
+<script>
+  function toggleNewsContent() {
+    const news = document.getElementById("newsContent");
+    const btn = document.getElementById("toggleNews");
+    news.classList.toggle("hidden");
+    btn.textContent = news.classList.contains("hidden") ? "Show News" : "Hide News";
+  }
+</script>
   <body>
     <canvas id="gridwormCanvas"></canvas>
     <div class="content">
@@ -67,61 +74,62 @@
                 >
               </div>
 
-              <!-- News section under photo -->
-              <div class="mt-8 text-justify text-sm">
-                <h3 class="text-2xl font-semibold mb-2">News</h3>
-                <ul class="list-none pl-0 text-gray-600 space-y-1">
-                  <li>
-                    <span class="font-semibold text-gray-800">Oct 2024</span> –
-                    Selected as
-                    <a
-                      href="https://www.daad.de/en/the-daad/postdocnet/fellows/fellows/"
-                      class="text-blue-600 hover:underline"
-                      target="_blank"
-                      >DAAD AInet fellow 2024</a
-                    >.
-                  </li>
-                  <li>
-                    <span class="font-semibold text-gray-800">June 2024</span> –
-                    Joined UVA as a postdoc.
-                  </li>
-                  <li>
-                    <span class="font-semibold text-gray-800">Feb 2024</span> –
-                    Presented our work at the
-                    <a
-                      href="https://event.india.acm.org/arcs/home/"
-                      class="text-blue-600 hover:underline"
-                      target="_blank"
-                      >ACM ARCS symposium</a
-                    >
-                    held at NISER Bhubaneswar.
-                  </li>
-                  <li>
-                    <span class="font-semibold text-gray-800">Dec 2023</span> –
-                    Gave a tutorial on
-                    <a
-                      href="https://ai4mh.github.io"
-                      class="text-blue-600 hover:underline"
-                      target="_blank"
-                      >AI for Mental Health</a
-                    >
-                    at the ICON 2023 conference held in Goa.
-                  </li>
-                  <li>
-                    <span class="font-semibold text-gray-800">Nov 2023</span> –
-                    Received Microsoft Travel Grant to present our EMNLP paper at Singapore.
-                  </li>
-                  <li>
-                    <span class="font-semibold text-gray-800">Aug 2023</span> –
-                    Received Microsoft Travel Grant to present our SIGKDD paper at Long Beach, USA.
-                  </li>
-                  <li>
-                    <span class="font-semibold text-gray-800">Apr 2023</span> –
-                    Webchair for the International Conf. on Big Data and Artificial Intelligence.
-                  </li>
-                </ul>
-              </div>
-            </div>
+              <!-- Collapsible News Section -->
+<div class="mt-8 text-sm">
+  <h3 class="text-2xl font-semibold mb-2">News</h3>
+  <button
+    id="toggleNews"
+    class="text-blue-600 hover:underline focus:outline-none"
+    onclick="toggleNewsContent()"
+  >
+    Show News
+  </button>
+  <div id="newsContent" class="mt-2 hidden text-justify">
+    <ul class="list-none pl-0 text-gray-600 space-y-1">
+      <li>
+        <span class="font-semibold text-gray-800">Oct 2024</span> –
+        Selected as
+        <a
+          href="https://www.daad.de/en/the-daad/postdocnet/fellows/fellows/"
+          class="text-blue-600 hover:underline"
+          target="_blank"
+          >DAAD AInet fellow 2024</a
+        >.
+      </li>
+      <li>
+        <span class="font-semibold text-gray-800">June 2024</span> – Joined UVA as a postdoc.
+      </li>
+      <li>
+        <span class="font-semibold text-gray-800">Feb 2024</span> – Presented at the
+        <a
+          href="https://event.india.acm.org/arcs/home/"
+          class="text-blue-600 hover:underline"
+          target="_blank"
+          >ACM ARCS symposium</a
+        >.
+      </li>
+      <li>
+        <span class="font-semibold text-gray-800">Dec 2023</span> – Gave tutorial at
+        <a
+          href="https://ai4mh.github.io"
+          class="text-blue-600 hover:underline"
+          target="_blank"
+          >ICON 2023</a
+        >.
+      </li>
+      <li>
+        <span class="font-semibold text-gray-800">Nov 2023</span> – Microsoft Travel Grant for EMNLP.
+      </li>
+      <li>
+        <span class="font-semibold text-gray-800">Aug 2023</span> – Microsoft Travel Grant for SIGKDD.
+      </li>
+      <li>
+        <span class="font-semibold text-gray-800">Apr 2023</span> – Webchair for Intl. Conf. on Big Data & AI.
+      </li>
+    </ul>
+  </div>
+</div>
+
 
             <!-- Right column: About Me -->
             <div class="md:w-2/3 text-justify mt-8 md:mt-0">
