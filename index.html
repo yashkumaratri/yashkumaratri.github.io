@@ -30,11 +30,17 @@
     </style>
   </head>
 <script>
-  function toggleNewsContent() {
-    const news = document.getElementById("newsContent");
-    const btn = document.getElementById("toggleNews");
-    news.classList.toggle("hidden");
-    btn.textContent = news.classList.contains("hidden") ? "Show News" : "Hide News";
+  function toggleMoreNews() {
+    const moreNews = document.getElementById("extraNews");
+    const btn = document.getElementById("moreNewsBtn");
+
+    if (moreNews.classList.contains("hidden")) {
+      moreNews.classList.remove("hidden");
+      btn.textContent = "Show Less";
+    } else {
+      moreNews.classList.add("hidden");
+      btn.textContent = "Show More";
+    }
   }
 </script>
   <body>
@@ -75,39 +81,34 @@
               </div>
 
               <!-- Collapsible News Section -->
+<!-- News Section -->
 <div class="mt-8 text-sm">
   <h3 class="text-2xl font-semibold mb-2">News</h3>
-  <button
-    id="toggleNews"
-    class="text-blue-600 hover:underline focus:outline-none"
-    onclick="toggleNewsContent()"
-  >
-    Show News
-  </button>
-  <div id="newsContent" class="mt-2 hidden text-justify">
-    <ul class="list-none pl-0 text-gray-600 space-y-1">
-      <li>
-        <span class="font-semibold text-gray-800">Oct 2024</span> –
-        Selected as
-        <a
-          href="https://www.daad.de/en/the-daad/postdocnet/fellows/fellows/"
-          class="text-blue-600 hover:underline"
-          target="_blank"
-          >DAAD AInet fellow 2024</a
-        >.
-      </li>
-      <li>
-        <span class="font-semibold text-gray-800">June 2024</span> – Joined UVA as a postdoc.
-      </li>
-      <li>
-        <span class="font-semibold text-gray-800">Feb 2024</span> – Presented at the
-        <a
-          href="https://event.india.acm.org/arcs/home/"
-          class="text-blue-600 hover:underline"
-          target="_blank"
-          >ACM ARCS symposium</a
-        >.
-      </li>
+  <ul class="list-none pl-0 text-gray-600 space-y-1 text-justify">
+    <li>
+      <span class="font-semibold text-gray-800">Oct 2024</span> – Selected as
+      <a
+        href="https://www.daad.de/en/the-daad/postdocnet/fellows/fellows/"
+        class="text-blue-600 hover:underline"
+        target="_blank"
+        >DAAD AInet fellow 2024</a
+      >.
+    </li>
+    <li>
+      <span class="font-semibold text-gray-800">June 2024</span> – Joined UVA as a postdoc.
+    </li>
+    <li>
+      <span class="font-semibold text-gray-800">Feb 2024</span> – Presented at the
+      <a
+        href="https://event.india.acm.org/arcs/home/"
+        class="text-blue-600 hover:underline"
+        target="_blank"
+        >ACM ARCS symposium</a
+      > at NISER Bhubaneswar.
+    </li>
+
+    <!-- Hidden extra news -->
+    <div id="extraNews" class="hidden space-y-1 mt-1">
       <li>
         <span class="font-semibold text-gray-800">Dec 2023</span> – Gave tutorial at
         <a
@@ -126,9 +127,19 @@
       <li>
         <span class="font-semibold text-gray-800">Apr 2023</span> – Webchair for Intl. Conf. on Big Data & AI.
       </li>
-    </ul>
-  </div>
+    </div>
+  </ul>
+
+  <!-- Toggle button -->
+  <button
+    onclick="toggleMoreNews()"
+    id="moreNewsBtn"
+    class="mt-2 text-blue-600 hover:underline focus:outline-none"
+  >
+    Show More
+  </button>
 </div>
+
 
 
             <!-- Right column: About Me -->
