@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adorable Pet Care Adventure</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #5a5a5a;
+        }
+
+        .game-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .story-section {
+            margin-bottom: 25px;
+        }
+
+        .story-text {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            color: #444;
+            text-align: left;
+            padding: 15px;
+            background: rgba(255, 240, 245, 0.6);
+            border-radius: 15px;
+            border-left: 4px solid #ff69b4;
+        }
+
+        .pet-container {
+            position: relative;
+            margin: 30px 0;
+            padding: 20px;
+            background: linear-gradient(145deg, #fff5f8, #ffe4e6);
+            border-radius: 20px;
+            border: 2px solid #ffb6c1;
+        }
+
+        .pet {
+            font-size: 120px;
+            margin: 20px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+            position: relative;
+        }
+
+        .pet:hover {
+            transform: scale(1.1);
+            filter: brightness(1.1);
+        }
+
+        .pet.happy {
+            animation: bounce 0.6s ease-in-out;
+        }
+
+        .pet.sleeping {
+            opacity: 0.7;
+            animation: breathe 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-20px); }
+            60% { transform: translateY(-10px); }
+        }
+
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .pet-name {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff1493;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .pet-status {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .status-item {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 10px 15px;
+            border-radius: 25px;
+            border: 2px solid #ffb6c1;
+            font-weight: bold;
+            font-size: 14px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .status-bar {
+            width: 100%;
+            height: 8px;
+            background: #ffe4e6;
+            border-radius: 4px;
+            margin-top: 5px;
+            overflow: hidden;
+        }
+
+        .status-fill {
+            height: 100%;
+            transition: width 0.5s ease;
+            border-radius: 4px;
+        }
+
+        .happiness-fill { background: linear-gradient(90deg, #ff69b4, #ff1493); }
+        .hunger-fill { background: linear-gradient(90deg, #ffa500, #ff6347); }
+        .energy-fill { background: linear-gradient(90deg, #32cd32, #228b22); }
+
+        .action-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin: 25px 0;
+        }
+
+        .btn {
+            background: linear-gradient(145deg, #ff69b4, #ff1493);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 20, 147, 0.3);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 20, 147, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn.secondary {
+            background: linear-gradient(145deg, #87ceeb, #4682b4);
+            box-shadow: 0 4px 15px rgba(70, 130, 180, 0.3);
+        }
+
+        .btn.secondary:hover {
+            box-shadow: 0 6px 20px rgba(70, 130, 180, 0.4);
+        }
+
+        .choice-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin: 25px 0;
+        }
+
+        .choice-btn {
+            background: linear-gradient(145deg, #ff69b4, #ff1493);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 20, 147, 0.3);
+        }
+
+        .choice-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 20, 147, 0.4);
+        }
+
+        .message {
+            background: rgba(255, 240, 245, 0.8);
+            padding: 15px;
+            border-radius: 15px;
+            margin: 15px 0;
+            border-left: 4px solid #ff69b4;
+            font-style: italic;
+            color: #666;
+        }
+
+        .hearts {
+            color: #ff69b4;
+            font-size: 20px;
+            margin: 10px 0;
+            animation: twinkle 1.5s ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .title {
+            color: #ff1493;
+            font-size: 28px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .game-over {
+            background: linear-gradient(145deg, #ffd700, #ffb347);
+            padding: 25px;
+            border-radius: 20px;
+            margin: 20px 0;
+            border: 3px solid #ff69b4;
+        }
+
+        .game-over h2 {
+            color: #ff1493;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <div id="intro-screen">
+            <h1 class="title">🌟 Adorable Pet Care Adventure 🌟</h1>
+            <div class="story-section">
+                <div class="story-text">
+                    While walking through the park on a beautiful sunny day, you hear a tiny, soft sound coming from behind some bushes. Your heart melts as you discover a small, helpless baby animal that seems to have lost its way. 
+                    <br><br>
+                    The little one looks up at you with the most adorable eyes, and you know you can't leave it alone. You decide to take it home and give it all the love and care it needs to grow up happy and healthy!
+                    <br><br>
+                    But first, you need to decide what kind of precious baby you've found...
+                </div>
+            </div>
+            <div class="choice-buttons">
+                <button class="choice-btn" onclick="choosePet('kitten')">🐱 Baby Kitten</button>
+                <button class="choice-btn" onclick="choosePet('monkey')">🐵 Baby Monkey</button>
+            </div>
+        </div>
+
+        <div id="game-screen" class="hidden">
+            <div class="pet-container">
+                <div class="pet-name" id="pet-name">Choose a name!</div>
+                <div class="pet" id="pet-display" onclick="petInteraction()">🐱</div>
+                <div class="hearts" id="love-hearts">💕</div>
+            </div>
+
+            <div class="pet-status">
+                <div class="status-item">
+                    <div>Happiness</div>
+                    <div class="status-bar">
+                        <div class="status-fill happiness-fill" id="happiness-bar"></div>
+                    </div>
+                    <div id="happiness-text">50%</div>
+                </div>
+                <div class="status-item">
+                    <div>Hunger</div>
+                    <div class="status-bar">
+                        <div class="status-fill hunger-fill" id="hunger-bar"></div>
+                    </div>
+                    <div id="hunger-text">30%</div>
+                </div>
+                <div class="status-item">
+                    <div>Energy</div>
+                    <div class="status-bar">
+                        <div class="status-fill energy-fill" id="energy-bar"></div>
+                    </div>
+                    <div id="energy-text">70%</div>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn" onclick="feedPet()">🍼 Feed</button>
+                <button class="btn" onclick="playWithPet()">🎾 Play</button>
+                <button class="btn" onclick="putToSleep()">😴 Sleep</button>
+                <button class="btn secondary" onclick="giveTreat()">🍯 Treat</button>
+                <button class="btn secondary" onclick="bathTime()">🛁 Bath</button>
+            </div>
+
+            <div class="message" id="message">Welcome to your new adventure! Click on your pet to interact with them!</div>
+
+            <div class="story-section">
+                <button class="btn secondary" onclick="showNamingScreen()">✏️ Name Your Pet</button>
+                <button class="btn secondary" onclick="restartGame()">🔄 Start Over</button>
+            </div>
+        </div>
+
+        <div id="naming-screen" class="hidden">
+            <h2>What would you like to name your adorable pet?</h2>
+            <div class="pet" id="naming-pet-display">🐱</div>
+            <input type="text" id="pet-name-input" placeholder="Enter a cute name..." style="padding: 10px; border-radius: 15px; border: 2px solid #ffb6c1; font-size: 16px; margin: 15px; width: 200px;">
+            <br>
+            <button class="btn" onclick="confirmName()">💖 Confirm Name</button>
+            <button class="btn secondary" onclick="cancelNaming()">❌ Cancel</button>
+        </div>
+
+        <div id="game-over-screen" class="hidden">
+            <div class="game-over">
+                <h2>🎉 Congratulations! 🎉</h2>
+                <div class="pet" id="final-pet-display">🐱</div>
+                <p>You've raised your pet with so much love and care! They've grown up to be the happiest, healthiest little companion anyone could ask for!</p>
+                <div class="hearts">💕✨💕✨💕</div>
+                <button class="btn" onclick="restartGame()">🌟 Start New Adventure</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let gameState = {
+            petType: 'kitten',
+            petName: 'Sweetie',
+            happiness: 50,
+            hunger: 30,
+            energy: 70,
+            interactions: 0,
+            isSleeping: false
+        };
+
+        const petEmojis = {
+            kitten: {
+                normal: '🐱',
+                happy: '😸',
+                sleeping: '😴',
+                eating: '🐱',
+                playing: '🙀'
+            },
+            monkey: {
+                normal: '🐵',
+                happy: '😊',
+                sleeping: '😴',
+                eating: '🐵',
+                playing: '🙈'
+            }
+        };
+
+        const messages = {
+            kitten: {
+                feed: ["*purr purr* Your kitten is so happy to have milk!", "Meow! That was delicious!", "Your kitten rubs against you lovingly after eating!"],
+                play: ["*pounce* Your kitten loves chasing the toy!", "Meow meow! So much fun!", "Your kitten does adorable little flips!"],
+                sleep: ["*yawn* Your kitten curls up in a tiny ball... zzz", "Sweet dreams, little one!", "Your kitten purrs softly while sleeping"],
+                treat: ["*purr* A special treat! Your kitten is in heaven!", "Meow! This is the best day ever!", "Your kitten does a happy little dance!"],
+                bath: ["*splash* Your kitten is now clean and fluffy!", "Meow! So fresh and clean!", "Your kitten shakes off and looks adorable!"],
+                pet: ["*purr purr* Your kitten loves your gentle touches!", "Meow! More pets please!", "Your kitten nuzzles your hand affectionately!"]
+            },
+            monkey: {
+                feed: ["*oook ook* Your monkey claps happily while eating!", "Your monkey makes happy chirping sounds!", "Your monkey shares a piece with you - so sweet!"],
+                play: ["*screech* Your monkey swings around playfully!", "Your monkey does silly tricks to make you laugh!", "Your monkey gives you the biggest hug!"],
+                sleep: ["*yawn* Your monkey curls up with its tiny arms around itself", "Sweet dreams, little one!", "Your monkey makes soft sleeping sounds"],
+                treat: ["*happy screeching* Your monkey goes bananas for treats!", "Your monkey jumps up and down with joy!", "Your monkey gives you a big thank-you hug!"],
+                bath: ["*splash* Your monkey loves playing in the water!", "Your monkey makes bubbles and giggles!", "Your monkey is now squeaky clean!"],
+                pet: ["*content sounds* Your monkey closes its eyes and enjoys your touch!", "Your monkey holds your finger with its tiny hand!", "Your monkey leans into your gentle petting!"]
+            }
+        };
+
+        function choosePet(type) {
+            gameState.petType = type;
+            gameState.petName = type === 'kitten' ? 'Whiskers' : 'Coco';
+            
+            document.getElementById('intro-screen').classList.add('hidden');
+            document.getElementById('game-screen').classList.remove('hidden');
+            
+            updatePetDisplay();
+            updateUI();
+            showMessage(`You've chosen to care for an adorable baby ${type}! Welcome to your new journey together! 💕`);
+        }
+
+        function updatePetDisplay() {
+            const petDisplay = document.getElementById('pet-display');
+            const petType = gameState.petType;
+            
+            if (gameState.isSleeping) {
+                petDisplay.textContent = petEmojis[petType].sleeping;
+                petDisplay.className = 'pet sleeping';
+            } else if (gameState.happiness > 80) {
+                petDisplay.textContent = petEmojis[petType].happy;
+                petDisplay.className = 'pet happy';
+            } else {
+                petDisplay.textContent = petEmojis[petType].normal;
+                petDisplay.className = 'pet';
+            }
+        }
+
+        function updateUI() {
+            document.getElementById('pet-name').textContent = gameState.petName;
+            
+            // Update status bars
+            document.getElementById('happiness-bar').style.width = gameState.happiness + '%';
+            document.getElementById('hunger-bar').style.width = gameState.hunger + '%';
+            document.getElementById('energy-bar').style.width = gameState.energy + '%';
+            
+            // Update status text
+            document.getElementById('happiness-text').textContent = gameState.happiness + '%';
+            document.getElementById('hunger-text').textContent = gameState.hunger + '%';
+            document.getElementById('energy-text').textContent = gameState.energy + '%';
+            
+            updatePetDisplay();
+            
+            // Check for game completion
+            if (gameState.interactions >= 15 && gameState.happiness >= 90) {
+                setTimeout(showGameOver, 2000);
+            }
+        }
+
+        function showMessage(msg) {
+            document.getElementById('message').textContent = msg;
+        }
+
+        function getRandomMessage(action) {
+            const messageArray = messages[gameState.petType][action];
+            return messageArray[Math.floor(Math.random() * messageArray.length)];
+        }
+
+        function feedPet() {
+            if (gameState.isSleeping) {
+                showMessage("Shh... your pet is sleeping peacefully. Let them rest!");
+                return;
+            }
+            
+            gameState.hunger = Math.min(100, gameState.hunger + 25);
+            gameState.happiness = Math.min(100, gameState.happiness + 10);
+            gameState.energy = Math.min(100, gameState.energy + 5);
+            gameState.interactions++;
+            
+            showMessage(getRandomMessage('feed'));
+            updateUI();
+        }
+
+        function playWithPet() {
+            if (gameState.isSleeping) {
+                showMessage("Your pet is sleeping! They need their rest to grow big and strong.");
+                return;
+            }
+            
+            if (gameState.energy < 20) {
+                showMessage("Your pet is too tired to play right now. Maybe they need a nap?");
+                return;
+            }
+            
+            gameState.happiness = Math.min(100, gameState.happiness + 20);
+            gameState.energy = Math.max(0, gameState.energy - 15);
+            gameState.hunger = Math.max(0, gameState.hunger - 5);
+            gameState.interactions++;
+            
+            showMessage(getRandomMessage('play'));
+            updateUI();
+        }
+
+        function putToSleep() {
+            gameState.isSleeping = true;
+            gameState.energy = Math.min(100, gameState.energy + 30);
+            gameState.happiness = Math.min(100, gameState.happiness + 5);
+            gameState.interactions++;
+            
+            showMessage(getRandomMessage('sleep'));
+            updateUI();
+            
+            setTimeout(() => {
+                gameState.isSleeping = false;
+                showMessage(`${gameState.petName} wakes up feeling refreshed and ready to play!`);
+                updateUI();
+            }, 3000);
+        }
+
+        function giveTreat() {
+            if (gameState.isSleeping) {
+                showMessage("Your pet is sleeping! Save the treat for when they wake up.");
+                return;
+            }
+            
+            gameState.happiness = Math.min(100, gameState.happiness + 15);
+            gameState.hunger = Math.min(100, gameState.hunger + 10);
+            gameState.interactions++;
+            
+            showMessage(getRandomMessage('treat'));
+            updateUI();
+        }
+
+        function bathTime() {
+            if (gameState.isSleeping) {
+                showMessage("Your pet is sleeping! Bath time can wait.");
+                return;
+            }
+            
+            gameState.happiness = Math.min(100, gameState.happiness + 10);
+            gameState.energy = Math.max(0, gameState.energy - 5);
+            gameState.interactions++;
+            
+            showMessage(getRandomMessage('bath'));
+            updateUI();
+        }
+
+        function petInteraction() {
+            if (gameState.isSleeping) {
+                showMessage("Your pet stirs slightly but continues sleeping peacefully...");
+                return;
+            }
+            
+            gameState.happiness = Math.min(100, gameState.happiness + 5);
+            gameState.interactions++;
+            
+            showMessage(getRandomMessage('pet'));
+            updateUI();
+        }
+
+        function showNamingScreen() {
+            document.getElementById('game-screen').classList.add('hidden');
+            document.getElementById('naming-screen').classList.remove('hidden');
+            document.getElementById('naming-pet-display').textContent = petEmojis[gameState.petType].normal;
+            document.getElementById('pet-name-input').value = gameState.petName;
+        }
+
+        function confirmName() {
+            const newName = document.getElementById('pet-name-input').value.trim();
+            if (newName) {
+                gameState.petName = newName;
+                showMessage(`Your pet's name is now ${newName}! They seem to love it! 💕`);
+            }
+            cancelNaming();
+        }
+
+        function cancelNaming() {
+            document.getElementById('naming-screen').classList.add('hidden');
+            document.getElementById('game-screen').classList.remove('hidden');
+            updateUI();
+        }
+
+        function showGameOver() {
+            document.getElementById('game-screen').classList.add('hidden');
+            document.getElementById('game-over-screen').classList.remove('hidden');
+            document.getElementById('final-pet-display').textContent = petEmojis[gameState.petType].happy;
+        }
+
+        function restartGame() {
+            gameState = {
+                petType: 'kitten',
+                petName: 'Sweetie',
+                happiness: 50,
+                hunger: 30,
+                energy: 70,
+                interactions: 0,
+                isSleeping: false
+            };
+            
+            document.getElementById('game-over-screen').classList.add('hidden');
+            document.getElementById('naming-screen').classList.add('hidden');
+            document.getElementById('game-screen').classList.add('hidden');
+            document.getElementById('intro-screen').classList.remove('hidden');
+        }
+
+        // Gradual status decay
+        setInterval(() => {
+            if (!gameState.isSleeping) {
+                gameState.happiness = Math.max(0, gameState.happiness - 1);
+                gameState.hunger = Math.max(0, gameState.hunger - 2);
+                gameState.energy = Math.max(0, gameState.energy - 1);
+                updateUI();
+            }
+        }, 10000); // Every 10 seconds
+    </script>
+</body>
+</html>
