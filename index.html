@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Yash Kumar Atri</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.17/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+      body {
+        font-family: 'JetBrains Mono', monospace;
+        background-color: #ffffff;
+        scroll-behavior: smooth;
+      }
+
+      /* Job Market Banner */
+      .job-market-banner {
+        background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+        color: white;
+        text-align: center;
+        padding: 12px 0;
+        font-weight: 500;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+
+      /* Header */
+      .header {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid #e5e7eb;
+      }
+
+      /* Card styles matching Agentic Lab */
+      .content-card {
+        background: #f9fafb;
+        border: 2px solid transparent;
+        transition: all 0.2s ease;
+        padding: 24px;
+      }
+
+      .content-card:hover {
+        border-color: #6b7280;
+      }
+
+      /* Publication cards */
+      .publication-card {
+        background: #f9fafb;
+        border: 2px solid transparent;
+        padding: 20px;
+        margin-bottom: 16px;
+        transition: all 0.2s ease;
+      }
+
+      .publication-card:hover {
+        border-color: #6b7280;
+      }
+
+      /* News section */
+      .news-item {
+        border-left: 3px solid #3b82f6;
+        padding-left: 12px;
+        margin-bottom: 12px;
+      }
+
+      /* Section headers */
+      .section-header {
+        font-size: 2rem;
+        font-weight: 500;
+        margin-bottom: 8px;
+        color: #111827;
+      }
+
+      .section-underline {
+        height: 4px;
+        width: 60px;
+        background: #d1d5db;
+        margin-bottom: 32px;
+      }
+
+      /* Navigation dots (simplified) */
+      .nav-dots {
+        position: fixed;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 50;
+        display: none;
+      }
+
+      @media (min-width: 1024px) {
+        .nav-dots {
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+        }
+      }
+
+      .nav-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: #d1d5db;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .nav-dot:hover, .nav-dot.active {
+        background: #3b82f6;
+        transform: scale(1.2);
+      }
+
+      /* Social icons */
+      .social-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: white;
+        color: #3b82f6;
+        border: 2px solid #3b82f6;
+        transition: all 0.2s ease;
+        margin: 0 8px;
+      }
+
+      .social-icon:hover {
+        background: #3b82f6;
+        color: white;
+      }
+
+      /* Mobile responsiveness */
+      @media (max-width: 768px) {
+        .section-header {
+          font-size: 1.5rem;
+        }
+        
+        .content-card {
+          padding: 16px;
+        }
+      }
+
+      /* Text styles */
+      .text-mono {
+        font-family: 'JetBrains Mono', monospace;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Job Market Banner -->
+    <div class="job-market-banner">
+      🎯 I am on the academic job market for positions starting in 2026
+    </div>
+
+    <!-- Navigation dots -->
+    <div class="nav-dots">
+      <div class="nav-dot active" data-target="hero"></div>
+      <div class="nav-dot" data-target="about"></div>
+      <div class="nav-dot" data-target="publications"></div>
+      <div class="nav-dot" data-target="experience"></div>
+      <div class="nav-dot" data-target="contact"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header sticky top-12 z-40">
+      <div class="max-w-6xl mx-auto px-6 py-4">
+        <div class="flex justify-between items-center">
+          <div class="text-xl font-medium">yash kumar atri</div>
+          <nav class="hidden md:flex space-x-8 text-sm">
+            <a href="#about" class="hover:text-blue-600 transition-colors">about</a>
+            <a href="#publications" class="hover:text-blue-600 transition-colors">publications</a>
+            <a href="#experience" class="hover:text-blue-600 transition-colors">experience</a>
+            <a href="#contact" class="hover:text-blue-600 transition-colors">contact</a>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <div class="max-w-6xl mx-auto">
+      <!-- Hero Section -->
+      <section id="hero" class="px-6 py-16">
+        <div class="content-card">
+          <div class="flex flex-col lg:flex-row gap-12">
+            <!-- Left: Image and Basic Info -->
+            <div class="lg:w-1/3">
+              <img
+                class="w-48 h-64 mx-auto lg:mx-0 rounded object-cover mb-6"
+                src="attachments/yash.jpg"
+                alt="Yash Kumar Atri"
+              />
+              <div class="text-center lg:text-left">
+                <h1 class="text-3xl font-semibold mb-2">yash kumar atri</h1>
+                <div class="text-lg text-gray-600 mb-2">university of virginia</div>
+                <div class="text-sm text-gray-500 mb-4">atri [at] virginia.edu</div>
+                
+                <!-- Social Links -->
+                <div class="flex justify-center lg:justify-start mb-6">
+                  <a href="https://www.linkedin.com/in/yashkumaratri/" target="_blank" class="social-icon">
+                    <i class="fab fa-linkedin-in"></i>
+                  </a>
+                  <a href="https://twitter.com/yashkumaratri" target="_blank" class="social-icon">
+                    <i class="fab fa-twitter"></i>
+                  </a>
+                  <a href="https://scholar.google.com/citations?user=sTyStXIAAAAJ&hl=en" target="_blank" class="social-icon">
+                    <i class="fab fa-google"></i>
+                  </a>
+                </div>
+
+                <!-- Resume Link -->
+                <div class="mb-8">
+                  <a href="https://drive.google.com/file/d/1ZJU-V7N3YFe5WNnj9pNzAMNWo16tApBj/view?usp=share_link" 
+                     target="_blank" 
+                     class="inline-block px-4 py-2 border-2 border-gray-400 text-gray-700 hover:border-gray-600 transition-colors">
+                    resume
+                  </a>
+                </div>
+
+                <!-- News Section -->
+                <div>
+                  <h3 class="text-lg font-semibold mb-4">news</h3>
+                  <div class="space-y-3 text-sm">
+                    <div class="news-item">
+                      <span class="font-medium">oct 2024</span> – selected as 
+                      <a href="https://www.daad.de/en/the-daad/postdocnet/fellows/fellows/" 
+                         class="text-blue-600 hover:underline" target="_blank">daad ainet fellow 2024</a>
+                    </div>
+                    <div class="news-item">
+                      <span class="font-medium">june 2024</span> – joined uva as a postdoc
+                    </div>
+                    <div class="news-item">
+                      <span class="font-medium">feb 2024</span> – presented at 
+                      <a href="https://event.india.acm.org/arcs/home/" 
+                         class="text-blue-600 hover:underline" target="_blank">acm arcs symposium</a>
+                    </div>
+                    <div class="news-item hidden" id="news4">
+                      <span class="font-medium">dec 2023</span> – gave tutorial at 
+                      <a href="https://ai4mh.github.io" class="text-blue-600 hover:underline" target="_blank">icon 2023</a>
+                    </div>
+                    <div class="news-item hidden" id="news5">
+                      <span class="font-medium">nov 2023</span> – microsoft travel grant for emnlp
+                    </div>
+                  </div>
+                  <button onclick="toggleMoreNews()" id="moreNewsBtn" 
+                          class="mt-3 text-blue-600 hover:underline text-sm">
+                    show more
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: About Me -->
+            <div class="lg:w-2/3" id="about">
+              <h2 class="section-header">about me</h2>
+              <div class="section-underline"></div>
+              
+              <div class="space-y-6 text-gray-700 text-justify">
+                <p>
+                  hi! i am a postdoc at the 
+                  <a href="https://datascience.virginia.edu" target="_blank" class="text-blue-600 hover:underline">university of virginia</a>, 
+                  working with <a href="https://www.tomhartvigsen.com" target="_blank" class="text-blue-600 hover:underline">prof. tom hartvigsen</a>. 
+                  before joining uva, i completed my phd in computer science and engineering at 
+                  <a href="https://www.iiitd.ac.in" target="_blank" class="text-blue-600 hover:underline">iiit delhi</a>, 
+                  india, where i was advised by 
+                  <a href="https://www.iiitd.ac.in/vikram" target="_blank" class="text-blue-600 hover:underline">prof. vikram goyal</a> 
+                  and <a href="https://www.tanmoychak.com" target="_blank" class="text-blue-600 hover:underline">prof. tanmoy chakraborty</a>.
+                </p>
+
+                <div>
+                  <h3 class="text-xl font-medium mb-3">research interests</h3>
+                  <p>
+                    i am interested in enabling language models to continuously learn and adapt beyond their initial pretraining. 
+                    my current research explores model editing, developing methods to update models efficiently with new information 
+                    and corrections. i build modular systems that apply each change locally, allowing the model to evolve while 
+                    retaining its existing knowledge. my long-term vision is to create models that learn like humans: accumulating 
+                    knowledge over time, refining their understanding, and remaining robust as language, technology, and societal 
+                    values change.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Publications Section -->
+      <section id="publications" class="px-6 py-16">
+        <h2 class="section-header">publications</h2>
+        <div class="section-underline"></div>
+        
+        <div class="space-y-4">
+          <div class="publication-card">
+            <div class="flex justify-between items-start">
+              <div class="flex-1">
+                <h3 class="font-medium mb-2">model editing with graph-based external memory</h3>
+                <p class="text-sm text-gray-600 mb-3"><strong>yash kumar atri</strong>, ahmed alaa, thomas hartvigsen</p>
+                <div class="flex items-center gap-4">
+                  <span class="text-sm text-gray-500">soon</span>
+                  <span class="text-xs px-2 py-1 bg-gray-200 rounded">acl (findings) 2025</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="publication-card">
+            <div class="flex justify-between items-start">
+              <div class="flex-1">
+                <h3 class="font-medium mb-2">continually self-improving language models for bariatric surgery question answering</h3>
+                <p class="text-sm text-gray-600 mb-3"><strong>yash kumar atri</strong>, thomas h shin, thomas hartvigsen</p>
+                <div class="flex items-center gap-4">
+                  <span class="text-sm text-gray-500">soon</span>
+                  <span class="text-xs px-2 py-1 bg-gray-200 rounded">preprint 2025</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="publication-card">
+            <div class="flex justify-between items-start">
+              <div class="flex-1">
+                <h3 class="font-medium mb-2">promoting topic coherence and inter-document consorts in multi-document summarization via simplicial complex and sheaf graph</h3>
+                <p class="text-sm text-gray-600 mb-3"><strong>yash kumar atri</strong>, arun iyer, tanmoy chakraborty, vikram goyal</p>
+                <div class="flex items-center gap-4">
+                  <a href="https://aclanthology.org/2023.emnlp-main.133/" target="_blank" class="text-blue-600 hover:underline text-sm">paper</a>
+                  <span class="text-xs px-2 py-1 bg-gray-200 rounded">emnlp 2023</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="publication-card">
+            <div class="flex justify-between items-start">
+              <div class="flex-1">
+                <h3 class="font-medium mb-2">fusing multimodal signals on hyper-complex space for extreme abstractive text summarization (tl;dr) of scientific contents</h3>
+                <p class="text-sm text-gray-600 mb-3"><strong>yash kumar atri</strong>, tanmoy chakraborty, vikram goyal</p>
+                <div class="flex items-center gap-4">
+                  <a href="https://dl.acm.org/doi/10.1145/3580305.3599830" target="_blank" class="text-blue-600 hover:underline text-sm">paper</a>
+                  <span class="text-xs px-2 py-1 bg-gray-200 rounded">sigkdd 2023</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Show more publications button -->
+          <div class="text-center">
+            <button onclick="togglePublications()" id="morePublicationsBtn" 
+                    class="text-blue-600 hover:underline">
+              show more publications
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Experience & Education Section -->
+      <section id="experience" class="px-6 py-16">
+        <div class="grid md:grid-cols-2 gap-12">
+          <!-- Left Column -->
+          <div>
+            <h2 class="section-header">experience</h2>
+            <div class="section-underline"></div>
+            <div class="space-y-4 text-sm">
+              <div class="content-card">
+                <h3 class="font-medium">postdoc researcher</h3>
+                <p class="text-gray-600">university of virginia</p>
+                <p class="text-gray-500">2024 - present</p>
+              </div>
+              <div class="content-card">
+                <h3 class="font-medium">research associate</h3>
+                <p class="text-gray-600">lcs2-iiitd</p>
+                <p class="text-gray-500">2019 - 2019</p>
+              </div>
+              <div class="content-card">
+                <h3 class="font-medium">software engineer (data science)</h3>
+                <p class="text-gray-600">lumiq.ai</p>
+                <p class="text-gray-500">2018 - 2019</p>
+              </div>
+            </div>
+
+            <h2 class="section-header mt-12">awards</h2>
+            <div class="section-underline"></div>
+            <div class="space-y-2 text-sm text-gray-600">
+              <div class="content-card">
+                <p><strong>daad ainet fellow 2025</strong> - postdoc-net-ai, germany</p>
+              </div>
+              <div class="content-card">
+                <p><strong>microsoft travel grants</strong> - emnlp 2023, kdd 2023</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column -->
+          <div>
+            <h2 class="section-header">education</h2>
+            <div class="section-underline"></div>
+            <div class="space-y-4">
+              <div class="content-card">
+                <h3 class="font-medium">ph.d. computer science and engineering</h3>
+                <p class="text-gray-600">iiit delhi, india</p>
+                <p class="text-gray-500">2020 - 2024</p>
+              </div>
+              <div class="content-card">
+                <h3 class="font-medium">b.tech. computer science and engineering</h3>
+                <p class="text-gray-600">jaypee university, india</p>
+                <p class="text-gray-500">2014 - 2018</p>
+              </div>
+            </div>
+
+            <h2 class="section-header mt-12">service</h2>
+            <div class="section-underline"></div>
+            <div class="content-card text-sm">
+              <p class="mb-2"><strong>reviewer:</strong> arr25, iclr25, arr24, emnlp23, acl23, bda23</p>
+              <p class="mb-2"><strong>organizer:</strong> bda 2023 conf, icon 2023 conf</p>
+              <p><strong>teaching:</strong> head ta for big data analytics & data mining (300+ students)</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact Section -->
+      <section id="contact" class="px-6 py-16">
+        <h2 class="section-header">contact</h2>
+        <div class="section-underline"></div>
+        
+        <div class="content-card">
+          <div class="grid md:grid-cols-2 gap-8">
+            <div>
+              <h3 class="font-medium mb-4">get in touch</h3>
+              <div class="space-y-2 text-gray-600">
+                <p>email: yashkumaratri [at] gmail.com</p>
+                <p>work: atri [at] virginia.edu</p>
+                <p>phone: +1 (434)-**6-1**1 (please email first)</p>
+              </div>
+            </div>
+            <div>
+              <h3 class="font-medium mb-4">location</h3>
+              <div class="text-gray-600">
+                <p>university of virginia</p>
+                <p>school of data science</p>
+                <p>charlottesville, va</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-200 mt-16">
+      <div class="max-w-6xl mx-auto px-6 py-8">
+        <div class="flex justify-between items-center text-sm text-gray-500">
+          <div>© 2024 yash kumar atri</div>
+          <div class="flex items-center gap-2">
+            template inspiration: 
+            <a href="https://github.com/onpix/minimal-academic-website" class="text-blue-600 hover:underline">onpix</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Toggle more news
+      function toggleMoreNews() {
+        const hiddenNews = document.querySelectorAll('.news-item.hidden');
+        const btn = document.getElementById('moreNewsBtn');
+        
+        if (hiddenNews[0].classList.contains('hidden')) {
+          hiddenNews.forEach(item => item.classList.remove('hidden'));
+          btn.textContent = 'show less';
+        } else {
+          hiddenNews.forEach(item => item.classList.add('hidden'));
+          btn.textContent = 'show more';
+        }
+      }
+
+      // Navigation dots
+      document.querySelectorAll('.nav-dot').forEach(dot => {
+        dot.addEventListener('click', function() {
+          const target = this.dataset.target;
+          document.getElementById(target).scrollIntoView({ behavior: 'smooth' });
+          
+          // Update active state
+          document.querySelectorAll('.nav-dot').forEach(d => d.classList.remove('active'));
+          this.classList.add('active');
+        });
+      });
+
+      // Update active dot on scroll
+      window.addEventListener('scroll', function() {
+        const sections = ['hero', 'about', 'publications', 'experience', 'contact'];
+        const scrollPos = window.scrollY + 200;
+        
+        sections.forEach((section, index) => {
+          const element = document.getElementById(section);
+          if (element && scrollPos >= element.offsetTop) {
+            document.querySelectorAll('.nav-dot').forEach(dot => dot.classList.remove('active'));
+            document.querySelectorAll('.nav-dot')[index].classList.add('active');
+          }
+        });
+      });
+
+      // Smooth scrolling for header nav
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+    </script>
