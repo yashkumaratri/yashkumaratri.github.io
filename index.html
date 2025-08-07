@@ -312,8 +312,8 @@ body.dark #research-directions span {
   <body>
     <!-- Job Market Banner -->
    <div class="job-market-banner flex items-center justify-center space-x-2 text-center uppercase font-bold text-lg lg:text-xl animate-pulse shadow-lg">
-  <i class="fas fa-bullseye text-white"></i>
-  <span>i am on the academic job market for positions starting in 2026</span>
+  <i class="fa-sharp-duotone fa-solid fa-bullseye"></i>
+  <span>i am on the academic job market for positions starting in 2026.</span>
 </div>
 
     <!-- Navigation dots -->
@@ -421,7 +421,7 @@ body.dark #research-directions span {
                     <a href="https://datascience.virginia.edu" target="_blank" class="text-blue-600 hover:underline">university of virginia</a>,
                     working with
                     <a href="https://www.tomhartvigsen.com" target="_blank" class="text-blue-600 hover:underline">prof. tom hartvigsen</a>.
-                    before joining uva, i completed my phd in computer ccience & engineering at
+                    before joining uva, i completed my <a href="https://repository.iiitd.edu.in/xmlui/handle/123456789/1640" target="_blank" class="text-blue-600 hover:underline">phd</a> in computer science & engineering at
                     <a href="https://www.iiitd.ac.in" target="_blank" class="text-blue-600 hover:underline">iiit Delhi</a>,
                     where i was advised by
                     <a href="https://www.iiitd.ac.in/vikram" target="_blank" class="text-blue-600 hover:underline">prof. vikram goyal</a>
@@ -437,7 +437,7 @@ body.dark #research-directions span {
                 <div class="section-underline mb-4"></div>
                 <div class="text-gray-700 text-justify text-sm">
                   <p>
-                    i am interested in enabling language models to continuously learn and adapt beyond their initial pretraining. my current research explores model editing, developing methods to update models efficiently with new information and corrections. i build modular systems that apply each change locally, allowing the model to evolve while retaining its existing knowledge. my long-term vision is to create models that learn like humans: accumulating knowledge over time, refining their understanding, and remaining robust as language, technology, and societal values change.
+                    i am interested in enabling language models to continuously learn and adapt beyond their initial pretraining. my current research explores model editing, developing methods to update models efficiently with new information and corrections. i build modular systems that apply each change locally, allowing the model to evolve while retaining its existing knowledge. my long-term vision is to create systems that learn like humans: accumulating knowledge over time, refining their understanding, and remaining robust as language, technology, and societal values change.
                   </p>
                 </div>
               </div>
@@ -460,11 +460,11 @@ body.dark #research-directions span {
                     </ul>
                   </div>
 
-                  <!-- the rest stay normal -->
+                  <!-- phd direction -->
                   <div>
                     <h4 class="font-medium mb-1">text summarization</h4>
                     <ul class="list-disc list-inside space-y-1">
-                      <li>promoting topic coherence via simplicial complex & sheaf graph (emnlp 2023)</li>
+                      <li>promoting topic coherence via simplicial complex & sheaf graph (emnlp main 2023)</li>
                       <li>fusing multimodal signals in hyper-complex space (sigkdd 2023)</li>
                     </ul>
                   </div>
@@ -667,73 +667,92 @@ body.dark #research-directions span {
   </div>
 </div>
 
-      <!-- Experience & Education Section -->
-      <section id="experience" class="px-6 py-16">
-        <div class="grid md:grid-cols-2 gap-12">
-          <!-- Left Column -->
-          <div>
-            <h2 class="section-header">experience</h2>
-            <div class="section-underline"></div>
-            <div class="space-y-4 text-sm">
-              <div class="bg-white border-2 border-transparent hover:border-gray-600 transition-all duration-200 p-6">
-                <h3 class="font-medium">postdoc researcher</h3>
-                <p class="text-gray-600">university of virginia, usa</p>
-                <p class="text-gray-500">2024 - present</p>
-              </div>
-              <div class="bg-white border-2 border-transparent hover:border-gray-600 transition-all duration-200 p-6">
-                <h3 class="font-medium">research associate</h3>
-                <p class="text-gray-600">lcs2-iiitd, delhi</p>
-                <p class="text-gray-500">2019 - 2019</p>
-              </div>
-              <div class="bg-white border-2 border-transparent hover:border-gray-600 transition-all duration-200 p-6">
-                <h3 class="font-medium">software engineer (data science)</h3>
-                <p class="text-gray-600">lumiq.ai, noida</p>
-                <p class="text-gray-500">2018 - 2019</p>
-              </div>
-            </div>
-
-            <h2 class="section-header mt-12">awards</h2>
-            <div class="section-underline"></div>
-            <div class="space-y-2 text-sm text-gray-600">
-              <div class="bg-white border-2 border-transparent hover:border-gray-600 transition-all duration-200 p-6">
-                <p><strong>daad ainet fellow 2025</strong> - postdoc-net-ai, germany</p>
-              </div>
-              <div class="bg-white border-2 border-transparent hover:border-gray-600 transition-all duration-200 p-6">
-                <p><strong>microsoft travel grant, ihub-anubhuti travel grant</strong> - emnlp 2023</p>
-              </div>
-              <div class="bg-white border-2 border-transparent hover:border-gray-600 transition-all duration-200 p-6">
-                <p><strong>microsoft + ihub-anubhuti-iiitd-foundation + acm-india travel grants</strong> - kdd 2023</p>
-              </div>
-            </div>
+<!-- Experience, Education & Services Section -->
+<section id="experience" class="px-6 py-16">
+  <div class="grid md:grid-cols-2 gap-12">
+    <!-- Left Column: Experience & Awards -->
+    <div>
+      <h2 class="section-header font-mono">experience</h2>
+      <div class="section-underline"></div>
+      <div class="space-y-4 text-sm">
+        <!-- postdoc -->
+        <div class="bg-white border-2 border-transparent hover:border-gray-600 transition-all duration-200 p-6">
+          <div class="flex justify-between items-baseline">
+            <h3 class="font-medium font-mono">postdoc researcher</h3>
+            <span class="text-gray-500 font-mono">2024 – present</span>
           </div>
-
-          <!-- Right Column -->
-          <div>
-            <h2 class="section-header">education</h2>
-            <div class="section-underline"></div>
-            <div class="space-y-4">
-              <div class="bg-white border-2 border-transparent hover:border-gray-600 transition-all duration-200 p-6">
-                <h3 class="font-medium">ph.d. computer science and engineering</h3>
-                <p class="text-gray-600">iiit delhi, india</p>
-                <p class="text-gray-500">2020 - 2024</p>
-              </div>
-              <div class="bg-white border-2 border-transparent hover:border-gray-600 transition-all duration-200 p-6">
-                <h3 class="font-medium">b.tech. computer science and engineering</h3>
-                <p class="text-gray-600">jaypee university, india</p>
-                <p class="text-gray-500">2014 - 2018</p>
-              </div>
-            </div>
-
-            <h2 class="section-header mt-12">services</h2>
-            <div class="section-underline"></div>
-            <div class="bg-white border-2 border-transparent hover:border-gray-600 transition-all duration-200 p-6 text-sm">
-              <p class="mb-2"><strong>reviewer:</strong> arr25,24; iclr25; tcss25,24; tasl24; kbs24; asonam24; icon24; emnlp23, acl23, bda23</p>
-              <p class="mb-2"><strong>organizer:</strong> bda 2023 conf, icon 2023 conf, acss 2022, 2021, 2020 workshops, cofad 2020 workshops</p>
-              <p><strong>teaching assistant:</strong> cse557 - big data analytics (w2020, w2021), cse506 - data mining (s2020, s2021)</p>
-            </div>
-          </div>
+          <p class="text-gray-600 font-mono">university of virginia, usa</p>
         </div>
-      </section>
+        <!-- research associate -->
+        <div class="bg-white border-2 border-transparent hover:border-gray-600 transition-all duration-200 p-6">
+          <div class="flex justify-between items-baseline">
+            <h3 class="font-medium font-mono">research associate</h3>
+            <span class="text-gray-500 font-mono">2019</span>
+          </div>
+          <p class="text-gray-600 font-mono">lcs2-iiitd, delhi</p>
+        </div>
+        <!-- software engineer -->
+        <div class="bg-white border-2 border-transparent hover:border-gray-600 transition-all duration-200 p-6">
+          <div class="flex justify-between items-baseline">
+            <h3 class="font-medium font-mono">software engineer (data science)</h3>
+            <span class="text-gray-500 font-mono">2018 – 2019</span>
+          </div>
+          <p class="text-gray-600 font-mono">lumiq.ai, noida</p>
+        </div>
+      </div>
+
+      <h2 class="section-header font-mono mt-12">awards</h2>
+      <div class="section-underline"></div>
+      <div class="space-y-2 text-sm text-gray-600">
+        <div class="bg-white border-2 border-transparent hover:border-gray-600 transition-all duration-200 p-6">
+          <p class="font-mono"><strong>daad ainet fellow 2025</strong> – postdoc-net-ai, germany</p>
+        </div>
+        <div class="bg-white border-2 border-transparent hover:border-gray-600 transition-all duration-200 p-6">
+          <p class="font-mono"><strong>microsoft travel grant, ihub-anubhuti travel grant</strong> – emnlp 2023</p>
+        </div>
+        <div class="bg-white border-2 border-transparent hover:border-gray-600 transition-all duration-200 p-6">
+          <p class="font-mono"><strong>microsoft + ihub-anubhuti-iiitd-foundation + acm-india travel grants</strong> – kdd 2023</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column: Education & Services -->
+    <div>
+      <h2 class="section-header font-mono">education</h2>
+      <div class="section-underline"></div>
+      <div class="space-y-4">
+        <!-- PhD -->
+        <div class="bg-white border-2 border-transparent hover:border-gray-600 transition-all duration-200 p-1">
+          <h3 class="font-medium font-mono">ph.d. computer science and engineering</h3>
+          <p class="flex justify-between text-gray-500 font-mono">
+            <span>iiit delhi, india</span>
+            <span>2020 – 2024</span>
+          </p>
+          <p class="text-gray-600 font-mono mt-4"><strong>advisors:</strong> prof. vikram goyal, prof. tanmoy chakraborty</p>
+          <p class="text-gray-600 font-mono mt-2"><strong>thesis title:</strong> advancing text summarization with conscience, comprehension, and multimodality</p>
+        </div>
+        <!-- B.Tech -->
+        <div class="bg-white border-2 border-transparent hover:border-gray-600 transition-all duration-200 p-1">
+          <h3 class="font-medium font-mono">b.tech. computer science and engineering</h3>
+          <p class="flex justify-between text-gray-500 font-mono">
+            <span>jaypee university, india</span>
+            <span>2014 – 2018</span>
+          </p>
+          <p class="text-gray-600 font-mono mt-4"><strong>advisor:</strong> dr. amit kumar</p>
+          <p class="text-gray-600 font-mono mt-2"><strong>thesis title:</strong> machine translation in indian languages</p>
+        </div>
+      </div>
+
+      <h2 class="section-header font-mono mt-12">services</h2>
+      <div class="section-underline"></div>
+      <div class="bg-white border-2 border-transparent hover:border-gray-600 transition-all duration-200 p-6 text-sm">
+        <p class="mb-2 font-mono"><strong>reviewer:</strong> arr25,24; iclr25; tcss25,24; tasl24; kbs24; asonam24; icon24; emnlp23; acl23; bda23</p>
+        <p class="mb-2 font-mono"><strong>organizer:</strong> bda 2023 conf; icon 2023 conf; acss 2020–2022 workshops; cofad 2020 workshop</p>
+        <p class="font-mono"><strong>teaching assistant:</strong> cse557 (w2020, w2021); cse506 (s2020, s2021)</p>
+      </div>
+    </div>
+  </div>
+</section>
 
 
 <!-- Contact Details (flat layout) -->
@@ -900,5 +919,11 @@ body.dark #research-directions span {
     animation: pulse-fast 1.5s cubic-bezier(.4,0,.6,1) infinite;
   }
 </style>
+<style>
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'JetBrains Mono', monospace;
+  }
+</style>
+
   </body>
 </html>
