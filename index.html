@@ -9,13 +9,32 @@
       rel="stylesheet"
     />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
     <style>
+      /* body text: inter; keep mono for code/accents */
       body {
-        font-family: 'JetBrains Mono', monospace;
-        background-color: #ffffff;
-        scroll-behavior: smooth;
+        font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+                     Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        line-height: 1.65;
+        letter-spacing: 0.01em;
       }
+      
+      /* headings (optional): slightly heavier weight for clarity */
+      .section-header, h1, h2, h3, h4 {
+        font-weight: 600;
+      }
+      
+      /* keep mono where it makes sense */
+      code, pre, .text-mono, .badge, .counter {
+        font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      }
+      
+      /* nicer alignment for years/counters */
+      .dates, .counter { font-variant-numeric: tabular-nums; }
+
 
       /* Job Market Banner */
       .job-market-banner {
