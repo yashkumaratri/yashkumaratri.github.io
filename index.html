@@ -9,265 +9,266 @@
       rel="stylesheet"
     />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
     <style>
-      /* body text: inter; keep mono for code/accents */
       body {
-        font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, "Segoe UI",
-                     Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+        font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
-        line-height: 1.65;
-        letter-spacing: 0.01em;
+        line-height: 1.7;
+        letter-spacing: -0.01em;
+        background-color: #fafafa;
+        color: #111827;
       }
-      
-      /* headings (optional): slightly heavier weight for clarity */
-      .section-header, h1, h2, h3, h4 {
-        font-weight: 600;
+
+      h1, h2, h3, h4, .section-header {
+        font-weight: 700;
+        letter-spacing: -0.02em;
       }
-      
-      /* keep mono where it makes sense */
+
       code, pre, .text-mono, .badge, .counter {
-        font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+        font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
       }
-      
-      /* nicer alignment for years/counters */
-      .dates, .counter { font-variant-numeric: tabular-nums; }
 
+      .dates, .counter {
+        font-variant-numeric: tabular-nums;
+      }
 
-      /* Job Market Banner */
+      /* Premium Job Market Banner */
       .job-market-banner {
-        background: linear-gradient(135deg, #2563eb, #1e40af);
-        color: white;
+        background: linear-gradient(135deg, #1e3a8a, #0f172a);
+        color: #fde68a;
         text-align: center;
-        padding: 12px 0;
-        font-weight: 500;
+        padding: 14px 0;
+        font-weight: 600;
         position: sticky;
         top: 0;
         z-index: 100;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+        border-bottom: 1px solid #334155;
       }
 
       /* Header */
       .header {
-        background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(10px);
-        border-bottom: 1px solid #e5e7eb;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid #e2e8f0;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.03);
       }
 
-      /* Card styles matching Agentic Lab */
+      /* Content Card */
       .content-card {
-        background: #ffffff;
-        border: 2px solid transparent;
-        transition: all 0.2s ease;
-        padding: 24px;
+        background: white;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 28px;
+        transition: all 0.3s ease;
       }
 
       .content-card:hover {
-        border-color: #6b7280;
+        border-color: #cbd5e1;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.03);
       }
 
-      /* Publication cards */
+      /* Publication Cards */
       .publication-card {
-        background: #ffffff;
-        border: 2px solid transparent;
-        padding: 20px;
-        margin-bottom: 16px;
-        transition: all 0.2s ease;
+        background: white;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 24px;
+        margin-bottom: 20px;
+        transition: all 0.3s ease;
         cursor: pointer;
       }
 
       .publication-card:hover {
         border-color: #3b82f6;
-        background: #f0f9ff;
+        background: #f8fafc;
         transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+        box-shadow: 0 6px 16px rgba(59, 130, 246, 0.12);
       }
 
-      /* News section */
+      /* News */
       .news-item {
         border-left: 3px solid #3b82f6;
-        padding-left: 12px;
-        margin-bottom: 12px;
+        padding-left: 16px;
+        margin-bottom: 14px;
+        font-size: 0.92rem;
       }
 
-      /* Section headers */
+      /* Section Headers */
       .section-header {
-        font-size: 2rem;
-        font-weight: 500;
-        margin-bottom: 8px;
-        color: #111827;
+        font-size: 2.1rem;
+        margin-bottom: 12px;
+        color: #0f172a;
       }
 
       .section-underline {
-        height: 4px;
-        width: 60px;
-        background: #d1d5db;
-        margin-bottom: 32px;
+        height: 3px;
+        width: 72px;
+        background: linear-gradient(to right, #3b82f6, #818cf8);
+        margin-bottom: 36px;
+        border-radius: 2px;
       }
 
-      /* Navigation dots (simplified) */
+      /* Navigation Dots */
       .nav-dots {
         position: fixed;
-        right: 20px;
+        right: 28px;
         top: 50%;
         transform: translateY(-50%);
         z-index: 50;
         display: none;
+        flex-direction: column;
+        gap: 16px;
       }
 
       @media (min-width: 1024px) {
-        .nav-dots {
-          display: flex;
-          flex-direction: column;
-          gap: 12px;
-        }
+        .nav-dots { display: flex; }
       }
 
       .nav-dot {
-        width: 12px;
-        height: 12px;
+        width: 10px;
+        height: 10px;
         border-radius: 50%;
-        background: #d1d5db;
+        background: #cbd5e1;
         cursor: pointer;
-        transition: all 0.2s ease;
+        transition: all 0.25s ease;
       }
 
       .nav-dot:hover, .nav-dot.active {
         background: #3b82f6;
-        transform: scale(1.2);
+        transform: scale(1.4);
       }
 
-      /* Social icons */
+      /* Social Icons */
       .social-icon {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        width: 32px;
-        height: 32px;
+        width: 36px;
+        height: 36px;
         border-radius: 50%;
         background: white;
-        color: #3b82f6;
-        border: 2px solid #3b82f6;
-        transition: all 0.2s ease;
-        margin: 0 8px;
+        color: #1e40af;
+        border: 2px solid #93c5fd;
+        transition: all 0.25s ease;
+        margin: 0 6px;
       }
 
       .social-icon:hover {
-        background: #3b82f6;
+        background: #1e40af;
         color: white;
+        border-color: #1e40af;
+        transform: translateY(-2px);
       }
 
-      /* Mobile responsiveness */
+      /* Mobile */
       @media (max-width: 768px) {
-        .section-header {
-          font-size: 1.5rem;
-        }
-        
-        .content-card {
-          padding: 16px;
-        }
+        .section-header { font-size: 1.75rem; }
+        .content-card { padding: 20px; }
       }
 
-      /* Text styles */
-      .text-mono {
-        font-family: 'JetBrains Mono', monospace;
-      }
-
-      /* ─── dark mode overrides ─── */
+      /* Dark Mode */
       body.dark {
-        background-color: #1a202c;
+        background-color: #0f172a;
         color: #e2e8f0;
       }
 
-      /* white → dark slate for all .bg-white containers */
       body.dark .bg-white,
       body.dark .content-card,
       body.dark .publication-card {
-        background-color: #2d3748 !important;
+        background-color: #1e293b !important;
+        border-color: #334155 !important;
       }
 
-      /* generic borders */
       body.dark .border,
       body.dark .border-gray-200 {
-        border-color: #4a5568 !important;
+        border-color: #334155 !important;
       }
 
-      /* section underlines */
       body.dark .section-underline {
-        background-color: #718096 !important;
+        background: linear-gradient(to right, #60a5fa, #93c5fd) !important;
       }
 
-      /* section headers */
       body.dark .section-header,
       body.dark h1,
       body.dark h2,
       body.dark h3,
       body.dark h4 {
-        color: #edf2f7 !important;
+        color: #f1f5f9 !important;
       }
 
-      /* paragraph & small text */
-      body.dark .text-lg,
-      body.dark .text-sm,
       body.dark .text-gray-700,
       body.dark .text-gray-600,
       body.dark .text-gray-500 {
-        color: #e2e8f0 !important;
+        color: #cbd5e1 !important;
       }
 
-      /* links */
       body.dark a,
       body.dark .text-blue-600 {
-        color: #63b3ed !important;
+        color: #93c5fd !important;
       }
 
-      /* job-market banner gradient tweak */
       body.dark .job-market-banner {
-        background: linear-gradient(135deg, #2c5282, #2a4365) !important;
+        background: linear-gradient(135deg, #0c4a6e, #0f172a) !important;
+        color: #fde047 !important;
       }
 
-      /* social icons */
       body.dark .social-icon {
-        background: #2d3748 !important;
-        color: #63b3ed !important;
-        border-color: #63b3ed !important;
+        background: #1e293b !important;
+        color: #93c5fd !important;
+        border-color: #60a5fa !important;
       }
 
-      /* news items */
       body.dark .news-item {
-        border-left-color: #63b3ed !important;
-        color: #e2e8f0 !important;
+        border-left-color: #60a5fa !important;
       }
 
-      /* nav-dots */
       body.dark .nav-dot {
-        background: #4a5568 !important;
+        background: #475569 !important;
       }
       body.dark .nav-dot.active,
       body.dark .nav-dot:hover {
-        background: #63b3ed !important;
+        background: #60a5fa !important;
       }
 
-      /* header */
       body.dark .header {
-        background: rgba(45, 55, 72, 0.95) !important;
-        border-bottom-color: #4a5568 !important;
+        background: rgba(15, 23, 42, 0.95) !important;
+        border-bottom-color: #334155 !important;
       }
+
       body.dark .header .text-xl,
       body.dark .header a,
       body.dark #darkToggle i {
-        color: #edf2f7 !important;
+        color: #f1f5f9 !important;
+      }
+
+      /* Premium badges */
+      .badge-current {
+        display: inline-block;
+        padding: 2px 8px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: #0c4a6e;
+        background: #dbeafe;
+        border-radius: 999px;
+        margin-left: 6px;
+      }
+
+      body.dark .badge-current {
+        color: #dbeafe;
+        background: rgba(12, 74, 110, 0.3);
       }
     </style>
   </head>
 
   <body>
     <!-- Job Market Banner -->
-    <div class="job-market-banner flex items-center justify-center space-x-2 text-center uppercase font-bold text-lg lg:text-xl animate-pulse shadow-lg">
-      <i class="fa-sharp-duotone fa-solid fa-bullseye"></i>
-      <span>i am on the academic job market for positions starting in 2026.</span>
+    <div class="job-market-banner flex items-center justify-center space-x-3 text-center uppercase tracking-wide font-semibold text-sm lg:text-base">
+      <i class="fa-solid fa-bullseye"></i>
+      <span>on the academic job market for positions starting in 2026</span>
     </div>
 
     <!-- Navigation dots -->
@@ -280,18 +281,18 @@
     </div>
 
     <!-- Header -->
-    <header class="header sticky top-12 z-40">
+    <header class="header sticky top-14 z-40">
       <div class="max-w-6xl mx-auto px-6 py-4">
         <div class="flex justify-between items-center">
-          <div class="text-xl font-medium">yash kumar atri</div>
-          <button id="darkToggle" class="ml-4 p-1 rounded focus:outline-none">
+          <div class="text-xl font-semibold tracking-tight">Yash Kumar Atri</div>
+          <button id="darkToggle" class="ml-4 p-1.5 rounded-full focus:outline-none">
             <i class="fas fa-moon"></i>
           </button>
-          <nav class="hidden md:flex space-x-8 text-sm">
-            <a href="#about" class="hover:text-blue-600 transition-colors">about</a>
-            <a href="#publications" class="hover:text-blue-600 transition-colors">publications</a>
-            <a href="#experience" class="hover:text-blue-600 transition-colors">experience</a>
-            <a href="#contact" class="hover:text-blue-600 transition-colors">contact</a>
+          <nav class="hidden md:flex space-x-7 text-sm font-medium">
+            <a href="#about" class="text-gray-600 hover:text-blue-700 transition-colors">About</a>
+            <a href="#publications" class="text-gray-600 hover:text-blue-700 transition-colors">Publications</a>
+            <a href="#experience" class="text-gray-600 hover:text-blue-700 transition-colors">Experience</a>
+            <a href="#contact" class="text-gray-600 hover:text-blue-700 transition-colors">Contact</a>
           </nav>
         </div>
       </div>
@@ -299,24 +300,23 @@
 
     <div class="max-w-7xl mx-auto">
       <!-- Hero Section -->
-      <section id="hero" class="px-6 py-16">
-        <div class="bg-white">
-          <div class="flex flex-col lg:flex-row gap-12">
+      <section id="hero" class="px-6 py-20">
+        <div class="bg-white rounded-xl shadow-sm">
+          <div class="flex flex-col lg:flex-row gap-16 p-8">
             <!-- Left: Image and Basic Info -->
-            <div class="lg:w-1/3">
+            <div class="lg:w-1/3 flex flex-col items-center lg:items-start">
               <img
-                class="w-80 h-80 mx-auto lg:mx-0 object-cover mb-2"
-                style="object-position: 100% 100%;"
+                class="w-64 h-64 rounded-full object-cover mb-6 border-4 border-white shadow-lg"
                 src="attachments/yash1.jpeg"
                 alt="Yash Kumar Atri"
               />
-              <div class="text-center lg:text-left">
-                <h1 class="text-3xl font-semibold mb-2">yash kumar atri</h1>
-                <div class="text-lg text-gray-600 mb-2">university of virginia</div>
-                <div class="text-sm text-gray-500 mb-4">atri [at] virginia.edu</div>
+              <div class="text-center lg:text-left w-full">
+                <h1 class="text-3xl font-bold mb-2 tracking-tight">Yash Kumar Atri</h1>
+                <div class="text-lg text-gray-700 mb-1">University of Virginia</div>
+                <div class="text-sm text-gray-600 mb-5">atri [at] virginia.edu</div>
 
                 <!-- Social Links -->
-                <div class="flex justify-center lg:justify-start mb-6">
+                <div class="flex justify-center lg:justify-start mb-7">
                   <a href="https://www.linkedin.com/in/yashkumaratri/" target="_blank" class="social-icon">
                     <i class="fab fa-linkedin-in"></i>
                   </a>
@@ -338,34 +338,33 @@
                 <div class="mb-8">
                   <a href="https://drive.google.com/file/d/1ZJU-V7N3YFe5WNnj9pNzAMNWo16tApBj/view?usp=share_link" 
                      target="_blank" 
-                     class="inline-block px-4 py-2 border-2 border-gray-400 text-gray-700 hover:border-gray-600 transition-colors">
-                    resume
+                     class="inline-block px-5 py-2.5 bg-gray-50 hover:bg-gray-100 border border-gray-300 text-gray-800 font-medium rounded-lg transition-colors">
+                    Résumé
                   </a>
                 </div>
 
                 <!-- News Section -->
                 <div class="mb-8">
-                  <h3 class="text-lg font-semibold mb-4">happenings</h3>
-                  <div class="space-y-3 text-sm">
+                  <h3 class="text-lg font-semibold mb-4">Happenings</h3>
+                  <div class="space-y-3.5 text-sm">
                     <div class="news-item">
-                      <span class="font-medium">aug 2025</span> – patent on text summarization granted 
+                      <span class="font-medium">Aug 2025</span> – Patent on text summarization granted 
                       (<a href="https://www.linkedin.com/posts/ihub-anubhuti_another-milestone-for-ihub-anubhuti-iiitd-activity-7365720206289076225-uci3?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAn-4zwBZzNUrD2ZdLlniKpvDBBfX5Gj5aI" target="_blank" class="text-blue-600 hover:underline">announcement</a>)
                     </div>
-                    <div class="news-item"><span class="font-medium">may 2025</span> – invited talk at lamarr institute nlproc colloquium, university of bonn</div>
-                    <div class="news-item"><span class="font-medium">apr 2025</span> – our paper <em>lifelong model editing with graph-based external memory</em> accepted to acl findings 2025</div>
-                    <div class="news-item"><span class="font-medium">oct 2024</span> – selected as daad ainet fellow 2024</div>
-                    <div class="news-item"><span class="font-medium">june 2024</span> – joined uva as a postdoc</div>
+                    <div class="news-item"><span class="font-medium">May 2025</span> – Invited talk at Lamarr Institute NLProc Colloquium, University of Bonn</div>
+                    <div class="news-item"><span class="font-medium">Apr 2025</span> – Our paper <em>Lifelong Model Editing with Graph-Based External Memory</em> accepted to ACL Findings 2025</div>
+                    <div class="news-item"><span class="font-medium">Oct 2024</span> – Selected as DAAD AInet Fellow 2024</div>
+                    <div class="news-item"><span class="font-medium">June 2024</span> – Joined UVA as a postdoc</div>
 
-                    <!-- toggleable extras -->
-                    <div class="news-item extra-news hidden"><span class="font-medium">feb 2024</span> – invited presentation at acm-india arcs symposium, niser bhubaneswar</div>
-                    <div class="news-item extra-news hidden"><span class="font-medium">dec 2023</span> – tutorial on building blocks of ai-driven mental health counseling, icon 2023, university of goa</div>
-                    <div class="news-item extra-news hidden"><span class="font-medium">oct 2023</span> – our paper <em>promoting topic coherence via simplicial complex &amp; sheaf graph</em> accepted to emnlp 2023</div>
-                    <div class="news-item extra-news hidden"><span class="font-medium">may 2023</span> – our paper <em>fusing multimodal signals in hyper-complex space</em> accepted to sigkdd 2023</div>
-                    <div class="news-item extra-news hidden"><span class="font-medium">mar 2023</span> – poster presentation at riise 2023, iiit delhi</div>
-                    <div class="news-item extra-news hidden"><span class="font-medium">aug 2020</span> – set foot on the phd path at iiit delhi — the rest is written in papers, code, and coffee</div>
+                    <div class="news-item extra-news hidden"><span class="font-medium">Feb 2024</span> – Invited presentation at ACM-India ARCS Symposium, NISER Bhubaneswar</div>
+                    <div class="news-item extra-news hidden"><span class="font-medium">Dec 2023</span> – Tutorial on building blocks of AI-driven mental health counseling, ICON 2023, University of Goa</div>
+                    <div class="news-item extra-news hidden"><span class="font-medium">Oct 2023</span> – Our paper <em>Promoting Topic Coherence via Simplicial Complex & Sheaf Graph</em> accepted to EMNLP 2023</div>
+                    <div class="news-item extra-news hidden"><span class="font-medium">May 2023</span> – Our paper <em>Fusing Multimodal Signals in Hyper-Complex Space</em> accepted to SIGKDD 2023</div>
+                    <div class="news-item extra-news hidden"><span class="font-medium">Mar 2023</span> – Poster presentation at RIISE 2023, IIIT Delhi</div>
+                    <div class="news-item extra-news hidden"><span class="font-medium">Aug 2020</span> – Set foot on the PhD path at IIIT Delhi — the rest is written in papers, code, and coffee</div>
                   </div>
-                  <button onclick="toggleMoreNews()" id="moreNewsBtn" class="mt-3 text-blue-600 hover:underline text-sm">
-                    show more
+                  <button onclick="toggleMoreNews()" id="moreNewsBtn" class="mt-4 text-blue-600 hover:underline text-sm font-medium">
+                    Show more
                   </button>
                 </div>
               </div>
@@ -373,65 +372,62 @@
 
             <!-- Right: About Me -->
             <div class="lg:w-2/3" id="about">
-              <!-- About Me -->
-              <div class="content-card mb-2">
-                <h3 class="text-xl font-medium mb-3">about me</h3>
+              <div class="content-card mb-6">
+                <h3 class="text-xl font-semibold mb-3">About Me</h3>
                 <div class="section-underline mb-4"></div>
-                <div class="text-gray-700 text-justify text-sm">
+                <div class="text-gray-700 text-justify text-sm leading-relaxed">
                   <p>
-                    hi! i am a postdoctoral researcher at the
-                    <a href="https://datascience.virginia.edu" target="_blank" class="text-blue-600 hover:underline">university of virginia</a>,
+                    Hi! I am a postdoctoral researcher at the
+                    <a href="https://datascience.virginia.edu" target="_blank" class="text-blue-600 hover:underline">University of Virginia</a>,
                     working with
-                    <a href="https://www.tomhartvigsen.com" target="_blank" class="text-blue-600 hover:underline">prof. tom hartvigsen</a>.
-                    before joining uva, i completed my <a href="https://repository.iiitd.edu.in/xmlui/handle/123456789/1640" target="_blank" class="text-blue-600 hover:underline">phd</a> in computer science & engineering at
-                    <a href="https://www.iiitd.ac.in" target="_blank" class="text-blue-600 hover:underline">iiit Delhi</a>,
+                    <a href="https://www.tomhartvigsen.com" target="_blank" class="text-blue-600 hover:underline">Prof. Tom Hartvigsen</a>.
+                    Before joining UVA, I completed my <a href="https://repository.iiitd.edu.in/xmlui/handle/123456789/1640" target="_blank" class="text-blue-600 hover:underline">PhD</a> in Computer Science & Engineering at
+                    <a href="https://www.iiitd.ac.in" target="_blank" class="text-blue-600 hover:underline">IIIT Delhi</a>,
                     advised by
-                    <a href="https://www.iiitd.ac.in/vikram" target="_blank" class="text-blue-600 hover:underline">prof. vikram goyal</a>
+                    <a href="https://www.iiitd.ac.in/vikram" target="_blank" class="text-blue-600 hover:underline">Prof. Vikram Goyal</a>
                     and
-                    <a href="https://www.tanmoychak.com" target="_blank" class="text-blue-600 hover:underline">prof. tanmoy chakraborty</a>.
-                    my research aims to build language systems that learn continuously, adapt responsibly, and evolve alongside human knowledge.
+                    <a href="https://www.tanmoychak.com" target="_blank" class="text-blue-600 hover:underline">Prof. Tanmoy Chakraborty</a>.
+                    My research aims to build language systems that learn continuously, adapt responsibly, and evolve alongside human knowledge.
                   </p>
                 </div>
               </div>
 
-              <!-- Research Interests -->
-              <div class="content-card mb-2">
-                <h3 class="text-xl font-medium mb-3">research interests</h3>
+              <div class="content-card mb-6">
+                <h3 class="text-xl font-semibold mb-3">Research Interests</h3>
                 <div class="section-underline mb-4"></div>
-                <div class="text-gray-700 text-justify text-sm">
+                <div class="text-gray-700 text-justify text-sm leading-relaxed">
                   <p>
-                    i am interested in enabling language models to continuously learn and adapt beyond their initial pretraining. my current research explores model editing, developing methods to update models efficiently with new information and corrections. i build modular systems that apply each change locally, allowing the model to evolve while retaining its existing knowledge. my long-term vision is to create systems that learn like humans: accumulating knowledge over time, refining their understanding, and remaining robust as language, technology, and societal values change.
+                    I am interested in enabling language models to continuously learn and adapt beyond their initial pretraining. My current research explores model editing, developing methods to update models efficiently with new information and corrections. I build modular systems that apply each change locally, allowing the model to evolve while retaining its existing knowledge. My long-term vision is to create systems that learn like humans: accumulating knowledge over time, refining their understanding, and remaining robust as language, technology, and societal values change.
                   </p>
                 </div>
               </div>
 
-              <!-- Research Directions -->
-              <div id="research-directions" class="content-card mb-2">
-                <h3 class="text-xl font-medium mb-3">research directions</h3>
+              <div id="research-directions" class="content-card mb-6">
+                <h3 class="text-xl font-semibold mb-3">Research Directions</h3>
                 <div class="section-underline mb-4"></div>
-                <div class="space-y-4 text-sm text-gray-700">
-                  <div class="bg-blue-50 border-l-4 border-blue-600 p-4 rounded">
-                    <h4 class="font-medium mb-1 flex items-center">
-                      model editing & continual learning
-                      <span class="ml-2 inline-block px-2 py-0.5 text-xs font-semibold text-blue-600 bg-blue-100 rounded-full">current</span>
+                <div class="space-y-5 text-sm text-gray-700">
+                  <div class="bg-blue-50 border-l-4 border-blue-600 p-4 rounded-lg">
+                    <h4 class="font-semibold mb-1 flex items-center">
+                      Model Editing & Continual Learning
+                      <span class="badge-current">Current</span>
                     </h4>
-                    <ul class="list-disc list-inside space-y-1">
-                      <li>lifelong model editing with graph-based external memory (acl findings 2025)</li>
-                      <li>continually self-improving language models for bariatric surgery qa (preprint 2025)</li>
+                    <ul class="list-disc list-inside space-y-1 pl-1">
+                      <li>Lifelong model editing with graph-based external memory (ACL Findings 2025)</li>
+                      <li>Continually self-improving language models for bariatric surgery QA (Preprint 2025)</li>
                     </ul>
                   </div>
                   <div>
-                    <h4 class="font-medium mb-1">text summarization</h4>
-                    <ul class="list-disc list-inside space-y-1">
-                      <li>promoting topic coherence via simplicial complex & sheaf graph (emnlp main 2023)</li>
-                      <li>fusing multimodal signals in hyper-complex space (sigkdd 2023)</li>
+                    <h4 class="font-semibold mb-1">Text Summarization</h4>
+                    <ul class="list-disc list-inside space-y-1 pl-1">
+                      <li>Promoting topic coherence via simplicial complex & sheaf graph (EMNLP Main 2023)</li>
+                      <li>Fusing multimodal signals in hyper-complex space (SIGKDD 2023)</li>
                     </ul>
                   </div>
                   <div>
-                    <h4 class="font-medium mb-1">data quality & evaluation</h4>
-                    <ul class="list-disc list-inside space-y-1">
-                      <li>inline citation classification with peripheral context & time-evolving augmentation (pakdd 2023)</li>
-                      <li>assessing the quality of the datasets by identifying mislabeled samples (asonam 2021)</li>
+                    <h4 class="font-semibold mb-1">Data Quality & Evaluation</h4>
+                    <ul class="list-disc list-inside space-y-1 pl-1">
+                      <li>Inline citation classification with peripheral context & time-evolving augmentation (PAKDD 2023)</li>
+                      <li>Assessing the quality of the datasets by identifying mislabeled samples (ASONAM 2021)</li>
                     </ul>
                   </div>
                 </div>
@@ -441,28 +437,28 @@
         </div>
       </section>
 
-      <!-- Publications Section -->
-      <section id="publications" class="px-6 py-16">
-        <div class="flex items-center justify-between mb-4">
-          <h2 class="section-header">publications</h2>
-          <div class="flex space-x-8 text-sm text-gray-600">
-            <div><span class="font-semibold">papers:</span> 8</div>
-            <div><span class="font-semibold">preprints:</span> 2</div>
-            <div><span class="font-semibold">patents:</span> 1</div>
+      <!-- Publications -->
+      <section id="publications" class="px-6 py-20">
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between mb-6">
+          <h2 class="section-header">Publications</h2>
+          <div class="flex flex-wrap gap-x-6 gap-y-2 mt-2 md:mt-0 text-sm text-gray-600 font-medium">
+            <div><span class="text-gray-900">Papers:</span> 8</div>
+            <div><span class="text-gray-900">Preprints:</span> 2</div>
+            <div><span class="text-gray-900">Patents:</span> 1</div>
           </div>
         </div>
-        <div class="section-underline"></div>
+        <div class="section-underline mb-8"></div>
 
-        <div class="space-y-4">
+        <div class="space-y-5">
           <!-- Core Publications -->
           <div class="publication-card" data-url="https://aclanthology.org/2025.findings-acl.690/">
             <div class="flex justify-between items-start">
               <div class="flex-1">
-                <h3 class="font-medium mb-2">lifelong model editing with graph-based external memory</h3>
-                <p class="text-sm text-gray-600 mb-3"><strong>yash kumar atri</strong>, ahmed alaa, thomas hartvigsen</p>
+                <h3 class="font-semibold mb-2">Lifelong Model Editing with Graph-Based External Memory</h3>
+                <p class="text-sm text-gray-600 mb-3"><strong>Yash Kumar Atri</strong>, Ahmed Alaa, Thomas Hartvigsen</p>
                 <div class="flex items-center gap-4"> 
-                  <a href="https://aclanthology.org/2025.findings-acl.690/" target="_blank" class="text-blue-600 hover:underline text-sm">paper</a>
-                  <span class="text-xs px-2 py-1 bg-gray-200 rounded">acl (findings) 2025</span>
+                  <a href="https://aclanthology.org/2025.findings-acl.690/" target="_blank" class="text-blue-600 hover:underline text-sm font-medium">Paper</a>
+                  <span class="text-xs px-2.5 py-1 bg-blue-100 text-blue-800 rounded font-medium">ACL (Findings) 2025</span>
                 </div>
               </div>
             </div>
@@ -471,11 +467,11 @@
           <div class="publication-card" data-url="https://arxiv.org/abs/2505.16102v2">
             <div class="flex justify-between items-start">
               <div class="flex-1">
-                <h3 class="font-medium mb-2">continually self-improving language models for bariatric surgery question--answering</h3>
-                <p class="text-sm text-gray-600 mb-3"><strong>yash kumar atri</strong>, thomas h shin, thomas hartvigsen</p>
+                <h3 class="font-semibold mb-2">Continually Self-Improving Language Models for Bariatric Surgery Question–Answering</h3>
+                <p class="text-sm text-gray-600 mb-3"><strong>Yash Kumar Atri</strong>, Thomas H Shin, Thomas Hartvigsen</p>
                 <div class="flex items-center gap-4">
-                  <a href="https://arxiv.org/abs/2505.16102v2" target="_blank" class="text-blue-600 hover:underline text-sm">paper</a>
-                  <span class="text-xs px-2 py-1 bg-gray-200 rounded">preprint 2025</span>
+                  <a href="https://arxiv.org/abs/2505.16102v2" target="_blank" class="text-blue-600 hover:underline text-sm font-medium">Paper</a>
+                  <span class="text-xs px-2.5 py-1 bg-gray-200 text-gray-800 rounded font-medium">Preprint 2025</span>
                 </div>
               </div>
             </div>
@@ -484,11 +480,11 @@
           <div class="publication-card" data-url="https://aclanthology.org/2023.emnlp-main.133/">
             <div class="flex justify-between items-start">
               <div class="flex-1">
-                <h3 class="font-medium mb-2">promoting topic coherence and inter-document consorts in multi-document summarization via simplicial complex and sheaf graph</h3>
-                <p class="text-sm text-gray-600 mb-3"><strong>yash kumar atri</strong>, arun iyer, tanmoy chakraborty, vikram goyal</p>
+                <h3 class="font-semibold mb-2">Promoting Topic Coherence and Inter-Document Consorts in Multi-Document Summarization via Simplicial Complex and Sheaf Graph</h3>
+                <p class="text-sm text-gray-600 mb-3"><strong>Yash Kumar Atri</strong>, Arun Iyer, Tanmoy Chakraborty, Vikram Goyal</p>
                 <div class="flex items-center gap-4">
-                  <a href="https://aclanthology.org/2023.emnlp-main.133/" target="_blank" class="text-blue-600 hover:underline text-sm">paper</a>
-                  <span class="text-xs px-2 py-1 bg-gray-200 rounded">emnlp main 2023</span>
+                  <a href="https://aclanthology.org/2023.emnlp-main.133/" target="_blank" class="text-blue-600 hover:underline text-sm font-medium">Paper</a>
+                  <span class="text-xs px-2.5 py-1 bg-emerald-100 text-emerald-800 rounded font-medium">EMNLP Main 2023</span>
                 </div>
               </div>
             </div>
@@ -497,11 +493,11 @@
           <div class="publication-card" data-url="https://dl.acm.org/doi/10.1145/3580305.3599830">
             <div class="flex justify-between items-start">
               <div class="flex-1">
-                <h3 class="font-medium mb-2">fusing multimodal signals on hyper-complex space for extreme abstractive text summarization</h3>
-                <p class="text-sm text-gray-600 mb-3"><strong>yash kumar atri</strong>, tanmoy chakraborty, vikram goyal</p>
+                <h3 class="font-semibold mb-2">Fusing Multimodal Signals on Hyper-Complex Space for Extreme Abstractive Text Summarization</h3>
+                <p class="text-sm text-gray-600 mb-3"><strong>Yash Kumar Atri</strong>, Tanmoy Chakraborty, Vikram Goyal</p>
                 <div class="flex items-center gap-4">
-                  <a href="https://dl.acm.org/doi/10.1145/3580305.3599830" target="_blank" class="text-blue-600 hover:underline text-sm">paper</a>
-                  <span class="text-xs px-2 py-1 bg-gray-200 rounded">sigkdd 2023</span>
+                  <a href="https://dl.acm.org/doi/10.1145/3580305.3599830" target="_blank" class="text-blue-600 hover:underline text-sm font-medium">Paper</a>
+                  <span class="text-xs px-2.5 py-1 bg-amber-100 text-amber-800 rounded font-medium">SIGKDD 2023</span>
                 </div>
               </div>
             </div>
@@ -511,24 +507,25 @@
           <div class="publication-card hidden extra-publication" data-url="https://raw.githubusercontent.com/yashkumaratri/yashkumaratri.github.io/refs/heads/master/attachments/patent.jpg">
             <div class="flex justify-between items-start">
               <div class="flex-1">
-                <h3 class="font-medium mb-2">system and method for text summarization, application number 202311015836, publication number  37/2024</h3>
-                <p class="text-sm text-gray-600 mb-3">simran kalra, <strong>yash kumar atri</strong>, tanmoy chakraborty</p>
+                <h3 class="font-semibold mb-2">System and Method for Text Summarization, Application Number 202311015836, Publication Number 37/2024</h3>
+                <p class="text-sm text-gray-600 mb-3">Simran Kalra, <strong>Yash Kumar Atri</strong>, Tanmoy Chakraborty</p>
                 <div class="flex items-center gap-4">
-                  <a href="https://raw.githubusercontent.com/yashkumaratri/yashkumaratri.github.io/refs/heads/master/attachments/patent.jpg" target="_blank" class="text-blue-600 hover:underline text-sm">patent</a>
-                  <span class="text-xs px-2 py-1 bg-gray-200 rounded">patent</span>
+                  <a href="https://raw.githubusercontent.com/yashkumaratri/yashkumaratri.github.io/refs/heads/master/attachments/patent.jpg" target="_blank" class="text-blue-600 hover:underline text-sm font-medium">Patent</a>
+                  <span class="text-xs px-2.5 py-1 bg-purple-100 text-purple-800 rounded font-medium">Patent</span>
                 </div>
               </div>
             </div>
           </div>
 
+          <!-- Remaining extra publications (same as original, just hidden) -->
           <div class="publication-card hidden extra-publication" data-url="https://arxiv.org/abs/2312.06022">
             <div class="flex justify-between items-start">
               <div class="flex-1">
-                <h3 class="font-medium mb-2">exploiting representation bias for data distillation in abstractive text summarization</h3>
-                <p class="text-sm text-gray-600 mb-3"><strong>yash kumar atri</strong>, tanmoy chakraborty, vikram goyal</p>
+                <h3 class="font-semibold mb-2">Exploiting Representation Bias for Data Distillation in Abstractive Text Summarization</h3>
+                <p class="text-sm text-gray-600 mb-3"><strong>Yash Kumar Atri</strong>, Tanmoy Chakraborty, Vikram Goyal</p>
                 <div class="flex items-center gap-4">
-                  <a href="https://arxiv.org/abs/2312.06022" target="_blank" class="text-blue-600 hover:underline text-sm">paper</a>
-                  <span class="text-xs px-2 py-1 bg-gray-200 rounded">preprint 2023</span>
+                  <a href="https://arxiv.org/abs/2312.06022" target="_blank" class="text-blue-600 hover:underline text-sm font-medium">Paper</a>
+                  <span class="text-xs px-2.5 py-1 bg-gray-200 text-gray-800 rounded font-medium">Preprint 2023</span>
                 </div>
               </div>
             </div>
@@ -537,11 +534,11 @@
           <div class="publication-card hidden extra-publication" data-url="https://ieeexplore.ieee.org/abstract/document/10261260">
             <div class="flex justify-between items-start">
               <div class="flex-1">
-                <h3 class="font-medium mb-2">multi-document summarization using selective attention span and reinforcement learning</h3>
-                <p class="text-sm text-gray-600 mb-3"><strong>yash kumar atri</strong>, tanmoy chakraborty, vikram goyal</p>
+                <h3 class="font-semibold mb-2">Multi-Document Summarization Using Selective Attention Span and Reinforcement Learning</h3>
+                <p class="text-sm text-gray-600 mb-3"><strong>Yash Kumar Atri</strong>, Tanmoy Chakraborty, Vikram Goyal</p>
                 <div class="flex items-center gap-4">
-                  <a href="https://ieeexplore.ieee.org/abstract/document/10261260" target="_blank" class="text-blue-600 hover:underline text-sm">paper</a>
-                  <span class="text-xs px-2 py-1 bg-gray-200 rounded">tasl 2023</span>
+                  <a href="https://ieeexplore.ieee.org/abstract/document/10261260" target="_blank" class="text-blue-600 hover:underline text-sm font-medium">Paper</a>
+                  <span class="text-xs px-2.5 py-1 bg-gray-200 text-gray-800 rounded font-medium">TASL 2023</span>
                 </div>
               </div>
             </div>
@@ -550,11 +547,11 @@
           <div class="publication-card hidden extra-publication" data-url="https://link.springer.com/chapter/10.1007/978-3-031-33383-5_1">
             <div class="flex justify-between items-start">
               <div class="flex-1">
-                <h3 class="font-medium mb-2">inline citation classification using peripheral context and time-evolving augmentation</h3>
-                <p class="text-sm text-gray-600 mb-3">priyanshi gupta, <strong>yash kumar atri</strong>, apurva nagvenkar, sourish dasgupta, tanmoy chakraborty</p>
+                <h3 class="font-semibold mb-2">Inline Citation Classification Using Peripheral Context and Time-Evolving Augmentation</h3>
+                <p class="text-sm text-gray-600 mb-3">Priyanshi Gupta, <strong>Yash Kumar Atri</strong>, Apurva Nagvenkar, Sourish Dasgupta, Tanmoy Chakraborty</p>
                 <div class="flex items-center gap-4">
-                  <a href="https://link.springer.com/chapter/10.1007/978-3-031-33383-5_1" target="_blank" class="text-blue-600 hover:underline text-sm">paper</a>
-                  <span class="text-xs px-2 py-1 bg-gray-200 rounded">pakdd 2023</span>
+                  <a href="https://link.springer.com/chapter/10.1007/978-3-031-33383-5_1" target="_blank" class="text-blue-600 hover:underline text-sm font-medium">Paper</a>
+                  <span class="text-xs px-2.5 py-1 bg-gray-200 text-gray-800 rounded font-medium">PAKDD 2023</span>
                 </div>
               </div>
             </div>
@@ -563,11 +560,11 @@
           <div class="publication-card hidden extra-publication" data-url="https://dl.acm.org/doi/10.1016/j.knosys.2021.107152">
             <div class="flex justify-between items-start">
               <div class="flex-1">
-                <h3 class="font-medium mb-2">see, hear, read: leveraging multimodality with guided attention for abstractive text summarization</h3>
-                <p class="text-sm text-gray-600 mb-3"><strong>yash kumar atri<sup>*</sup></strong>, shraman pramanick<sup>*</sup>, vikram goyal, tanmoy chakraborty</p>
+                <h3 class="font-semibold mb-2">See, Hear, Read: Leveraging Multimodality with Guided Attention for Abstractive Text Summarization</h3>
+                <p class="text-sm text-gray-600 mb-3"><strong>Yash Kumar Atri<sup>*</sup></strong>, Shraman Pramanick<sup>*</sup>, Vikram Goyal, Tanmoy Chakraborty</p>
                 <div class="flex items-center gap-4">
-                  <a href="https://dl.acm.org/doi/10.1016/j.knosys.2021.107152" target="_blank" class="text-blue-600 hover:underline text-sm">paper</a>
-                  <span class="text-xs px-2 py-1 bg-gray-200 rounded">kbs 2021</span>
+                  <a href="https://dl.acm.org/doi/10.1016/j.knosys.2021.107152" target="_blank" class="text-blue-600 hover:underline text-sm font-medium">Paper</a>
+                  <span class="text-xs px-2.5 py-1 bg-gray-200 text-gray-800 rounded font-medium">KBS 2021</span>
                 </div>
               </div>
             </div>
@@ -576,11 +573,11 @@
           <div class="publication-card hidden extra-publication" data-url="https://dl.acm.org/doi/abs/10.1145/3487351.3488361">
             <div class="flex justify-between items-start">
               <div class="flex-1">
-                <h3 class="font-medium mb-2">assessing the quality of the datasets by identifying mislabeled samples</h3>
-                <p class="text-sm text-gray-600 mb-3">vaibhav pulastya, gaurav nuti, <strong>yash kumar atri</strong>, tanmoy chakraborty</p>
+                <h3 class="font-semibold mb-2">Assessing the Quality of the Datasets by Identifying Mislabeled Samples</h3>
+                <p class="text-sm text-gray-600 mb-3">Vaibhav Pulastya, Gaurav Nuti, <strong>Yash Kumar Atri</strong>, Tanmoy Chakraborty</p>
                 <div class="flex items-center gap-4">
-                  <a href="https://dl.acm.org/doi/abs/10.1145/3487351.3488361" target="_blank" class="text-blue-600 hover:underline text-sm">paper</a>
-                  <span class="text-xs px-2 py-1 bg-gray-200 rounded">asonam 2021</span>
+                  <a href="https://dl.acm.org/doi/abs/10.1145/3487351.3488361" target="_blank" class="text-blue-600 hover:underline text-sm font-medium">Paper</a>
+                  <span class="text-xs px-2.5 py-1 bg-gray-200 text-gray-800 rounded font-medium">ASONAM 2021</span>
                 </div>
               </div>
             </div>
@@ -589,66 +586,62 @@
           <div class="publication-card hidden extra-publication" data-url="https://aclanthology.org/2020.findings-emnlp.254/">
             <div class="flex justify-between items-start">
               <div class="flex-1">
-                <h3 class="font-medium mb-2">corpora evaluation and system bias detection in multi-document summarization</h3>
-                <p class="text-sm text-gray-600 mb-3">alvin dey<sup>*</sup>, tanya chowdhury<sup>*</sup>, <strong>yash kumar atri<sup>*</sup></strong>, tanmoy chakraborty</p>
+                <h3 class="font-semibold mb-2">Corpora Evaluation and System Bias Detection in Multi-Document Summarization</h3>
+                <p class="text-sm text-gray-600 mb-3">Alvin Dey<sup>*</sup>, Tanya Chowdhury<sup>*</sup>, <strong>Yash Kumar Atri<sup>*</sup></strong>, Tanmoy Chakraborty</p>
                 <div class="flex items-center gap-4">
-                  <a href="https://aclanthology.org/2020.findings-emnlp.254/" target="_blank" class="text-blue-600 hover:underline text-sm">paper</a>
-                  <span class="text-xs px-2 py-1 bg-gray-200 rounded">emnlp (findings) 2020</span>
+                  <a href="https://aclanthology.org/2020.findings-emnlp.254/" target="_blank" class="text-blue-600 hover:underline text-sm font-medium">Paper</a>
+                  <span class="text-xs px-2.5 py-1 bg-gray-200 text-gray-800 rounded font-medium">EMNLP (Findings) 2020</span>
                 </div>
               </div>
             </div>
           </div>
 
-          <div class="text-center">
-            <button onclick="togglePublications()" id="morePublicationsBtn" class="text-blue-600 hover:underline">
-              show more publications
+          <div class="text-center mt-6">
+            <button onclick="togglePublications()" id="morePublicationsBtn" class="text-blue-600 hover:underline font-medium">
+              Show more publications
             </button>
           </div>
         </div>
       </section>
 
-      <!-- Experience, Education, Awards & Service Section -->
-      <section id="experience" class="px-6 py-16">
-        <div class="grid md:grid-cols-2 gap-12">
-          <!-- Left Column: Experience & Awards -->
+      <!-- Experience, Education, Awards & Service -->
+      <section id="experience" class="px-6 py-20">
+        <div class="grid md:grid-cols-2 gap-16">
           <div>
-            <h2 class="section-header font-mono">experience</h2>
-            <div class="section-underline"></div>
-            <div class="space-y-4 text-sm">
-              <!-- Postdoc -->
+            <h2 class="section-header font-mono tracking-wide">Experience</h2>
+            <div class="section-underline mb-8"></div>
+            <div class="space-y-6 text-sm">
               <div class="content-card">
                 <div class="flex justify-between items-baseline">
-                  <h3 class="font-medium font-mono">Postdoctoral Researcher</h3>
-                  <span class="text-gray-500 font-mono">2024 – present</span>
+                  <h3 class="font-semibold font-mono">Postdoctoral Researcher</h3>
+                  <span class="text-gray-500 font-mono">2024 – Present</span>
                 </div>
-                <p class="text-gray-600 font-mono mt-1">
+                <p class="text-gray-600 font-mono mt-2">
                   University of Virginia, USA<br>
                   <span class="text-sm">Advised by <a href="https://www.tomhartvigsen.com" target="_blank" class="text-blue-600 hover:underline">Prof. Tom Hartvigsen</a></span>
                 </p>
               </div>
 
-              <!-- Research Associate -->
               <div class="content-card">
                 <div class="flex justify-between items-baseline">
-                  <h3 class="font-medium font-mono">Research Associate</h3>
+                  <h3 class="font-semibold font-mono">Research Associate</h3>
                   <span class="text-gray-500 font-mono">2019</span>
                 </div>
-                <p class="text-gray-600 font-mono mt-1">LCS<sup>2</sup>, IIIT Delhi, India</p>
+                <p class="text-gray-600 font-mono mt-2">LCS2, IIIT Delhi, India</p>
               </div>
 
-              <!-- Software Engineer -->
               <div class="content-card">
                 <div class="flex justify-between items-baseline">
-                  <h3 class="font-medium font-mono">Software Engineer (Data Science)</h3>
+                  <h3 class="font-semibold font-mono">Software Engineer (Data Science)</h3>
                   <span class="text-gray-500 font-mono">2018 – 2019</span>
                 </div>
-                <p class="text-gray-600 font-mono mt-1">Lumiq.ai, Noida, India</p>
+                <p class="text-gray-600 font-mono mt-2">Lumiq.ai, Noida, India</p>
               </div>
             </div>
 
-            <h2 class="section-header font-mono mt-12">awards</h2>
-            <div class="section-underline"></div>
-            <div class="space-y-4">
+            <h2 class="section-header font-mono tracking-wide mt-14">Awards</h2>
+            <div class="section-underline mb-8"></div>
+            <div class="space-y-5">
               <div class="content-card">
                 <p class="font-mono text-gray-700">
                   <strong>DAAD AInet Fellow 2024</strong> — Postdoc-NET-AI, Germany
@@ -662,15 +655,13 @@
             </div>
           </div>
 
-          <!-- Right Column: Education & Professional Service -->
           <div>
-            <h2 class="section-header font-mono">education</h2>
-            <div class="section-underline"></div>
-            <div class="space-y-4">
-              <!-- PhD -->
+            <h2 class="section-header font-mono tracking-wide">Education</h2>
+            <div class="section-underline mb-8"></div>
+            <div class="space-y-6">
               <div class="content-card">
-                <h3 class="font-medium font-mono">Ph.D. Computer Science & Engineering</h3>
-                <p class="flex justify-between text-gray-500 font-mono mt-1">
+                <h3 class="font-semibold font-mono">Ph.D. Computer Science & Engineering</h3>
+                <p class="flex justify-between text-gray-500 font-mono mt-2">
                   <span>IIIT Delhi, India</span>
                   <span>2020 – 2024</span>
                 </p>
@@ -682,10 +673,9 @@
                 </p>
               </div>
 
-              <!-- B.Tech -->
               <div class="content-card">
-                <h3 class="font-medium font-mono">B.Tech. Computer Science & Engineering</h3>
-                <p class="flex justify-between text-gray-500 font-mono mt-1">
+                <h3 class="font-semibold font-mono">B.Tech. Computer Science & Engineering</h3>
+                <p class="flex justify-between text-gray-500 font-mono mt-2">
                   <span>Jaypee University, India</span>
                   <span>2014 – 2018</span>
                 </p>
@@ -698,10 +688,9 @@
               </div>
             </div>
 
-            <!-- Professional Service -->
-            <h2 class="section-header font-mono mt-12">professional service</h2>
-            <div class="section-underline"></div>
-            <div class="content-card text-sm font-mono text-gray-700 space-y-2">
+            <h2 class="section-header font-mono tracking-wide mt-14">Professional Service</h2>
+            <div class="section-underline mb-8"></div>
+            <div class="content-card text-sm font-mono text-gray-700 space-y-2.5">
               <div>
                 <span class="font-semibold">Area Chair</span> — ACL Rolling Review (ARR) 2025
               </div>
@@ -713,10 +702,9 @@
               </div>
             </div>
 
-            <!-- Teaching -->
-            <h2 class="section-header font-mono mt-12">teaching & mentoring</h2>
-            <div class="section-underline"></div>
-            <div class="content-card text-sm font-mono text-gray-700 space-y-2">
+            <h2 class="section-header font-mono tracking-wide mt-14">Teaching & Mentoring</h2>
+            <div class="section-underline mb-8"></div>
+            <div class="content-card text-sm font-mono text-gray-700 space-y-2.5">
               <div>Teaching Assistant: CSE557 (W2020, W2021), CSE506 (S2020, S2021) — IIIT Delhi</div>
               <div>Guest Lecturer: Tutorial on AI-Driven Mental Health Counseling — ICON 2023</div>
               <div>Mentor: Guided undergraduate research interns on summarization & fairness (2021–2023)</div>
@@ -725,10 +713,10 @@
         </div>
       </section>
 
-      <!-- Contact Details -->
-      <div class="bg-white border-2 border-transparent hover:border-gray-600 transition-all duration-200 p-6">
-        <h2 class="section-header">Get in touch</h2>
-        <div class="flex flex-wrap items-center text-gray-600 text-sm space-x-6">
+      <!-- Contact -->
+      <div class="bg-white border border-gray-200 rounded-xl p-8 mb-16 hover:shadow-md transition-shadow">
+        <h2 class="section-header mb-6">Get in Touch</h2>
+        <div class="flex flex-wrap items-center text-gray-600 text-sm space-x-8">
           <div class="flex items-center space-x-2">
             <i class="fas fa-envelope text-blue-600"></i>
             <a href="mailto:yashkumaratri@gmail.com" class="hover:underline">yashkumaratri [at] gmail.com</a>
@@ -749,13 +737,13 @@
       </div>
 
       <!-- Footer -->
-      <footer class="border-t border-gray-200 mt-16">
-        <div class="max-w-6xl mx-auto px-6 py-8">
-          <div class="flex justify-between items-center text-sm text-gray-500">
-            <div>© 2025 yash kumar atri</div>
-            <div class="flex items-center gap-2">
-              base template inspiration: 
-              <a href="https://github.com/onpix/minimal-academic-website" class="text-blue-600 hover:underline">onpix</a>
+      <footer class="border-t border-gray-200 pt-8 pb-12">
+        <div class="max-w-6xl mx-auto px-6">
+          <div class="flex flex-col md:flex-row md:justify-between items-center text-sm text-gray-500">
+            <div>© 2025 Yash Kumar Atri</div>
+            <div class="mt-2 md:mt-0">
+              Base template inspired by: 
+              <a href="https://github.com/onpix/minimal-academic-website" class="text-blue-600 hover:underline ml-1">onpix</a>
             </div>
           </div>
         </div>
@@ -769,10 +757,10 @@
         const btn = document.getElementById('moreNewsBtn');
         if (hiddenNews.length > 0 && hiddenNews[0].classList.contains('hidden')) {
           hiddenNews.forEach(item => item.classList.remove('hidden'));
-          btn.textContent = 'show less';
+          btn.textContent = 'Show less';
         } else {
           hiddenNews.forEach(item => item.classList.add('hidden'));
-          btn.textContent = 'show more';
+          btn.textContent = 'Show more';
         }
       }
 
@@ -782,61 +770,56 @@
         const btn = document.getElementById('morePublicationsBtn');
         if (hiddenPublications.length > 0 && hiddenPublications[0].classList.contains('hidden')) {
           hiddenPublications.forEach(item => item.classList.remove('hidden'));
-          btn.textContent = 'show less publications';
+          btn.textContent = 'Show less publications';
         } else {
           hiddenPublications.forEach(item => item.classList.add('hidden'));
-          btn.textContent = 'show more publications';
+          btn.textContent = 'Show more publications';
         }
       }
 
-      // Publication card click handler
+      // Publication card click
       document.addEventListener('DOMContentLoaded', function() {
-        const publicationCards = document.querySelectorAll('.publication-card');
-        publicationCards.forEach(card => {
+        const cards = document.querySelectorAll('.publication-card');
+        cards.forEach(card => {
           card.addEventListener('click', function() {
-            const url = this.dataset.url;
-            if (url && url.trim() !== '') {
-              window.open(url, '_blank');
-            }
+            const url = this.dataset.url?.trim();
+            if (url) window.open(url, '_blank');
           });
         });
       });
 
-      // Navigation dots
+      // Nav dots
       document.querySelectorAll('.nav-dot').forEach(dot => {
         dot.addEventListener('click', function() {
           const target = this.dataset.target;
-          document.getElementById(target).scrollIntoView({ behavior: 'smooth' });
+          document.getElementById(target)?.scrollIntoView({ behavior: 'smooth' });
           document.querySelectorAll('.nav-dot').forEach(d => d.classList.remove('active'));
           this.classList.add('active');
         });
       });
 
-      // Update active dot on scroll
       window.addEventListener('scroll', function() {
         const sections = ['hero', 'about', 'publications', 'experience', 'contact'];
-        const scrollPos = window.scrollY + 200;
+        const scrollPos = window.scrollY + 250;
         sections.forEach((section, index) => {
-          const element = document.getElementById(section);
-          if (element && scrollPos >= element.offsetTop) {
-            document.querySelectorAll('.nav-dot').forEach(dot => dot.classList.remove('active'));
-            document.querySelectorAll('.nav-dot')[index].classList.add('active');
+          const el = document.getElementById(section);
+          if (el && scrollPos >= el.offsetTop) {
+            document.querySelectorAll('.nav-dot').forEach(d => d.classList.remove('active'));
+            document.querySelectorAll('.nav-dot')[index]?.classList.add('active');
           }
         });
       });
 
-      // Smooth scrolling for header nav
+      // Smooth scroll
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
+        anchor.addEventListener('click', function(e) {
           e.preventDefault();
           const target = document.querySelector(this.getAttribute('href'));
-          if (target) {
-            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }
+          if (target) target.scrollIntoView({ behavior: 'smooth' });
         });
       });
 
-      // Dark mode toggle
+      // Dark mode
       const toggle = document.getElementById('darkToggle');
       const body = document.body;
       if (localStorage.getItem('dark') === 'true') body.classList.add('dark');
