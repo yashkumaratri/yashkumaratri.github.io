@@ -1,0 +1,1095 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Negotiated Knowledge Integration: A Novel Paradigm for LLM Lifelong Learning</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                        'serif': ['Playfair Display', 'Georgia', 'serif'],
+                    },
+                    colors: {
+                        primary: '#1e3a8a',
+                        secondary: '#64748b',
+                        accent: '#3b82f6',
+                        neutral: '#f8fafc',
+                        'base-100': '#ffffff',
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Playfair+Display:ital,wght@0,400;0,600;1,400&amp;display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+    <style>
+        .gradient-text {
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-overlay {
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.9), rgba(59, 130, 246, 0.8));
+        }
+        .toc-fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 280px;
+            height: 100vh;
+            background: rgba(248, 250, 252, 0.95);
+            backdrop-filter: blur(10px);
+            border-right: 1px solid #e2e8f0;
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 2rem 1.5rem;
+        }
+        .content-offset {
+            margin-left: 280px;
+        }
+        .section-anchor {
+            scroll-margin-top: 2rem;
+        }
+        .citation-link {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        .citation-link:hover {
+            color: #1e3a8a;
+            text-decoration: underline;
+        }
+        .comparison-table {
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+        .comparison-table th,
+        .comparison-table td {
+            border: 1px solid #e2e8f0;
+            padding: 1rem;
+        }
+        .comparison-table th {
+            background: #f1f5f9;
+            font-weight: 600;
+        }
+        .comparison-table tr:hover td {
+            background: #f8fafc;
+        }
+        .mermaid-container {
+            display: flex;
+            justify-content: center;
+            min-height: 300px;
+            max-height: 800px;
+            background: #ffffff;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mermaid-container .mermaid {
+            width: 100%;
+            max-width: 100%;
+            height: 100%;
+            cursor: grab;
+            transition: transform 0.3s ease;
+            transform-origin: center center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            touch-action: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .mermaid-container .mermaid svg {
+            max-width: 100%;
+            height: 100%;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .mermaid-container .mermaid:active {
+            cursor: grabbing;
+        }
+
+        .mermaid-container.zoomed .mermaid {
+            height: 100%;
+            width: 100%;
+            cursor: grab;
+        }
+
+        .mermaid-controls {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 20;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 8px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .mermaid-control-btn {
+            background: #ffffff;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            padding: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #374151;
+            font-size: 14px;
+            min-width: 36px;
+            height: 36px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mermaid-control-btn:hover {
+            background: #f8fafc;
+            border-color: #3b82f6;
+            color: #3b82f6;
+            transform: translateY(-1px);
+        }
+
+        .mermaid-control-btn:active {
+            transform: scale(0.95);
+        }
+        @media (max-width: 1024px) {
+            .toc-fixed {
+                display: none;
+            }
+            .content-offset {
+                margin-left: 0;
+            }
+            .mermaid-control-btn:not(.reset-zoom) {
+                display: none;
+            }
+            .mermaid-controls {
+                top: auto;
+                bottom: 15px;
+                right: 15px;
+            }
+        }
+    </style>
+  </head>
+
+  <body class="bg-neutral font-sans">
+    <!-- Fixed Table of Contents -->
+    <nav class="toc-fixed">
+      <div class="mb-6">
+        <h3 class="text-lg font-serif font-semibold text-primary mb-4">Contents</h3>
+        <ul class="space-y-2 text-sm">
+          <li>
+            <a href="#introduction" class="citation-link hover:text-primary transition-colors">Introduction</a>
+          </li>
+          <li>
+            <a href="#core-challenge" class="citation-link hover:text-primary transition-colors">The Core Challenge</a>
+          </li>
+          <li>
+            <a href="#pitfalls" class="citation-link hover:text-primary transition-colors">Current Pitfalls</a>
+          </li>
+          <li>
+            <a href="#negotiated-integration" class="citation-link hover:text-primary transition-colors">Negotiated Knowledge Integration</a>
+          </li>
+          <li>
+            <a href="#solution-avenues" class="citation-link hover:text-primary transition-colors">Solution Avenues</a>
+          </li>
+          <li>
+            <a href="#expected-impact" class="citation-link hover:text-primary transition-colors">Expected Impact</a>
+          </li>
+          <li>
+            <a href="#open-questions" class="citation-link hover:text-primary transition-colors">Open Questions</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="mt-8 pt-6 border-t border-gray-200">
+        <h4 class="text-sm font-semibold text-secondary mb-3">Key Concepts</h4>
+        <div class="flex flex-wrap gap-2">
+          <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded">NKI</span>
+          <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded">Lifelong Learning</span>
+          <span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded">Knowledge Graphs</span>
+          <span class="px-2 py-1 bg-orange-100 text-orange-800 text-xs rounded">Symbolic Reasoning</span>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="content-offset">
+      <!-- Hero Section -->
+      <section class="relative min-h-[70vh] flex items-center">
+        <div class="absolute inset-0">
+          <img src="https://kimi-web-img.moonshot.cn/img/placeholder-0620/图片17.png" alt="Abstract visualization of knowledge integration in neural networks" class="w-full h-full object-cover" size="wallpaper" aspect="wide" query="abstract neural network knowledge integration" referrerpolicy="no-referrer"/>
+          <div class="hero-overlay absolute inset-0"></div>
+        </div>
+
+        <div class="relative z-10 max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+          <!-- Title Section -->
+          <div class="lg:col-span-2 text-white">
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-serif italic leading-tight mb-6">
+              Negotiated Knowledge Integration
+            </h1>
+            <p class="text-lg md:text-xl lg:text-2xl font-light mb-8 leading-relaxed">
+              A Novel Paradigm for Lifelong Learning in Large Language Models
+            </p>
+            <div class="flex flex-wrap gap-4">
+              <span class="px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-sm font-medium">Active Learning</span>
+              <span class="px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-sm font-medium">Collaborative Knowledge</span>
+              <span class="px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-sm font-medium">Dynamic Integration</span>
+            </div>
+          </div>
+
+          <!-- Key Highlights -->
+          <div class="lg:col-span-1 bg-white/95 backdrop-blur-sm rounded-2xl p-6 shadow-2xl">
+            <h3 class="text-lg font-serif font-semibold text-primary mb-4">Research Highlights</h3>
+            <ul class="space-y-3 text-sm text-gray-700">
+              <li class="flex items-start gap-2">
+                <i class="fas fa-brain text-accent mt-1"></i>
+                <span>Active model participation in knowledge assimilation</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <i class="fas fa-network-wired text-accent mt-1"></i>
+                <span>Integration with symbolic reasoning systems</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <i class="fas fa-sync-alt text-accent mt-1"></i>
+                <span>Iterative refinement mechanisms</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <i class="fas fa-shield-alt text-accent mt-1"></i>
+                <span>Mitigation of catastrophic forgetting</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Introduction -->
+      <section id="introduction" class="section-anchor py-16 bg-white">
+        <div class="max-w-4xl mx-auto px-6">
+          <div class="prose prose-lg max-w-none">
+            <p class="text-xl leading-relaxed text-gray-700 mb-8">
+              The evolution of information in our rapidly changing world presents unprecedented challenges for Large Language Models. While these AI systems demonstrate remarkable capabilities, their static training paradigms risk rendering them obsolete in dynamic domains like medicine, law, and scientific research.
+            </p>
+
+            <div class="bg-blue-50 border-l-4 border-blue-400 p-6 my-8">
+              <p class="text-lg italic text-blue-900">
+                &#34;Traditional model editing approaches treat LLMs as passive recipients of knowledge updates, fundamentally limiting their ability to achieve true lifelong learning and coherent knowledge integration.&#34;
+              </p>
+            </div>
+
+            <p class="text-lg leading-relaxed">
+              This paper introduces a revolutionary framework called <strong>Negotiated Knowledge Integration (NKI)</strong>, which reimagines the knowledge updating process as a collaborative dialogue between the model and incoming information. Rather than passively receiving edits, LLMs actively participate in evaluating, contextualizing, and assimilating new knowledge in ways that preserve coherence and reasoning capabilities.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Core Challenge -->
+      <section id="core-challenge" class="section-anchor py-16 bg-gray-50">
+        <div class="max-w-4xl mx-auto px-6">
+          <h2 class="text-4xl font-serif font-semibold text-primary mb-8">The Core Challenge: Updating Knowledge Without Compromising Capabilities</h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+            <div class="bg-white p-6 rounded-xl shadow-sm">
+              <h3 class="text-xl font-semibold text-primary mb-4">
+                <i class="fas fa-exclamation-triangle text-orange-500 mr-2"></i>
+                The Problem
+              </h3>
+              <p class="text-gray-700">
+                LLMs trained on static datasets risk rapid obsolescence in dynamic fields. Full retraining is computationally prohibitive, while current knowledge editing techniques face substantial limitations in real-world applications.
+              </p>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow-sm">
+              <h3 class="text-xl font-semibold text-primary mb-4">
+                <i class="fas fa-target text-green-500 mr-2"></i>
+                The Goal
+              </h3>
+              <p class="text-gray-700">
+                Develop model editing techniques that efficiently incorporate new knowledge into open-source LLMs over extended periods without degrading existing capabilities or general performance.
+              </p>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-xl p-8 shadow-sm">
+            <h3 class="text-2xl font-serif font-semibold text-primary mb-6">The Knowledge Integration Challenge</h3>
+            <div class="mermaid-container">
+              <div class="mermaid-controls">
+                <button class="mermaid-control-btn zoom-in" title="放大">
+                  <i class="fas fa-search-plus"></i>
+                </button>
+                <button class="mermaid-control-btn zoom-out" title="缩小">
+                  <i class="fas fa-search-minus"></i>
+                </button>
+                <button class="mermaid-control-btn reset-zoom" title="重置">
+                  <i class="fas fa-expand-arrows-alt"></i>
+                </button>
+                <button class="mermaid-control-btn fullscreen" title="全屏查看">
+                  <i class="fas fa-expand"></i>
+                </button>
+              </div>
+              <div class="mermaid">
+                graph TD
+                A[&#34;Static LLM Knowledge&#34;] --&gt; B[&#34;New Information&#34;]
+                B --&gt; C{&#34;Integration Challenge&#34;}
+                C --&gt; D[&#34;Fact Insertion&#34;]
+                C --&gt; E[&#34;Fact Modification&#34;]
+                C --&gt; F[&#34;Fact Removal&#34;]
+                D --&gt; G[&#34;Consistency Maintenance&#34;]
+                E --&gt; G
+                F --&gt; G
+                G --&gt; H{&#34;Side Effects?&#34;}
+                H --&gt;|&#34;Yes&#34;| I[&#34;Catastrophic Forgetting&#34;]
+                H --&gt;|&#34;Yes&#34;| J[&#34;Reasoning Degradation&#34;]
+                H --&gt;|&#34;Yes&#34;| K[&#34;Hallucination Increase&#34;]
+                H --&gt;|&#34;No&#34;| L[&#34;Successful Integration&#34;]
+
+                style A fill:#e1f5fe,stroke:#1e3a8a,stroke-width:2px,color:#1e3a8a
+                style L fill:#e8f5e8,stroke:#10b981,stroke-width:2px,color:#10b981
+                style I fill:#fef2f2,stroke:#ef4444,stroke-width:2px,color:#ef4444
+                style J fill:#fef2f2,stroke:#ef4444,stroke-width:2px,color:#ef4444
+                style K fill:#fef2f2,stroke:#ef4444,stroke-width:2px,color:#ef4444
+                style C fill:#fff3e0,stroke:#f59e0b,stroke-width:2px,color:#f59e0b
+                style H fill:#fff3e0,stroke:#f59e0b,stroke-width:2px,color:#f59e0b
+                style B fill:#f3e5f5,stroke:#8b5cf6,stroke-width:2px,color:#8b5cf6
+                style D fill:#fafafa,stroke:#64748b,stroke-width:1px,color:#64748b
+                style E fill:#fafafa,stroke:#64748b,stroke-width:1px,color:#64748b
+                style F fill:#fafafa,stroke:#64748b,stroke-width:1px,color:#64748b
+                style G fill:#fafafa,stroke:#64748b,stroke-width:1px,color:#64748b
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Current Pitfalls -->
+      <section id="pitfalls" class="section-anchor py-16 bg-white">
+        <div class="max-w-6xl mx-auto px-6">
+          <h2 class="text-4xl font-serif font-semibold text-primary mb-8">The Pitfalls of Current Model Editing Techniques</h2>
+
+          <p class="text-lg text-gray-700 mb-8">
+            Current model editing techniques face several critical limitations that hinder their effectiveness in real-world applications. A comprehensive survey <a href="https://aclanthology.org/2024.findings-emnlp.550.pdf" class="citation-link" target="_blank">[97]</a> identifies these key challenges:
+          </p>
+
+          <div class="overflow-x-auto mb-12">
+            <table class="comparison-table w-full bg-white rounded-xl shadow-sm">
+              <thead>
+                <tr>
+                  <th class="text-left">Pitfall Category</th>
+                  <th class="text-left">Description</th>
+                  <th class="text-left">Key Citations</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="font-semibold text-red-700">Logical Inference Failure</td>
+                  <td>Methods implant facts but fail to enable reasoning about implications or application in related contexts</td>
+                  <td>
+                    <a href="https://www.researchgate.net/publication/390892758_Memorization_vs_Reasoning_Updating_LLMs_with_New_Knowledge" class="citation-link" target="_blank">[84]</a>,
+                    <a href="https://aclanthology.org/2024.findings-emnlp.550.pdf" class="citation-link" target="_blank">[97]</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="font-semibold text-orange-700">Unintended Modifications</td>
+                  <td>Editing specific information risks altering unrelated knowledge through &#34;ripple effects&#34;</td>
+                  <td>
+                    <a href="https://aclanthology.org/2024.findings-emnlp.550.pdf" class="citation-link" target="_blank">[97]</a>,
+                    <a href="https://arxiv.org/html/2503.05212v1" class="citation-link" target="_blank">[108]</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="font-semibold text-yellow-700">General Ability Deterioration</td>
+                  <td>Editing process negatively impacts core linguistic capabilities and downstream task performance</td>
+                  <td>
+                    <a href="https://aclanthology.org/2024.findings-emnlp.550.pdf" class="citation-link" target="_blank">[97]</a>,
+                    <a href="https://arxiv.org/html/2503.05212v1" class="citation-link" target="_blank">[108]</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="font-semibold text-red-700">Catastrophic Forgetting</td>
+                  <td>Sequential edits lead to forgetting previously edited facts and general language ability degradation</td>
+                  <td>
+                    <a href="https://arxiv.org/html/2502.02958v1" class="citation-link" target="_blank">[164]</a>,
+                    <a href="https://www.researchgate.net/publication/386204675_Model_Editing_Harms_General_Abilities_of_Large_Language_Models_Regularization_to_the_Rescue" class="citation-link" target="_blank">[166]</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="font-semibold text-purple-700">Multi-Hop Reasoning Impact</td>
+                  <td>Post-edit LLMs struggle with reasoning requiring combination of multiple knowledge pieces</td>
+                  <td>
+                    <a href="https://www.researchgate.net/publication/386204675_Model_Editing_Harms_General_Abilities_of_Large_Language_Models_Regularization_to_the_Rescue" class="citation-link" target="_blank">[166]</a>,
+                    <a href="https://arxiv.org/html/2503.05212v1" class="citation-link" target="_blank">[182]</a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="bg-red-50 border border-red-200 rounded-xl p-6">
+            <h3 class="text-xl font-semibold text-red-800 mb-4">
+              <i class="fas fa-exclamation-circle mr-2"></i>
+              Critical Assessment
+            </h3>
+            <p class="text-red-700">
+              The &#34;WikiBigEdit&#34; benchmark reveals that many specialized editing techniques struggle to outperform simpler baselines like retrieval augmentation when dealing with large volumes of factual updates <a href="https://openreview.net/forum?id=9NVm1Bf7CS&amp;referrer=%5Bthe%20profile%20of%20Zeynep%20Akata%5D(%2Fprofile%3Fid%3D~Zeynep_Akata1)" class="citation-link" target="_blank">[31]</a>. This highlights the urgent need for more robust and scalable solutions.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Negotiated Knowledge Integration -->
+      <section id="negotiated-integration" class="section-anchor py-16 bg-gray-50">
+        <div class="max-w-6xl mx-auto px-6">
+          <h2 class="text-4xl font-serif font-semibold text-primary mb-8">Proposed Novel Problem Statement: &#34;Negotiated Knowledge Integration&#34;</h2>
+
+          <div class="bg-white rounded-xl p-8 shadow-sm mb-12">
+            <h3 class="text-2xl font-serif font-semibold text-primary mb-6">Defining &#34;Negotiated Knowledge Integration&#34;</h3>
+
+            <p class="text-lg text-gray-700 mb-6">
+              <strong>Negotiated Knowledge Integration (NKI)</strong> represents a paradigm shift from passive parameter modification to active, collaborative knowledge assimilation. In this framework, LLMs become active participants in their own knowledge evolution through a structured four-phase process:
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div class="bg-blue-50 p-6 rounded-lg">
+                <h4 class="font-semibold text-blue-900 mb-2">1. Evaluation</h4>
+                <p class="text-blue-800 text-sm">The LLM assesses new information for consistency, potential conflicts, and plausibility against existing knowledge</p>
+              </div>
+
+              <div class="bg-green-50 p-6 rounded-lg">
+                <h4 class="font-semibold text-green-900 mb-2">2. Contextualization</h4>
+                <p class="text-green-800 text-sm">Determines how new information relates to existing understanding, identifying connections and implications</p>
+              </div>
+
+              <div class="bg-purple-50 p-6 rounded-lg">
+                <h4 class="font-semibold text-purple-900 mb-2">3. Assimilation Strategy</h4>
+                <p class="text-purple-800 text-sm">Collaboratively determines optimal integration approach: incorporation, modification, deprecation, or rejection</p>
+              </div>
+
+              <div class="bg-orange-50 p-6 rounded-lg">
+                <h4 class="font-semibold text-orange-900 mb-2">4. Iterative Refinement</h4>
+                <p class="text-orange-800 text-sm">Multiple feedback and adjustment steps ensure coherence and minimize disruption to overall capabilities</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-xl p-8 shadow-sm">
+            <h3 class="text-2xl font-serif font-semibold text-primary mb-6">Comparison with Current Approaches</h3>
+
+            <div class="overflow-x-auto">
+              <table class="comparison-table w-full">
+                <thead>
+                  <tr>
+                    <th class="text-left">Feature</th>
+                    <th class="text-left">Current Model Editing Approaches</th>
+                    <th class="text-left">Negotiated Knowledge Integration (NKI)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="font-semibold">Model&#39;s Role</td>
+                    <td>Passive recipient of edits; parameters are directly modified</td>
+                    <td class="bg-green-50"><strong>Active participant</strong>; engages in evaluation, contextualization, and assimilation strategy</td>
+                  </tr>
+                  <tr>
+                    <td class="font-semibold">Primary Mechanism</td>
+                    <td>Direct parameter modification or external memory addition</td>
+                    <td class="bg-green-50"><strong>Collaborative process</strong> involving LLM&#39;s reasoning with external systems</td>
+                  </tr>
+                  <tr>
+                    <td class="font-semibold">Focus</td>
+                    <td>Factual accuracy of specific edits; treats knowledge as isolated units</td>
+                    <td class="bg-green-50"><strong>Coherence and consistency</strong> of entire knowledge base; emphasizes relational understanding</td>
+                  </tr>
+                  <tr>
+                    <td class="font-semibold">Handling Conflicts</td>
+                    <td>Often overlooks conflicts with existing knowledge</td>
+                    <td class="bg-green-50">Explicitly addresses conflicts through &#34;negotiation&#34; process</td>
+                  </tr>
+                  <tr>
+                    <td class="font-semibold">Lifelong Learning</td>
+                    <td>Struggles with sequential updates due to catastrophic forgetting</td>
+                    <td class="bg-green-50">Designed for <strong>sustainable lifelong learning</strong> through adaptive assimilation</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Solution Avenues -->
+      <section id="solution-avenues" class="section-anchor py-16 bg-white">
+        <div class="max-w-6xl mx-auto px-6">
+          <h2 class="text-4xl font-serif font-semibold text-primary mb-8">Potential Solution Avenues for &#34;Negotiated Knowledge Integration&#34;</h2>
+
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+            <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-6 shadow-sm">
+              <div class="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center mb-4">
+                <i class="fas fa-brain text-white text-xl"></i>
+              </div>
+              <h3 class="text-xl font-semibold text-blue-900 mb-4">Internal Representations</h3>
+              <p class="text-blue-800 text-sm">Leveraging LLM&#39;s internal representations for targeted, precise updates that understand semantic neighborhoods</p>
+            </div>
+
+            <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-6 shadow-sm">
+              <div class="w-12 h-12 bg-green-500 rounded-lg flex items-center justify-center mb-4">
+                <i class="fas fa-project-diagram text-white text-xl"></i>
+              </div>
+              <h3 class="text-xl font-semibold text-green-900 mb-4">Symbolic Reasoning</h3>
+              <p class="text-green-800 text-sm">Integrating Knowledge Graphs and symbolic structures for explicit, interpretable knowledge representation</p>
+            </div>
+
+            <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-6 shadow-sm">
+              <div class="w-12 h-12 bg-purple-500 rounded-lg flex items-center justify-center mb-4">
+                <i class="fas fa-sync-alt text-white text-xl"></i>
+              </div>
+              <h3 class="text-xl font-semibold text-purple-900 mb-4">Iterative Refinement</h3>
+              <p class="text-purple-800 text-sm">Interactive feedback mechanisms enabling continuous improvement and adjustment of knowledge integration</p>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-xl p-8 shadow-sm mb-12">
+            <h3 class="text-2xl font-serif font-semibold text-primary mb-6">Incorporating Symbolic Reasoning and External Knowledge Structures</h3>
+
+            <p class="text-lg text-gray-700 mb-6">
+              A key component for achieving robust knowledge updating lies in integrating symbolic reasoning and structured knowledge representations. This approach moves beyond treating knowledge as dense vectors to establishing connections with formal, interpretable frameworks <a href="https://arxiv.org/html/2503.05212v1" class="citation-link" target="_blank">[108]</a>, <a href="https://www.researchgate.net/publication/392597514_From_Symbolic_to_Neural_and_Back_Exploring_Knowledge_Graph-Large_Language_Model_Synergies" class="citation-link" target="_blank">[140]</a>.
+            </p>
+
+            <div class="overflow-x-auto">
+              <table class="comparison-table w-full">
+                <thead>
+                  <tr>
+                    <th class="text-left">Strategy</th>
+                    <th class="text-left">Description</th>
+                    <th class="text-left">Key Citations</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="font-semibold">Causal Graph Integration</td>
+                    <td>Using causal subgraphs to guide reasoning, focusing on cause-effect relationships</td>
+                    <td>
+                      <a href="https://arxiv.org/html/2501.14892v2" class="citation-link" target="_blank">[101]</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="font-semibold">Structured-Unstructured Alignment</td>
+                    <td>Aligning KG information with unstructured LLM text for joint reasoning</td>
+                    <td>
+                      <a href="https://www.researchgate.net/publication/392597514_From_Symbolic_to_Neural_and_Back_Exploring_Knowledge_Graph-Large_Language_Model_Synergies" class="citation-link" target="_blank">[140]</a>,
+                      <a href="https://www.arxiv.org/pdf/2506.09566" class="citation-link" target="_blank">[141]</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="font-semibold">KG-Constrained Decoding</td>
+                    <td>Constraining LLM generation to conform to actual KG paths for factual grounding</td>
+                    <td>
+                      <a href="https://www.themoonlight.io/en/review/from-symbolic-to-neural-and-back-exploring-knowledge-graph-large-language-model-synergies" class="citation-link" target="_blank">[142]</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="font-semibold">Neural-Symbolic Systems</td>
+                    <td>Continuously updating both symbolic KG and neural LLM knowledge</td>
+                    <td>
+                      <a href="https://vldb.org/workshops/2024/proceedings/LLM+KG/LLM+KG-2.pdf" class="citation-link" target="_blank">[143]</a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="bg-gray-50 rounded-xl p-8">
+            <h3 class="text-2xl font-serif font-semibold text-primary mb-6">Interactive and Iterative Refinement Mechanisms</h3>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div>
+                <h4 class="font-semibold text-gray-900 mb-4">WISE Framework Example</h4>
+                <p class="text-gray-700 mb-4">
+                  The WISE framework <a href="https://openreview.net/pdf?id=VJMYOfJVC2" class="citation-link" target="_blank">[106]</a> introduces iterative refinement through its &#34;router&#34; component, which decides whether to use original or edited memory based on input queries.
+                </p>
+                <p class="text-gray-700">
+                  If routing produces incorrect outputs, feedback adjusts the router&#39;s decision logic or edit scope definitions, creating a continuous improvement loop.
+                </p>
+              </div>
+
+              <div>
+                <h4 class="font-semibold text-gray-900 mb-4">Selective Contextual Reasoning</h4>
+                <p class="text-gray-700 mb-4">
+                  This approach <a href="https://arxiv.org/html/2503.05212v1" class="citation-link" target="_blank">[68]</a> relies on retrieving relevant information from updatable knowledge sources via prompts.
+                </p>
+                <p class="text-gray-700">
+                  The &#34;prompt, evaluate, refine&#34; cycle becomes crucial for NKI, enabling collaborative optimization of integration strategies between model and editor.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Expected Impact -->
+      <section id="expected-impact" class="section-anchor py-16 bg-gray-50">
+        <div class="max-w-4xl mx-auto px-6">
+          <h2 class="text-4xl font-serif font-semibold text-primary mb-8">Expected Impact and Benefits</h2>
+
+          <div class="space-y-8">
+            <div class="bg-white rounded-xl p-8 shadow-sm">
+              <h3 class="text-2xl font-serif font-semibold text-green-700 mb-4">
+                <i class="fas fa-shield-alt mr-2"></i>
+                Addressing Catastrophic Forgetting
+              </h3>
+              <p class="text-lg text-gray-700 mb-4">
+                NKI aims to significantly mitigate catastrophic forgetting and negative side-effects through active evaluation and contextualization. By involving the LLM in the integration process, updates become more harmonious with existing representations.
+              </p>
+              <p class="text-gray-600">
+                When new information contradicts existing knowledge, the NKI process enables structured deprecation or versioned understanding rather than blunt overwrites, preserving essential information while maintaining model coherence.
+              </p>
+            </div>
+
+            <div class="bg-white rounded-xl p-8 shadow-sm">
+              <h3 class="text-2xl font-serif font-semibold text-blue-700 mb-4">
+                <i class="fas fa-brain mr-2"></i>
+                Enhancing Generalization and Reasoning
+              </h3>
+              <p class="text-lg text-gray-700 mb-4">
+                NKI is expected to substantially enhance LLMs&#39; ability to generalize from updated knowledge and perform complex reasoning. Current methods often fail to apply edited facts in broader contexts or multi-hop reasoning tasks <a href="https://www.researchgate.net/publication/390892758_Memorization_vs_Reasoning_Updating_LLMs_with_New_Knowledge" class="citation-link" target="_blank">[84]</a>, <a href="https://arxiv.org/html/2503.05212v1" class="citation-link" target="_blank">[182]</a>.
+              </p>
+              <p class="text-gray-600">
+                The &#34;negotiation&#34; aspect fosters deeper integration into the model&#39;s semantic network, enabling flexible application of new knowledge and logical synthesis with existing understanding.
+              </p>
+            </div>
+
+            <div class="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-8 border border-blue-200">
+              <h3 class="text-2xl font-serif font-semibold text-primary mb-4">
+                <i class="fas fa-rocket mr-2"></i>
+                Transformative Potential
+              </h3>
+              <p class="text-lg text-gray-700">
+                Successful implementation of NKI could revolutionize how we approach lifelong learning in AI systems, moving from fragile, static models to robust, adaptive systems capable of continuous knowledge integration while maintaining reasoning integrity and performance stability.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Open Questions -->
+      <section id="open-questions" class="section-anchor py-16 bg-white">
+        <div class="max-w-4xl mx-auto px-6">
+          <h2 class="text-4xl font-serif font-semibold text-primary mb-8">Open Questions and Future Research Directions</h2>
+
+          <div class="mb-8">
+            <img src="https://kimi-web-img.moonshot.cn/img/placeholder-0620/图片8.png" alt="Abstract visualization of future AI research directions" class="w-full h-64 object-cover rounded-xl shadow-sm mb-6" size="medium" aspect="wide" query="AI research future abstract" referrerpolicy="no-referrer"/>
+          </div>
+
+          <p class="text-lg text-gray-700 mb-8">
+            The &#34;Negotiated Knowledge Integration&#34; problem statement opens numerous research avenues and raises fundamental questions that will guide future investigation:
+          </p>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-blue-50 border border-blue-200 rounded-xl p-6">
+              <h4 class="font-semibold text-blue-900 mb-3">
+                <i class="fas fa-cogs text-blue-600 mr-2"></i>
+                Mechanisms for &#34;Negotiation&#34;
+              </h4>
+              <p class="text-blue-800 text-sm">
+                How can LLMs be trained to perform evaluation, contextualization, and assimilation strategy formulation? What are the most effective interaction paradigms?
+              </p>
+            </div>
+
+            <div class="bg-green-50 border border-green-200 rounded-xl p-6">
+              <h4 class="font-semibold text-green-900 mb-3">
+                <i class="fas fa-expand-arrows-alt text-green-600 mr-2"></i>
+                Scalability of Negotiation
+              </h4>
+              <p class="text-green-800 text-sm">
+                Can negotiation processes be made computationally efficient enough for large-scale, continuous knowledge updates in massive LLMs?
+              </p>
+            </div>
+
+            <div class="bg-purple-50 border border-purple-200 rounded-xl p-6">
+              <h4 class="font-semibold text-purple-900 mb-3">
+                <i class="fas fa-chart-line text-purple-600 mr-2"></i>
+                Measuring Success of NKI
+              </h4>
+              <p class="text-purple-800 text-sm">
+                How do we effectively evaluate NKI success beyond factual accuracy? New metrics for coherence, consistency, and reasoning improvement are needed.
+              </p>
+            </div>
+
+            <div class="bg-orange-50 border border-orange-200 rounded-xl p-6">
+              <h4 class="font-semibold text-orange-900 mb-3">
+                <i class="fas fa-users text-orange-600 mr-2"></i>
+                Human-in-the-Loop NKI
+              </h4>
+              <p class="text-orange-800 text-sm">
+                What role should humans play in NKI, especially for critical updates or conflict resolution? How can human feedback be effectively integrated?
+              </p>
+            </div>
+
+            <div class="bg-red-50 border border-red-200 rounded-xl p-6">
+              <h4 class="font-semibold text-red-900 mb-3">
+                <i class="fas fa-building text-red-600 mr-2"></i>
+                Architectural Support
+              </h4>
+              <p class="text-red-800 text-sm">
+                Are new LLM architectures needed to support NKI, such as dedicated reasoning engines or more transparent memory structures?
+              </p>
+            </div>
+
+            <div class="bg-indigo-50 border border-indigo-200 rounded-xl p-6">
+              <h4 class="font-semibold text-indigo-900 mb-3">
+                <i class="fas fa-shield-alt text-indigo-600 mr-2"></i>
+                Robustness and Security
+              </h4>
+              <p class="text-indigo-800 text-sm">
+                How can NKI systems be made robust against adversarial inputs or misleading information during &#34;negotiation&#34;?
+              </p>
+            </div>
+          </div>
+
+          <div class="mt-12 bg-gradient-to-r from-gray-50 to-blue-50 rounded-xl p-8 border border-gray-200">
+            <h3 class="text-2xl font-serif font-semibold text-primary mb-4">
+              <i class="fas fa-lightbulb mr-2"></i>
+              Research Imperative
+            </h3>
+            <p class="text-lg text-gray-700">
+              Addressing these questions will be crucial for advancing the state-of-the-art in lifelong knowledge integration for LLMs and realizing the full potential of the NKI paradigm. The path forward requires interdisciplinary collaboration combining insights from machine learning, cognitive science, knowledge representation, and human-computer interaction.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-4xl mx-auto px-6">
+          <div class="border-t border-gray-700 pt-8">
+            <p class="text-gray-400 text-sm text-center">
+              This research explores novel approaches to knowledge integration in large language models, proposing the Negotiated Knowledge Integration framework as a pathway toward more robust and reliable AI systems.
+            </p>
+          </div>
+        </div>
+      </footer>
+    </main>
+
+    <script>
+        // Initialize Mermaid with custom configuration
+        mermaid.initialize({ 
+            startOnLoad: true, 
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#3b82f6',
+                primaryTextColor: '#1e3a8a',
+                primaryBorderColor: '#1e3a8a',
+                lineColor: '#64748b',
+                secondaryColor: '#f1f5f9',
+                tertiaryColor: '#ffffff',
+                background: '#ffffff',
+                mainBkg: '#ffffff',
+                secondaryBkg: '#f1f5f9',
+                tertiaryBkg: '#f8fafc'
+            },
+            flowchart: {
+                useMaxWidth: false,
+                htmlLabels: true,
+                curve: 'basis'
+            }
+        });
+
+        // Initialize Mermaid Controls for zoom and pan
+        function initializeMermaidControls() {
+            const containers = document.querySelectorAll('.mermaid-container');
+
+            containers.forEach(container => {
+            const mermaidElement = container.querySelector('.mermaid');
+            let scale = 1;
+            let isDragging = false;
+            let startX, startY, translateX = 0, translateY = 0;
+
+            // 触摸相关状态
+            let isTouch = false;
+            let touchStartTime = 0;
+            let initialDistance = 0;
+            let initialScale = 1;
+            let isPinching = false;
+
+            // Zoom controls
+            const zoomInBtn = container.querySelector('.zoom-in');
+            const zoomOutBtn = container.querySelector('.zoom-out');
+            const resetBtn = container.querySelector('.reset-zoom');
+            const fullscreenBtn = container.querySelector('.fullscreen');
+
+            function updateTransform() {
+                mermaidElement.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+
+                if (scale > 1) {
+                container.classList.add('zoomed');
+                } else {
+                container.classList.remove('zoomed');
+                }
+
+                mermaidElement.style.cursor = isDragging ? 'grabbing' : 'grab';
+            }
+
+            if (zoomInBtn) {
+                zoomInBtn.addEventListener('click', () => {
+                scale = Math.min(scale * 1.25, 4);
+                updateTransform();
+                });
+            }
+
+            if (zoomOutBtn) {
+                zoomOutBtn.addEventListener('click', () => {
+                scale = Math.max(scale / 1.25, 0.3);
+                if (scale <= 1) {
+                    translateX = 0;
+                    translateY = 0;
+                }
+                updateTransform();
+                });
+            }
+
+            if (resetBtn) {
+                resetBtn.addEventListener('click', () => {
+                scale = 1;
+                translateX = 0;
+                translateY = 0;
+                updateTransform();
+                });
+            }
+
+            if (fullscreenBtn) {
+                fullscreenBtn.addEventListener('click', () => {
+                if (container.requestFullscreen) {
+                    container.requestFullscreen();
+                } else if (container.webkitRequestFullscreen) {
+                    container.webkitRequestFullscreen();
+                } else if (container.msRequestFullscreen) {
+                    container.msRequestFullscreen();
+                }
+                });
+            }
+
+            // Mouse Events
+            mermaidElement.addEventListener('mousedown', (e) => {
+                if (isTouch) return; // 如果是触摸设备，忽略鼠标事件
+
+                isDragging = true;
+                startX = e.clientX - translateX;
+                startY = e.clientY - translateY;
+                mermaidElement.style.cursor = 'grabbing';
+                updateTransform();
+                e.preventDefault();
+            });
+
+            document.addEventListener('mousemove', (e) => {
+                if (isDragging && !isTouch) {
+                translateX = e.clientX - startX;
+                translateY = e.clientY - startY;
+                updateTransform();
+                }
+            });
+
+            document.addEventListener('mouseup', () => {
+                if (isDragging && !isTouch) {
+                isDragging = false;
+                mermaidElement.style.cursor = 'grab';
+                updateTransform();
+                }
+            });
+
+            document.addEventListener('mouseleave', () => {
+                if (isDragging && !isTouch) {
+                isDragging = false;
+                mermaidElement.style.cursor = 'grab';
+                updateTransform();
+                }
+            });
+
+            // 获取两点之间的距离
+            function getTouchDistance(touch1, touch2) {
+                return Math.hypot(
+                touch2.clientX - touch1.clientX,
+                touch2.clientY - touch1.clientY
+                );
+            }
+
+            // Touch Events - 触摸事件处理
+            mermaidElement.addEventListener('touchstart', (e) => {
+                isTouch = true;
+                touchStartTime = Date.now();
+
+                if (e.touches.length === 1) {
+                // 单指拖动
+                isPinching = false;
+                isDragging = true;
+
+                const touch = e.touches[0];
+                startX = touch.clientX - translateX;
+                startY = touch.clientY - translateY;
+
+                } else if (e.touches.length === 2) {
+                // 双指缩放
+                isPinching = true;
+                isDragging = false;
+
+                const touch1 = e.touches[0];
+                const touch2 = e.touches[1];
+                initialDistance = getTouchDistance(touch1, touch2);
+                initialScale = scale;
+                }
+
+                e.preventDefault();
+            }, { passive: false });
+
+            mermaidElement.addEventListener('touchmove', (e) => {
+                if (e.touches.length === 1 && isDragging && !isPinching) {
+                // 单指拖动
+                const touch = e.touches[0];
+                translateX = touch.clientX - startX;
+                translateY = touch.clientY - startY;
+                updateTransform();
+
+                } else if (e.touches.length === 2 && isPinching) {
+                // 双指缩放
+                const touch1 = e.touches[0];
+                const touch2 = e.touches[1];
+                const currentDistance = getTouchDistance(touch1, touch2);
+
+                if (initialDistance > 0) {
+                    const newScale = Math.min(Math.max(
+                    initialScale * (currentDistance / initialDistance),
+                    0.3
+                    ), 4);
+                    scale = newScale;
+                    updateTransform();
+                }
+                }
+
+                e.preventDefault();
+            }, { passive: false });
+
+            mermaidElement.addEventListener('touchend', (e) => {
+                // 重置状态
+                if (e.touches.length === 0) {
+                isDragging = false;
+                isPinching = false;
+                initialDistance = 0;
+
+                // 延迟重置isTouch，避免鼠标事件立即触发
+                setTimeout(() => {
+                    isTouch = false;
+                }, 100);
+                } else if (e.touches.length === 1 && isPinching) {
+                // 从双指变为单指，切换为拖动模式
+                isPinching = false;
+                isDragging = true;
+
+                const touch = e.touches[0];
+                startX = touch.clientX - translateX;
+                startY = touch.clientY - translateY;
+                }
+
+                updateTransform();
+            });
+
+            mermaidElement.addEventListener('touchcancel', (e) => {
+                isDragging = false;
+                isPinching = false;
+                initialDistance = 0;
+
+                setTimeout(() => {
+                isTouch = false;
+                }, 100);
+
+                updateTransform();
+            });
+
+            // Enhanced wheel zoom with better center point handling
+            container.addEventListener('wheel', (e) => {
+                e.preventDefault();
+                const rect = container.getBoundingClientRect();
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const delta = e.deltaY > 0 ? 0.9 : 1.1;
+                const newScale = Math.min(Math.max(scale * delta, 0.3), 4);
+
+                // Adjust translation to zoom towards center
+                if (newScale !== scale) {
+                const scaleDiff = newScale / scale;
+                translateX = translateX * scaleDiff;
+                translateY = translateY * scaleDiff;
+                scale = newScale;
+
+                if (scale <= 1) {
+                    translateX = 0;
+                    translateY = 0;
+                }
+
+                updateTransform();
+                }
+            });
+
+            // Initialize display
+            updateTransform();
+            });
+        }
+
+        // Smooth scrolling for TOC links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Highlight active section in TOC
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('.section-anchor');
+            const scrollPos = window.scrollY + 100;
+
+            sections.forEach(section => {
+                const top = section.offsetTop;
+                const height = section.offsetHeight;
+                const id = section.getAttribute('id');
+                const link = document.querySelector(`a[href="#${id}"]`);
+                
+                if (scrollPos >= top && scrollPos < top + height) {
+                    document.querySelectorAll('.toc-fixed a').forEach(a => a.classList.remove('font-semibold', 'text-primary'));
+                    if (link) {
+                        link.classList.add('font-semibold', 'text-primary');
+                    }
+                }
+            });
+        });
+
+        // Initialize mermaid controls when the DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeMermaidControls();
+        });
+    </script>
+  
+
+</body></html>

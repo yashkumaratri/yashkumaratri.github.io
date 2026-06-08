@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colony Survival: The Harsh Frontier</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        .game-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073; }
+            to { text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6; }
+        }
+
+        .stats-panel {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s;
+            opacity: 0;
+        }
+
+        .stat-card:hover::before {
+            opacity: 1;
+            animation: shine 0.5s ease-in-out;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .stat-value {
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient 3s ease infinite;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .event-panel {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+        }
+
+        .event-title {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            color: #ffeb3b;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .event-description {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            color: #f0f0f0;
+        }
+
+        .choices {
+            display: grid;
+            gap: 15px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+
+        .choice-btn {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            border: none;
+            border-radius: 15px;
+            padding: 20px;
+            color: white;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .choice-btn:nth-child(2) {
+            background: linear-gradient(135deg, #4ecdc4, #44a08d);
+        }
+
+        .choice-btn:nth-child(3) {
+            background: linear-gradient(135deg, #45b7d1, #2980b9);
+        }
+
+        .choice-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .choice-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .choice-btn:active::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .psychology-panel {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 25px;
+            margin-top: 30px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .psychology-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .psych-stat {
+            text-align: center;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1);
+            border-radius: 4px;
+            transition: width 0.8s ease;
+            background-size: 200% 100%;
+            animation: progressGlow 2s linear infinite;
+        }
+
+        @keyframes progressGlow {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        .outcome-panel {
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(15px);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid #ffeb3b;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .game-over {
+            text-align: center;
+            background: rgba(255, 0, 0, 0.2);
+            border: 3px solid #ff6b6b;
+            border-radius: 20px;
+            padding: 30px;
+            margin: 20px 0;
+        }
+
+        .restart-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border: none;
+            border-radius: 25px;
+            padding: 15px 30px;
+            color: white;
+            font-size: 1.1em;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .restart-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .turn-counter {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .floating-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 6s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0; }
+            50% { transform: translateY(-100px) rotate(180deg); opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .choices {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-panel {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-particles"></div>
+    
+    <div class="game-container">
+        <div class="turn-counter">Turn: <span id="turnCounter">1</span></div>
+        
+        <header class="header">
+            <h1>🏔️ Colony Survival: The Harsh Frontier 🏔️</h1>
+            <p>Lead your colony through impossible choices. Every decision shapes your world and reveals who you truly are.</p>
+        </header>
+
+        <div class="stats-panel">
+            <div class="stat-card">
+                <div class="stat-value" id="population">500</div>
+                <div class="stat-label">👥 Population</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="food">1000</div>
+                <div class="stat-label">🌾 Food</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="energy">800</div>
+                <div class="stat-label">⚡ Energy</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="morale">75</div>
+                <div class="stat-label">😊 Morale</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="security">60</div>
+                <div class="stat-label">🛡️ Security</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="technology">40</div>
+                <div class="stat-label">🔬 Technology</div>
+            </div>
+        </div>
+
+        <div class="event-panel" id="eventPanel">
+            <h2 class="event-title" id="eventTitle">Welcome to New Eden</h2>
+            <p class="event-description" id="eventDescription">
+                Your colony ship has crash-landed on a harsh, frozen world. 500 survivors look to you for leadership. 
+                The ship's reactor is failing, food stores are limited, and the weather is getting worse. 
+                Winter is coming, and difficult decisions lie ahead. How will you lead your people?
+            </p>
+            <div class="choices" id="choices">
+                <button class="choice-btn" onclick="makeChoice(0)">
+                    🏭 Focus on industrial development - Prioritize energy and technology
+                </button>
+                <button class="choice-btn" onclick="makeChoice(1)">
+                    🌾 Secure food production - Build farms and hunting parties
+                </button>
+                <button class="choice-btn" onclick="makeChoice(2)">
+                    🛡️ Establish security - Form militia and build defenses
+                </button>
+            </div>
+        </div>
+
+        <div id="outcomePanel"></div>
+
+        <div class="psychology-panel">
+            <h3>🧠 Psychological Profile Analysis</h3>
+            <div class="psychology-grid">
+                <div class="psych-stat">
+                    <div>Democratic Tendency</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="democraticBar" style="width: 50%"></div>
+                    </div>
+                    <span id="democraticScore">50%</span>
+                </div>
+                <div class="psych-stat">
+                    <div>Authoritarian Tendency</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="authoritarianBar" style="width: 50%"></div>
+                    </div>
+                    <span id="authoritarianScore">50%</span>
+                </div>
+                <div class="psych-stat">
+                    <div>Emotional Intelligence (EQ)</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="eqBar" style="width: 60%"></div>
+                    </div>
+                    <span id="eqScore">60</span>
+                </div>
+                <div class="psych-stat">
+                    <div>Strategic Thinking (IQ)</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="iqBar" style="width: 65%"></div>
+                    </div>
+                    <span id="iqScore">65</span>
+                </div>
+                <div class="psych-stat">
+                    <div>Pragmatism</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="pragmatismBar" style="width: 55%"></div>
+                    </div>
+                    <span id="pragmatismScore">55%</span>
+                </div>
+                <div class="psych-stat">
+                    <div>Idealism</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="idealismBar" style="width: 45%"></div>
+                    </div>
+                    <span id="idealismScore">45%</span>
+                </div>
+            </div>
+            <div id="psychologyAnalysis" style="margin-top: 20px; padding: 15px; background: rgba(255,255,255,0.05); border-radius: 10px;">
+                <strong>Current Assessment:</strong> You appear to be a balanced leader, showing moderate democratic tendencies with good emotional intelligence. Your decisions will reveal more about your leadership style as the colony faces greater challenges.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Game State
+        let gameState = {
+            population: 500,
+            food: 1000,
+            energy: 800,
+            morale: 75,
+            security: 60,
+            technology: 40,
+            turn: 1,
+            gameOver: false
+        };
+
+        // Psychological Profile
+        let psychology = {
+            democratic: 50,
+            authoritarian: 50,
+            eq: 60,
+            iq: 65,
+            pragmatism: 55,
+            idealism: 45
+        };
+
+        // Game Events
+        const events = [
+            {
+                title: "The First Winter Storm",
+                description: "A massive blizzard approaches your colony. The temperature will drop to -40°C for several days. Your people are panicking and energy consumption will triple. How do you respond?",
+                choices: [
+                    {
+                        text: "🔥 Implement strict energy rationing - Everyone gets equal minimal heating",
+                        effects: { energy: -200, morale: -15, population: -10 },
+                        psychology: { democratic: +5, eq: +2, pragmatism: +3 }
+                    },
+                    {
+                        text: "👥 Prioritize essential workers - Give extra resources to key personnel",
+                        effects: { energy: -150, morale: -25, security: +10, population: -20 },
+                        psychology: { authoritarian: +8, pragmatism: +5, idealism: -3 }
+                    },
+                    {
+                        text: "🏭 Emergency power boost - Overload the reactor for maximum heat",
+                        effects: { energy: -100, technology: -15, morale: +10 },
+                        psychology: { iq: +3, pragmatism: +2, authoritarian: +2 }
+                    }
+                ]
+            },
+            {
+                title: "Food Shortage Crisis",
+                description: "Your food stores are critically low. A group of colonists has discovered a cache of pre-war rations in the ruins, but they're demanding a larger share of all future food distributions in exchange.",
+                choices: [
+                    {
+                        text: "🤝 Negotiate fairly - Give them a slight increase in rations",
+                        effects: { food: +200, morale: +5, population: +5 },
+                        psychology: { democratic: +6, eq: +4, idealism: +2 }
+                    },
+                    {
+                        text: "⚔️ Seize the food by force - Use security to take control",
+                        effects: { food: +300, morale: -20, security: -10, population: -15 },
+                        psychology: { authoritarian: +10, pragmatism: +6, eq: -2 }
+                    },
+                    {
+                        text: "🧠 Outsmart them - Offer them leadership positions instead of food",
+                        effects: { food: +250, morale: +10, security: +5 },
+                        psychology: { iq: +5, pragmatism: +4, democratic: +3 }
+                    }
+                ]
+            },
+            {
+                title: "The Infected",
+                description: "A deadly plague has broken out among your people. It's highly contagious, and 30% of your population is already showing symptoms. You have limited medical supplies and must decide how to contain it.",
+                choices: [
+                    {
+                        text: "🏥 Quarantine the sick - Isolate infected people with minimal care",
+                        effects: { population: -80, morale: -30, security: +5 },
+                        psychology: { pragmatism: +8, authoritarian: +5, eq: -3 }
+                    },
+                    {
+                        text: "💊 Share all medicine equally - Give everyone the same treatment",
+                        effects: { population: -120, morale: +10, food: -100 },
+                        psychology: { democratic: +7, idealism: +5, eq: +3 }
+                    },
+                    {
+                        text: "🔬 Focus on finding a cure - Use all resources for research",
+                        effects: { population: -60, technology: +20, energy: -200 },
+                        psychology: { iq: +6, idealism: +4, pragmatism: +2 }
+                    }
+                ]
+            },
+            {
+                title: "The Bandit Threat",
+                description: "A group of armed raiders has surrounded your colony. They demand half of your food and energy supplies, threatening to attack if you refuse. Your security forces are outnumbered 3 to 1.",
+                choices: [
+                    {
+                        text: "🏳️ Negotiate and pay - Give them what they want for peace",
+                        effects: { food: -300, energy: -200, morale: -10 },
+                        psychology: { pragmatism: +5, eq: +2, authoritarian: -2 }
+                    },
+                    {
+                        text: "⚔️ Fight them - Rally your people to defend the colony",
+                        effects: { population: -60, security: -20, morale: +15 },
+                        psychology: { authoritarian: +6, pragmatism: -2, idealism: +3 }
+                    },
+                    {
+                        text: "🎭 Deceive them - Pretend to agree then ambush their leaders",
+                        effects: { population: -30, security: +10, morale: +5 },
+                        psychology: { iq: +4, pragmatism: +6, authoritarian: +3 }
+                    }
+                ]
+            },
+            {
+                title: "The Child Workers",
+                description: "Your colony is desperately short on labor. Some colonists suggest that children over 12 should work in the mines and factories to help with production. This would significantly boost your output but put children at risk.",
+                choices: [
+                    {
+                        text: "🚫 Absolutely refuse - Children should be protected at all costs",
+                        effects: { morale: +20, energy: -50, technology: -10 },
+                        psychology: { idealism: +8, eq: +5, democratic: +3 }
+                    },
+                    {
+                        text: "⚖️ Limited work - Children work only 4 hours in safe conditions",
+                        effects: { energy: +30, technology: +10, morale: -5, population: -5 },
+                        psychology: { pragmatism: +5, democratic: +2, eq: -1 }
+                    },
+                    {
+                        text: "🏭 Full child labor - Children work the same hours as adults",
+                        effects: { energy: +100, technology: +25, morale: -25, population: -15 },
+                        psychology: { authoritarian: +12, pragmatism: +8, idealism: -6, eq: -4 }
+                    }
+                ]
+            },
+            {
+                title: "The Discovery",
+                description: "Your explorers have found an ancient alien artifact that pulses with unknown energy. Initial scans suggest it could solve your energy crisis, but it's also emitting strange signals that might attract unwanted attention. What do you do?",
+                choices: [
+                    {
+                        text: "🔬 Study it carefully - Thorough research before using it",
+                        effects: { technology: +30, energy: +50, security: -10 },
+                        psychology: { iq: +5, pragmatism: +3, idealism: +2 }
+                    },
+                    {
+                        text: "⚡ Use it immediately - Your people need power now",
+                        effects: { energy: +200, population: -20, security: -20 },
+                        psychology: { pragmatism: +6, authoritarian: +3, iq: -2 }
+                    },
+                    {
+                        text: "🗑️ Destroy it - It's too dangerous to keep",
+                        effects: { security: +15, morale: +10, technology: -10 },
+                        psychology: { pragmatism: +4, idealism: +3, eq: +2 }
+                    }
+                ]
+            }
+        ];
+
+        let currentEventIndex = 0;
+
+        // Initialize particles
+        function createParticles() {
+            const container = document.querySelector('.floating-particles');
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.width = particle.style.height = (Math.random() * 6 + 2) + 'px';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (Math.random() * 4 + 4) + 's';
+                container.appendChild(particle);
+            }
+        }
+
+        function updateDisplay() {
+            // Update stats
+            document.getElementById('population').textContent = gameState.population;
+            document.getElementById('food').textContent = gameState.food;
+            document.getElementById('energy').textContent = gameState.energy;
+            document.getElementById('morale').textContent = gameState.morale;
+            document.getElementById('security').textContent = gameState.security;
+            document.getElementById('technology').textContent = gameState.technology;
+            document.getElementById('turnCounter').textContent = gameState.turn;
+
+            // Update psychology bars
+            document.getElementById('democraticBar').style.width = psychology.democratic + '%';
+            document.getElementById('democraticScore').textContent = psychology.democratic + '%';
+            document.getElementById('authoritarianBar').style.width = psychology.authoritarian + '%';
+            document.getElementById('authoritarianScore').textContent = psychology.authoritarian + '%';
+            document.getElementById('eqBar').style.width = psychology.eq + '%';
+            document.getElementById('eqScore').textContent = psychology.eq;
+            document.getElementById('iqBar').style.width = psychology.iq + '%';
+            document.getElementById('iqScore').textContent = psychology.iq;
+            document.getElementById('pragmatismBar').style.width = psychology.pragmatism + '%';
+            document.getElementById('pragmatismScore').textContent = psychology.pragmatism + '%';
+            document.getElementById('idealismBar').style.width = psychology.idealism + '%';
+            document.getElementById('idealismScore').textContent = psychology.idealism + '%';
+
+            // Update psychology analysis
+            updatePsychologyAnalysis();
+        }
+
+        function updatePsychologyAnalysis() {
+            let analysis = "Current Assessment: ";
+            
+            if (psychology.democratic > psychology.authoritarian) {
+                if (psychology.democratic > 70) analysis += "You are a strong democratic leader who values consensus and equality. ";
+                else analysis += "You lean towards democratic decision-making. ";
+            } else {
+                if (psychology.authoritarian > 70) analysis += "You are a decisive authoritarian leader who prioritizes order and efficiency. ";
+                else analysis += "You tend towards more centralized decision-making. ";
+            }
+
+            if (psychology.eq > 70) analysis += "Your emotional intelligence is high - you understand and care about your people's feelings. ";
+            else if (psychology.eq < 40) analysis += "You focus more on logic than emotions in your decisions. ";
+
+            if (psychology.iq > 70) analysis += "You demonstrate excellent strategic thinking and problem-solving skills. ";
+            else if (psychology.iq < 40) analysis += "You may benefit from more analytical thinking in complex situations. ";
+
+            if (psychology.pragmatism > psychology.idealism) {
+                analysis += "You are pragmatic, making decisions based on practical necessity rather than ideals.";
+            } else {
+                analysis += "You are idealistic, trying to maintain your moral principles even in difficult times.";
+            }
+
+            document.getElementById('psychologyAnalysis').innerHTML = `<strong>${analysis}</strong>`;
+        }
+
+        function makeChoice(choiceIndex) {
+            const currentEvent = events[currentEventIndex];
+            const choice = currentEvent.choices[choiceIndex];
+
+            // Apply effects
+            for (const [stat, change] of Object.entries(choice.effects)) {
+                gameState[stat] += change;
+                // Ensure stats don't go below 0 (except for special cases)
+                if (stat !== 'population' && gameState[stat] < 0) {
+                    gameState[stat] = 0;
+                }
+            }
+
+            // Apply psychology changes
+            for (const [trait, change] of Object.entries(choice.psychology)) {
+                psychology[trait] += change;
+                // Keep psychology values between 0 and 100
+                psychology[trait] = Math.max(0, Math.min(100, psychology[trait]));
+            }
+
+            // Ensure authoritarian and democratic are inversely related
+            const total = psychology.democratic + psychology.authoritarian;
+            if (total !== 100) {
+                const diff = 100 - total;
+                psychology.democratic += diff / 2;
+                psychology.authoritarian += diff / 2;
+            }
+
+            // Same for pragmatism and idealism
+            const totalPragIdeal = psychology.pragmatism + psychology.idealism;
+            if (totalPragIdeal !== 100) {
+                const diff = 100 - totalPragIdeal;
+                psychology.pragmatism += diff / 2;
+                psychology.idealism += diff / 2;
+            }
+
+            // Show outcome
+            showOutcome(choice);
+
+            // Check for game over conditions
+            if (gameState.population <= 0) {
+                gameOver("Your colony has been wiped out. No one survived the harsh conditions.");
+                return;
+            }
+
+            if (gameState.food <= 0 && gameState.energy <= 0) {
+                gameOver("Your colony has collapsed. Without food or energy, your people could not survive.");
+                return;
+            }
+
+            if (gameState.morale <= 0) {
+                gameOver("Your people have lost all hope and abandoned the colony. Your leadership has failed.");
+                return;
+            }
+
+            // Continue to next event
+            gameState.turn++;
+            currentEventIndex = (currentEventIndex + 1) % events.length;
+            
+            setTimeout(() => {
+                showNextEvent();
+                updateDisplay();
+            }, 3000);
+        }
+
+        function showOutcome(choice) {
+            const outcomePanel = document.getElementById('outcomePanel');
+            const outcomeDiv = document.createElement('div');
+            outcomeDiv.className = 'outcome-panel';
+            outcomeDiv.innerHTML = `
+                <h3>📊 Outcome</h3>
+                <p><strong>Your choice:</strong> ${choice.text}</p>
+                <p><strong>Consequences:</strong> ${getEffectDescription(choice.effects)}</p>
+                <p><strong>Psychological Impact:</strong> ${getPsychologyDescription(choice.psychology)}</p>
+            `;
+            outcomePanel.appendChild(outcomeDiv);
+
+            // Remove old outcomes (keep only last 2)
+            const outcomes = outcomePanel.querySelectorAll('.outcome-panel');
+            if (outcomes.length > 2) {
+                outcomePanel.removeChild(outcomes[0]);
+            }
+        }
+
+        function getEffectDescription(effects) {
+            const descriptions = [];
+            for (const [stat, change] of Object.entries(effects)) {
+                const sign = change > 0 ? '+' : '';
+                descriptions.push(`${stat}: ${sign}${change}`);
+            }
+            return descriptions.join(', ');
+        }
+
+        function getPsychologyDescription(psychEffects) {
+            const descriptions = [];
+            for (const [trait, change] of Object.entries(psychEffects)) {
+                const sign = change > 0 ? '+' : '';
+                descriptions.push(`${trait}: ${sign}${change}`);
+            }
+            return descriptions.join(', ');
+        }
+
+        function showNextEvent() {
+            const event = events[currentEventIndex];
+            document.getElementById('eventTitle').textContent = event.title;
+            document.getElementById('eventDescription').textContent = event.description;
+            
+            const choicesDiv = document.getElementById('choices');
+            choicesDiv.innerHTML = '';
+            
+            event.choices.forEach((choice, index) => {
+                const button = document.createElement('button');
+                button.className = 'choice-btn';
+                button.textContent = choice.text;
+                button.onclick = () => makeChoice(index);
+                choicesDiv.appendChild(button);
+            });
+        }
+
+        function gameOver(message) {
+            gameState.gameOver = true;
+            const eventPanel = document.getElementById('eventPanel');
+            eventPanel.innerHTML = `
+                <div class="game-over">
+                    <h2>💀 Game Over</h2>
+                    <p>${message}</p>
+                    <h3>Final Statistics:</h3>
+                    <p>Turns Survived: ${gameState.turn}</p>
+                    <p>Final Population: ${gameState.population}</p>
+                    <p>Leadership Style: ${psychology.democratic > psychology.authoritarian ? 'Democratic' : 'Authoritarian'}</p>
+                    <p>Primary Trait: ${psychology.pragmatism > psychology.idealism ? 'Pragmatic' : 'Idealistic'}</p>
+                    <p>EQ Score: ${psychology.eq}</p>
+                    <p>IQ Score: ${psychology.iq}</p>
+                    <button class="restart-btn" onclick="restartGame()">🔄 Start New Colony</button>
+                </div>
+            `;
+        }
+
+        function restartGame() {
+            // Reset game state
+            gameState = {
+                population: 500,
+                food: 1000,
+                energy: 800,
+                morale: 75,
+                security: 60,
+                technology: 40,
+                turn: 1,
+                gameOver: false
+            };
+
+            // Reset psychology
+            psychology = {
+                democratic: 50,
+                authoritarian: 50,
+                eq: 60,
+                iq: 65,
+                pragmatism: 55,
+                idealism: 45
+            };
+
+            currentEventIndex = 0;
+            
+            // Clear outcomes
+            document.getElementById('outcomePanel').innerHTML = '';
+            
+            // Reset to initial event
+            document.getElementById('eventTitle').textContent = 'Welcome to New Eden';
+            document.getElementById('eventDescription').textContent = 'Your colony ship has crash-landed on a harsh, frozen world. 500 survivors look to you for leadership. The ship\'s reactor is failing, food stores are limited, and the weather is getting worse. Winter is coming, and difficult decisions lie ahead. How will you lead your people?';
+            
+            const choicesDiv = document.getElementById('choices');
+            choicesDiv.innerHTML = `
+                <button class="choice-btn" onclick="makeChoice(0)">
+                    🏭 Focus on industrial development - Prioritize energy and technology
+                </button>
+                <button class="choice-btn" onclick="makeChoice(1)">
+                    🌾 Secure food production - Build farms and hunting parties
+                </button>
+                <button class="choice-btn" onclick="makeChoice(2)">
+                    🛡️ Establish security - Form militia and build defenses
+                </button>
+            `;
+
+            updateDisplay();
+        }
+
+        // Handle the initial choice differently
+        function makeChoice(choiceIndex) {
+            if (gameState.turn === 1) {
+                // Handle initial choice
+                const initialChoices = [
+                    {
+                        text: "🏭 Focus on industrial development - Prioritize energy and technology",
+                        effects: { energy: +100, technology: +20, food: -50 },
+                        psychology: { iq: +3, pragmatism: +2, authoritarian: +1 }
+                    },
+                    {
+                        text: "🌾 Secure food production - Build farms and hunting parties",
+                        effects: { food: +200, population: +10, energy: -50 },
+                        psychology: { eq: +2, democratic: +2, idealism: +1 }
+                    },
+                    {
+                        text: "🛡️ Establish security - Form militia and build defenses",
+                        effects: { security: +25, morale: +10, food: -30 },
+                        psychology: { authoritarian: +3, pragmatism: +2, iq: +1 }
+                    }
+                ];
+
+                const choice = initialChoices[choiceIndex];
+                
+                // Apply effects
+                for (const [stat, change] of Object.entries(choice.effects)) {
+                    gameState[stat] += change;
+                    if (stat !== 'population' && gameState[stat] < 0) {
+                        gameState[stat] = 0;
+                    }
+                }
+
+                // Apply psychology changes
+                for (const [trait, change] of Object.entries(choice.psychology)) {
+                    psychology[trait] += change;
+                    psychology[trait] = Math.max(0, Math.min(100, psychology[trait]));
+                }
+
+                // Balance psychology
+                balancePsychology();
+
+                // Show outcome
+                showOutcome(choice);
+
+                // Move to first real event
+                gameState.turn++;
+                currentEventIndex = 0;
+                
+                setTimeout(() => {
+                    showNextEvent();
+                    updateDisplay();
+                }, 3000);
+
+                return;
+            }
+
+            // Regular event handling
+            const currentEvent = events[currentEventIndex];
+            const choice = currentEvent.choices[choiceIndex];
+
+            // Apply effects
+            for (const [stat, change] of Object.entries(choice.effects)) {
+                gameState[stat] += change;
+                if (stat !== 'population' && gameState[stat] < 0) {
+                    gameState[stat] = 0;
+                }
+            }
+
+            // Apply psychology changes
+            for (const [trait, change] of Object.entries(choice.psychology)) {
+                psychology[trait] += change;
+                psychology[trait] = Math.max(0, Math.min(100, psychology[trait]));
+            }
+
+            // Balance psychology
+            balancePsychology();
+
+            // Show outcome
+            showOutcome(choice);
+
+            // Check for game over conditions
+            if (gameState.population <= 0) {
+                gameOver("Your colony has been wiped out. No one survived the harsh conditions.");
+                return;
+            }
+
+            if (gameState.food <= 0 && gameState.energy <= 0) {
+                gameOver("Your colony has collapsed. Without food or energy, your people could not survive.");
+                return;
+            }
+
+            if (gameState.morale <= 0) {
+                gameOver("Your people have lost all hope and abandoned the colony. Your leadership has failed.");
+                return;
+            }
+
+            // Add some random events based on low stats
+            if (gameState.food < 100) {
+                addRandomEvent("starvation");
+            }
+            if (gameState.energy < 100) {
+                addRandomEvent("power_failure");
+            }
+            if (gameState.security < 20) {
+                addRandomEvent("civil_unrest");
+            }
+
+            // Continue to next event
+            gameState.turn++;
+            currentEventIndex = (currentEventIndex + 1) % events.length;
+            
+            setTimeout(() => {
+                showNextEvent();
+                updateDisplay();
+            }, 3000);
+        }
+
+        function balancePsychology() {
+            // Ensure authoritarian and democratic are inversely related
+            const totalAuthDemo = psychology.democratic + psychology.authoritarian;
+            if (totalAuthDemo !== 100) {
+                const diff = 100 - totalAuthDemo;
+                psychology.democratic += diff / 2;
+                psychology.authoritarian += diff / 2;
+            }
+
+            // Same for pragmatism and idealism
+            const totalPragIdeal = psychology.pragmatism + psychology.idealism;
+            if (totalPragIdeal !== 100) {
+                const diff = 100 - totalPragIdeal;
+                psychology.pragmatism += diff / 2;
+                psychology.idealism += diff / 2;
+            }
+
+            // Keep all values in bounds
+            for (const trait in psychology) {
+                psychology[trait] = Math.max(0, Math.min(100, psychology[trait]));
+            }
+        }
+
+        function addRandomEvent(type) {
+            const randomEvents = {
+                starvation: {
+                    title: "🍽️ Desperate Hunger",
+                    description: "People are starting to starve. Some colonists are talking about resorting to cannibalism to survive.",
+                    choices: [
+                        {
+                            text: "😱 Allow it - Survival at any cost",
+                            effects: { population: -30, morale: -40, food: +50 },
+                            psychology: { authoritarian: +15, pragmatism: +10, eq: -5, idealism: -8 }
+                        },
+                        {
+                            text: "🚫 Forbid it - Find other solutions",
+                            effects: { population: -50, morale: +10, technology: +5 },
+                            psychology: { idealism: +8, eq: +3, democratic: +5 }
+                        }
+                    ]
+                },
+                power_failure: {
+                    title: "⚡ Total Blackout",
+                    description: "The main reactor has failed completely. Without power, heating, life support, and food production have stopped.",
+                    choices: [
+                        {
+                            text: "🔥 Burn furniture and books for warmth",
+                            effects: { energy: +50, technology: -20, morale: -15 },
+                            psychology: { pragmatism: +5, authoritarian: +3 }
+                        },
+                        {
+                            text: "🏃 Evacuate to the ruins for shelter",
+                            effects: { security: -30, population: -20, energy: +30 },
+                            psychology: { pragmatism: +8, iq: +2 }
+                        }
+                    ]
+                },
+                civil_unrest: {
+                    title: "✊ Rebellion",
+                    description: "A group of colonists has declared you unfit to lead and is trying to overthrow your government.",
+                    choices: [
+                        {
+                            text: "⚔️ Crush the rebellion with force",
+                            effects: { security: +15, population: -40, morale: -20 },
+                            psychology: { authoritarian: +12, pragmatism: +5, eq: -3 }
+                        },
+                        {
+                            text: "🤝 Negotiate and compromise",
+                            effects: { morale: +15, security: -10, food: -50 },
+                            psychology: { democratic: +8, eq: +4, idealism: +3 }
+                        }
+                    ]
+                }
+            };
+
+            if (randomEvents[type]) {
+                events.push(randomEvents[type]);
+            }
+        }
+
+        // Initialize the game
+        createParticles();
+        updateDisplay();
+
+        // Add some dynamic weather effects
+        setInterval(() => {
+            if (!gameState.gameOver) {
+                // Random weather events
+                if (Math.random() < 0.1) {
+                    const weatherEffects = [
+                        { energy: -20, morale: -5 },
+                        { food: -30, population: -2 },
+                        { security: -5, energy: -10 }
+                    ];
+                    const effect = weatherEffects[Math.floor(Math.random() * weatherEffects.length)];
+                    for (const [stat, change] of Object.entries(effect)) {
+                        gameState[stat] += change;
+                        if (stat !== 'population' && gameState[stat] < 0) {
+                            gameState[stat] = 0;
+                        }
+                    }
+                    updateDisplay();
+                }
+            }
+        }, 15000); // Every 15 seconds
+
+        // Add victory condition
+        function checkVictory() {
+            if (gameState.turn > 20 && gameState.population > 400 && gameState.food > 500 && gameState.energy > 500) {
+                const eventPanel = document.getElementById('eventPanel');
+                eventPanel.innerHTML = `
+                    <div class="game-over" style="border-color: #4ecdc4; background: rgba(78, 205, 196, 0.2);">
+                        <h2>🎉 Victory!</h2>
+                        <p>Congratulations! Your colony has thrived and grown into a prosperous settlement. You've successfully led your people through the harshest conditions and built a new world.</p>
+                        <h3>Final Leadership Assessment:</h3>
+                        <p>Turns Survived: ${gameState.turn}</p>
+                        <p>Final Population: ${gameState.population}</p>
+                        <p>Leadership Style: ${psychology.democratic > psychology.authoritarian ? 'Democratic Leader' : 'Authoritarian Leader'}</p>
+                        <p>Decision Making: ${psychology.pragmatism > psychology.idealism ? 'Pragmatic Realist' : 'Idealistic Visionary'}</p>
+                        <p>Emotional Intelligence: ${psychology.eq > 70 ? 'High EQ - Empathetic' : psychology.eq > 40 ? 'Moderate EQ' : 'Low EQ - Logic-focused'}</p>
+                        <p>Strategic Intelligence: ${psychology.iq > 70 ? 'High IQ - Strategic Genius' : psychology.iq > 40 ? 'Good Strategic Thinking' : 'Needs Strategic Development'}</p>
+                        <button class="restart-btn" onclick="restartGame()">🔄 Lead Another Colony</button>
+                    </div>
+                `;
+                gameState.gameOver = true;
+            }
+        }
+
+        // Check victory condition periodically
+        setInterval(() => {
+            if (!gameState.gameOver) {
+                checkVictory();
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
