@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Yash Kumar Atri is a postdoctoral researcher at the University of Virginia working on language models, model editing, continual learning, and text summarization." />
+    <meta name="description" content="Yash Kumar Atri is a postdoctoral researcher at the University of Virginia working on large language models: continual learning, model editing, temporal consistency, and evaluation, with applications in medicine." />
     <meta name="theme-color" content="#0f766e" />
     <title>Yash Kumar Atri</title>
-    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="favicon.svg?v=2" type="image/svg+xml">
     <link rel="preload" href="attachments/yash-720.jpg" as="image">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -99,7 +99,7 @@
       .cosmic-bg {
         position: fixed;
         inset: 0;
-        z-index: 0;
+        z-index: 5;
         overflow: hidden;
         pointer-events: none;
         opacity: 0.72;
@@ -136,7 +136,6 @@
           radial-gradient(circle at 68% 74%, rgba(13,71,161,0.62), transparent 32%),
           linear-gradient(145deg, rgba(125,211,252,0.9), rgba(37,99,235,0.72) 48%, rgba(30,64,175,0.78));
         box-shadow: 0 0 32px rgba(37,99,235,0.24);
-        animation: driftNeptune 30s linear infinite;
       }
 
       .celestial.jupiter {
@@ -157,7 +156,6 @@
             rgba(180,83,9,0.5) 64% 75%,
             rgba(254,243,199,0.76) 75% 100%);
         box-shadow: 0 0 30px rgba(180,83,9,0.18);
-        animation: driftJupiter 42s linear infinite;
       }
 
       .celestial.jupiter::after {
@@ -183,8 +181,31 @@
           inset -5px -4px 7px rgba(23,16,12,0.34),
           inset 4px 3px 5px rgba(221,176,121,0.16),
           0 0 20px rgba(72,46,31,0.18);
-        animation: driftAsteroid 34s linear infinite;
       }
+
+
+      .celestial.mercury, .celestial.venus, .celestial.earth, .celestial.mars,
+      .celestial.saturn, .celestial.uranus, .celestial.pluto { border-radius: 50%; }
+      .celestial.mercury { width: 10px; height: 10px;
+        background: radial-gradient(circle at 34% 30%, #d6d3d1, #78716c 70%); box-shadow: 0 0 14px rgba(120,113,108,0.25); }
+      .celestial.venus { width: 17px; height: 17px;
+        background: radial-gradient(circle at 34% 30%, #fef3c7, #e0a95a 62%, #b9803a); box-shadow: 0 0 18px rgba(224,169,90,0.28); }
+      .celestial.earth { width: 18px; height: 18px;
+        background:
+          radial-gradient(circle at 62% 62%, rgba(74,155,92,0.9) 0 20%, transparent 21%),
+          radial-gradient(circle at 30% 38%, rgba(74,155,92,0.85) 0 16%, transparent 17%),
+          radial-gradient(circle at 34% 28%, #bae6fd, #2563eb 70%);
+        box-shadow: 0 0 20px rgba(37,99,235,0.28); }
+      .celestial.mars { width: 13px; height: 13px;
+        background: radial-gradient(circle at 34% 30%, #fdba74, #c2410c 70%); box-shadow: 0 0 16px rgba(194,65,12,0.26); }
+      .celestial.saturn { width: 24px; height: 24px;
+        background: radial-gradient(circle at 34% 28%, #fef3c7, #d9a85c 60%, #a8742e); box-shadow: 0 0 22px rgba(217,168,92,0.26); }
+      .celestial.saturn::after { content: ''; position: absolute; left: -11px; right: -11px; top: 50%; height: 12px; margin-top: -6px;
+        border: 2px solid rgba(190,150,90,0.7); border-radius: 50%; transform: rotate(-18deg); }
+      .celestial.uranus { width: 19px; height: 19px;
+        background: radial-gradient(circle at 34% 28%, #ecfeff, #67e8f9 55%, #0e7490); box-shadow: 0 0 20px rgba(103,232,249,0.3); }
+      .celestial.pluto { width: 8px; height: 8px;
+        background: radial-gradient(circle at 34% 30%, #f5e6d3, #a8856a 70%); box-shadow: 0 0 12px rgba(168,133,106,0.25); }
 
       .shooting-star {
         position: absolute;
@@ -287,7 +308,7 @@
       body.dark .site-header { background: rgba(16,19,22,0.92); }
 
       .header-inner {
-        max-width: 1240px;
+        max-width: 1560px;
         margin: 0 auto;
         padding: 0 24px;
         min-height: 58px;
@@ -336,10 +357,19 @@
         font-size: 13px;
         transition: border-color 0.15s, color 0.15s, background 0.15s;
       }
+      #playBtn {
+        display: inline-flex; align-items: center; gap: 7px; height: 34px; padding: 0 13px;
+        border-radius: 8px; border: 1px solid var(--border); background: var(--surface);
+        color: var(--text-secondary); font: inherit; font-size: 13px; font-weight: 500; cursor: pointer;
+        transition: border-color 0.15s, color 0.15s, background 0.15s;
+      }
+      #playBtn[hidden] { display: none; }
+      #playBtn i { font-size: 10px; }
+      #playBtn:hover, #playBtn[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
       #darkToggle:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
 
       .container {
-        max-width: 1240px;
+        max-width: 1560px;
         margin: 0 auto;
         padding: 0 24px;
       }
@@ -351,8 +381,8 @@
 
       .hero-grid {
         display: grid;
-        grid-template-columns: 330px minmax(0, 1fr);
-        gap: 72px;
+        grid-template-columns: 340px minmax(0, 1fr);
+        gap: 56px;
         align-items: start;
       }
 
@@ -437,7 +467,7 @@
       }
 
       .hero-summary {
-        max-width: 660px;
+        max-width: none;
         font-size: 20px;
         line-height: 1.45;
         color: var(--text-primary);
@@ -502,7 +532,7 @@
       }
 
       /* ── News ── */
-      .news-section { margin-top: 4px; }
+      .news-section { margin-top: 0; }
 
       .news-title {
         font-size: 13px;
@@ -535,7 +565,7 @@
       }
 
       .news-text { color: var(--text-secondary); }
-      .news-text em { font-style: italic; color: var(--text-primary); }
+      .news-text em { font-style: normal; font-weight: 500; color: var(--text-primary); }
       .news-text a { color: var(--accent); text-decoration: none; }
       .news-text a:hover { text-decoration: underline; }
 
@@ -606,6 +636,29 @@
           0 1px 0 rgba(255,255,255,0.68) inset,
           0 10px 22px rgba(23,32,51,0.045);
       }
+
+      .directions-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+        align-items: stretch;
+      }
+      .directions-grid .direction-block { margin-bottom: 0; }
+      .directions-lede {
+        font-size: 13.5px;
+        color: var(--text-secondary);
+        margin: -4px 0 14px;
+      }
+      .direction-venue {
+        font-family: var(--mono); font-size: 10.5px; color: var(--text-tertiary); white-space: nowrap;
+      }
+      .direction-blurb {
+        font-size: 12.5px;
+        font-style: italic;
+        color: var(--text-tertiary);
+        margin-bottom: 8px;
+      }
+      @media (max-width: 1180px) { .directions-grid { grid-template-columns: 1fr; } }
 
       .direction-block.current {
         background:
@@ -713,6 +766,15 @@
         gap: 8px;
       }
 
+      .pub-filter { display: flex; flex-wrap: wrap; gap: 8px; margin: -4px 0 18px; }
+      .pub-filter button {
+        font: inherit; font-size: 12.5px; padding: 5px 12px; border-radius: 999px; cursor: pointer;
+        border: 1px solid var(--border); background: transparent; color: var(--text-secondary);
+        transition: border-color 0.15s, color 0.15s, background 0.15s;
+      }
+      .pub-filter button:hover { border-color: var(--accent); color: var(--accent); }
+      .pub-filter button.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+      body.dark .pub-filter button.active { color: #04201c; }
       .pub-stats {
         display: flex;
         gap: 20px;
@@ -962,7 +1024,7 @@
       }
 
       .footer-inner {
-        max-width: 1240px;
+        max-width: 1560px;
         margin: 0 auto;
         padding: 0 24px;
         display: flex;
@@ -1122,6 +1184,167 @@
       }
 
       .hidden { display: none !important; }
+    
+      /* ── Refinements: flatter surfaces, profile rail, timeline ── */
+      body, body.dark { background: var(--bg); }
+      .avatar-wrap::before { display: none; }
+      .avatar { box-shadow: none; border: 1px solid var(--border); border-radius: 10px; }
+      body.dark .avatar { box-shadow: none; }
+      .card, .direction-block, .pub-card, .exp-card { box-shadow: none; }
+      .direction-block { background: var(--surface); border-radius: 8px; }
+      .direction-block::before { display: none; }
+
+      .avatar-row { display: flex; align-items: flex-start; gap: 12px; }
+      .social-rail { display: flex; flex-direction: column; gap: 8px; position: relative; z-index: 3; }
+      .social-rail .social-btn {
+        position: relative;
+        width: 36px; height: 36px;
+        background: var(--surface);
+      }
+      .social-rail .social-btn::after {
+        content: attr(data-label);
+        position: absolute;
+        left: calc(100% + 10px);
+        top: 50%;
+        transform: translate(-4px, -50%);
+        padding: 5px 10px;
+        border-radius: 6px;
+        background: var(--text-primary);
+        color: var(--bg);
+        font-size: 12px;
+        font-weight: 500;
+        white-space: nowrap;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.15s, transform 0.15s;
+      }
+      .social-rail .social-btn:hover::after,
+      .social-rail .social-btn:focus-visible::after { opacity: 1; transform: translate(0, -50%); }
+      .social-rail .social-btn:hover { box-shadow: none; transform: none; }
+
+      .news-section { width: 100%; margin-top: 6px; }
+      .news-section .news-list {
+        display: block;
+        position: relative;
+        max-height: 292px;
+        overflow-y: auto;
+        margin-left: 4px;
+        padding: 2px 8px 18px 18px;
+        border-left: 1px solid var(--border);
+        scrollbar-width: thin;
+        -webkit-mask-image: linear-gradient(180deg, #000 calc(100% - 28px), transparent);
+        mask-image: linear-gradient(180deg, #000 calc(100% - 28px), transparent);
+      }
+      .news-section .news-item {
+        display: block;
+        position: relative;
+        padding: 0 0 14px;
+        border: 0;
+        grid-template-columns: none;
+      }
+      .news-section .news-item::before {
+        content: '';
+        position: absolute;
+        left: -23px;
+        top: 6px;
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: var(--bg);
+        border: 1.5px solid var(--text-tertiary);
+      }
+      .news-section .news-item:first-child::before { background: var(--accent); border-color: var(--accent); }
+      .news-section .news-date {
+        display: block;
+        min-width: 0;
+        padding: 0 0 2px;
+        font-size: 11px;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+      .news-section .news-text { display: block; font-size: 13px; line-height: 1.5; }
+
+      @media (max-width: 820px) {
+        .news-section .news-list { max-height: none; overflow: visible; -webkit-mask-image: none; mask-image: none; }
+        .news-section .news-item:nth-child(n+6) { display: none; }
+      }
+      @media (max-width: 560px) {
+        .avatar-row .avatar { width: min(100%, 250px); }
+        .social-rail .social-btn { flex: none; }
+      }
+    
+      /* ── Orbit game UI ── */
+      .orbit-hud button, .imsg-actions button {
+        font: inherit; cursor: pointer;
+      }
+      .orbit-hud {
+        position: fixed; left: 50%; bottom: 16px; transform: translateX(-50%); z-index: 40;
+        display: flex; align-items: center; gap: 6px; max-width: calc(100vw - 24px);
+        padding: 6px 6px 6px 14px; border-radius: 999px;
+        border: 1px solid var(--border); background: var(--surface); color: var(--text-primary);
+        font-size: 12.5px;
+      }
+      .orbit-hud[hidden], .orbit-hint[hidden], .orbit-hud [hidden] { display: none; }
+      .orbit-hud-msg { margin-right: 6px; }
+      .orbit-hud button {
+        padding: 5px 11px; border-radius: 999px; border: 1px solid var(--border);
+        background: transparent; color: var(--text-secondary); font-size: 12px;
+      }
+      .orbit-hud button:hover { border-color: var(--accent); color: var(--accent); }
+      .orbit-hint {
+        position: fixed; left: 50%; bottom: 62px; transform: translateX(-50%); z-index: 40;
+        max-width: calc(100vw - 24px); padding: 8px 14px; border-radius: 10px;
+        background: var(--text-primary); color: var(--bg); font-size: 12px; text-align: center;
+      }
+      .cosmic-bg.game .celestial:not(.asteroid) { pointer-events: auto; cursor: grab; touch-action: none; opacity: 0.95; }
+      .cosmic-bg.game .celestial:not(.asteroid):active { cursor: grabbing; }
+      .cosmic-bg.game .celestial:not(.asteroid)::before { content: ''; position: absolute; inset: -12px; border-radius: 50%; }
+      .cosmic-bg.game .celestial.asteroid { display: none; }
+
+      body.boom { animation: boomShake 0.55s ease-out; }
+      @keyframes boomShake {
+        0% { transform: translate(0, 0); } 15% { transform: translate(-6px, 4px); } 30% { transform: translate(5px, -5px); }
+        45% { transform: translate(-4px, -3px); } 60% { transform: translate(3px, 3px); } 80% { transform: translate(-1px, 1px); } 100% { transform: none; }
+      }
+      .boom-flash { position: fixed; inset: 0; z-index: 70; background: #fff; opacity: 0; pointer-events: none; animation: boomFlash 0.7s ease-out; }
+      @keyframes boomFlash { 0% { opacity: 0.75; } 100% { opacity: 0; } }
+      .fx-canvas { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 75; pointer-events: none; }
+
+      .imsg {
+        position: fixed; left: 50%; top: 22%; transform: translateX(-50%); z-index: 80;
+        width: min(320px, calc(100vw - 32px));
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", system-ui, sans-serif;
+      }
+      .imsg-from { font-size: 11px; color: #8e8e93; margin: 0 0 3px 12px; }
+      .imsg-bubble, .imsg-typing {
+        position: relative; display: inline-block; padding: 9px 15px; border-radius: 19px;
+        background: #e9e9eb; color: #000; font-size: 16px; line-height: 1.3;
+        box-shadow: 0 6px 24px rgba(0,0,0,0.12);
+      }
+      body.dark .imsg-bubble, body.dark .imsg-typing { background: #3b3b3d; color: #fff; }
+      .imsg-bubble::before, .imsg-typing::before {
+        content: ''; position: absolute; left: -7px; bottom: 0; width: 20px; height: 18px; background: inherit;
+        border-bottom-right-radius: 16px 14px; z-index: -1;
+      }
+      .imsg-bubble::after, .imsg-typing::after {
+        content: ''; position: absolute; left: -26px; bottom: 0; width: 26px; height: 18px; background: var(--bg);
+        border-bottom-right-radius: 10px;
+      }
+      .imsg.in .imsg-bubble { animation: imsgPop 0.38s cubic-bezier(.2,1.3,.4,1); transform-origin: left bottom; }
+      @keyframes imsgPop { 0% { transform: scale(0.3); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+      .imsg-typing { padding: 12px 16px; }
+      .imsg-typing i { display: inline-block; width: 8px; height: 8px; margin: 0 2px; border-radius: 50%; background: #8e8e93; animation: imsgDot 1s infinite; }
+      .imsg-typing i:nth-child(2) { animation-delay: 0.15s; } .imsg-typing i:nth-child(3) { animation-delay: 0.3s; }
+      @keyframes imsgDot { 0%, 60%, 100% { opacity: 0.35; transform: translateY(0); } 30% { opacity: 1; transform: translateY(-3px); } }
+      .imsg-actions { margin: 10px 0 0 6px; display: flex; gap: 8px; }
+      .imsg-actions button {
+        padding: 6px 14px; border-radius: 999px; border: 0; background: #0a84ff; color: #fff; font-size: 13px; font-weight: 500;
+      }
+      .imsg-actions button + button { background: rgba(120,120,128,0.2); color: var(--text-primary); }
+      @media (max-width: 560px) {
+        .orbit-hud { bottom: 12px; flex-wrap: wrap; justify-content: center; border-radius: 18px; padding: 8px 10px; }
+        .orbit-hint { bottom: 80px; }
+      }
     </style>
   </head>
 
@@ -1130,6 +1353,13 @@
       <span class="celestial neptune"></span>
       <span class="celestial jupiter"></span>
       <span class="celestial asteroid"></span>
+      <span class="celestial mercury"></span>
+      <span class="celestial venus"></span>
+      <span class="celestial earth"></span>
+      <span class="celestial mars"></span>
+      <span class="celestial saturn"></span>
+      <span class="celestial uranus"></span>
+      <span class="celestial pluto"></span>
       <span class="shooting-star one"></span>
       <span class="shooting-star two"></span>
     </div>
@@ -1154,6 +1384,7 @@
           <a href="#publications">Publications</a>
           <a href="#experience">Experience</a>
           <a href="#contact">Contact</a>
+          <button id="playBtn" type="button" aria-pressed="false" hidden><i class="fas fa-play"></i><span>Play</span></button>
           <button id="darkToggle" type="button" aria-label="Toggle dark mode">
             <i class="fas fa-moon"></i>
           </button>
@@ -1168,8 +1399,17 @@
 
           <!-- Left column -->
           <div class="hero-left">
-            <div class="avatar-wrap">
+            <div class="avatar-row">
+              <nav class="social-rail" aria-label="Profiles">
+                <a href="https://www.linkedin.com/in/yashkumaratri/" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="LinkedIn" data-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://twitter.com/yashkumaratri" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Twitter" data-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://scholar.google.com/citations?user=sTyStXIAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Google Scholar" data-label="Google Scholar"><i class="fab fa-google"></i></a>
+                <a href="https://github.com/yashkumaratri" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="GitHub" data-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://orcid.org/0000-0003-4992-0505" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="ORCID" data-label="ORCID"><i class="fab fa-orcid"></i></a>
+              </nav>
+              <div class="avatar-wrap">
               <img class="avatar" src="attachments/yash-720.jpg" alt="Yash Kumar Atri" width="268" height="348" fetchpriority="high" decoding="async" />
+              </div>
             </div>
 
             <div>
@@ -1179,37 +1419,20 @@
             </div>
 
             <div class="hero-summary-mobile">
-              <div class="hero-kicker">Language models · continual learning · evaluation</div>
-              <p class="hero-summary">I build <span>adaptive language systems</span> that can update their knowledge, reason consistently as information evolves, and remain reliable after deployment.</p>
+              <div class="hero-kicker">Continual learning · Model editing · Evaluation</div>
+              <p class="hero-summary">I build <span>adaptive language systems</span>: large language models that can be edited, keep learning as information evolves, and stay reliable after deployment.</p>
             </div>
 
-            <div class="social-row">
-              <a href="https://www.linkedin.com/in/yashkumaratri/" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="LinkedIn" title="LinkedIn">
-                <i class="fab fa-linkedin-in"></i>
-              </a>
-              <a href="https://twitter.com/yashkumaratri" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Twitter" title="Twitter">
-                <i class="fab fa-twitter"></i>
-              </a>
-              <a href="https://scholar.google.com/citations?user=sTyStXIAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Google Scholar" title="Google Scholar">
-                <i class="fab fa-google"></i>
-              </a>
-              <a href="https://github.com/yashkumaratri" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="GitHub" title="GitHub">
-                <i class="fab fa-github"></i>
-              </a>
-              <a href="https://orcid.org/0000-0003-4992-0505" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="ORCID" title="ORCID">
-                <i class="fab fa-orcid"></i>
-              </a>
-            </div>
-
-            <a href="https://drive.google.com/file/d/1ZJU-V7N3YFe5WNnj9pNzAMNWo16tApBj/view?usp=share_link"
-               target="_blank" rel="noopener noreferrer" class="resume-btn">
-              <i class="fas fa-file-alt" style="font-size:13px;"></i> Résumé
-            </a>
-
-            <!-- News -->
-            <div class="news-section" style="width:100%;">
+            <div class="news-section">
               <div class="news-title">Happenings</div>
               <div class="news-list" id="newsList">
+
+                <div class="news-item">
+                  <span class="news-date">Oct 2026</span>
+                  <span class="news-text"><em>MedKIT: Evaluating Knowledge Integration and Generalization in Large Language Models</em> accepted to NeurIPS 2026 Evaluations and Datasets Track (poster)
+                    (<a href="https://arxiv.org/abs/2609.38543" target="_blank" rel="noopener noreferrer">paper</a>)
+                  </span>
+                </div>
 
                 <div class="news-item">
                   <span class="news-date">May 2026</span>
@@ -1230,7 +1453,7 @@
                   <span class="news-text">Invited talk on lifelong model editing at IIT Jodhpur</span>
                 </div>
 
-                <div class="news-item extra-news hidden">
+                <div class="news-item">
                   <span class="news-date">2026</span>
                   <span class="news-text">Received Google Cloud Research Credits and a Cohere Labs Catalyst Grant</span>
                 </div>
@@ -1242,67 +1465,67 @@
                   </span>
                 </div>
 
-                <div class="news-item extra-news hidden">
+                <div class="news-item">
                   <span class="news-date">Apr 2025</span>
                   <span class="news-text">Invited talk at Lamarr Institute NLProc Colloquium, University of Bonn</span>
                 </div>
 
-                <div class="news-item extra-news hidden">
+                <div class="news-item">
                   <span class="news-date">Apr 2025</span>
-                  <span class="news-text"><em>Model Editing with Graph-Based External Memory</em> accepted to ACL Findings 2025</span>
+                  <span class="news-text"><em>Lifelong Model Editing with Graph-Based External Memory</em> accepted to ACL Findings 2025</span>
                 </div>
 
-                <div class="news-item extra-news hidden">
+                <div class="news-item">
                   <span class="news-date">Oct 2024</span>
                   <span class="news-text">Selected as DAAD AInet Fellow 2024</span>
                 </div>
 
-                <div class="news-item extra-news hidden">
-                  <span class="news-date">Jun 2024</span>
+                <div class="news-item">
+                  <span class="news-date">Jul 2024</span>
                   <span class="news-text">Joined UVA as a postdoc</span>
                 </div>
 
-                <!-- Hidden items — correctly siblings, not nested -->
-                <div class="news-item extra-news hidden">
+                <!--  -->
+                <div class="news-item">
                   <span class="news-date">Feb 2024</span>
                   <span class="news-text">Invited presentation at ACM-India ARCS Symposium, NISER Bhubaneswar</span>
                 </div>
 
-                <div class="news-item extra-news hidden">
+                <div class="news-item">
                   <span class="news-date">Dec 2023</span>
                   <span class="news-text">Tutorial on building blocks of AI-driven mental health counseling, ICON 2023, University of Goa</span>
                 </div>
 
-                <div class="news-item extra-news hidden">
+                <div class="news-item">
                   <span class="news-date">Oct 2023</span>
                   <span class="news-text"><em>Promoting Topic Coherence via Simplicial Complex &amp; Sheaf Graph</em> accepted to EMNLP 2023</span>
                 </div>
 
-                <div class="news-item extra-news hidden">
+                <div class="news-item">
                   <span class="news-date">May 2023</span>
                   <span class="news-text"><em>Fusing Multimodal Signals in Hyper-Complex Space</em> accepted to SIGKDD 2023</span>
                 </div>
 
-                <div class="news-item extra-news hidden">
+                <div class="news-item">
                   <span class="news-date">Mar 2023</span>
                   <span class="news-text">Poster presentation at RIISE 2023, IIIT Delhi</span>
                 </div>
 
-                <div class="news-item extra-news hidden">
+                <div class="news-item">
                   <span class="news-date">Aug 2020</span>
                   <span class="news-text">Set foot on the PhD path at IIIT Delhi — the rest is written in papers, code, and coffee</span>
                 </div>
 
               </div>
-              <button class="show-more-btn" id="moreNewsBtn" type="button" aria-expanded="false">Show more</button>
             </div>
+
           </div>
 
           <!-- Right column: About -->
           <div id="about" style="display:flex; flex-direction:column; gap:16px;">
             <div class="about-intro">
-              <div class="hero-kicker">Language models · continual learning · evaluation</div>
-              <p class="hero-summary">I build <span>adaptive language systems</span> that can update their knowledge, reason consistently as information evolves, and remain reliable after deployment.</p>
+              <div class="hero-kicker">Continual learning · Model editing · Evaluation</div>
+              <p class="hero-summary">I build <span>adaptive language systems</span>: large language models that can be edited, keep learning as information evolves, and stay reliable after deployment.</p>
             </div>
 
             <div class="card">
@@ -1318,53 +1541,43 @@
                   <a href="https://www.iiitd.ac.in/vikram" target="_blank" rel="noopener noreferrer">Prof. Vikram Goyal</a>
                   and
                   <a href="https://www.tanmoychak.com" target="_blank" rel="noopener noreferrer">Prof. Tanmoy Chakraborty</a>.
-                  My research aims to build language systems that learn continuously, incorporate new evidence after deployment, and remain reliable as human knowledge changes.
+                  My research focuses on continual learning, model editing, and evaluation of large language models, including clinical applications where outdated answers carry real risk.
                 </p>
               </div>
             </div>
 
             <div class="card">
               <div class="card-title">Research Directions</div>
-
-              <div class="direction-block current">
-                <div class="direction-title">
-                  Continual Learning &amp; Adaptive Model Updating
-                  <span class="badge-current">Current</span>
+              <p class="directions-lede">Models are trained once and used for years, while the world keeps changing. My work is about three things: repairing what a model gets wrong, helping it adapt as things change, and verifying that it still works.</p>
+              <div class="directions-grid">
+                <div class="direction-block" data-topic="u">
+                  <div class="direction-title">Repair</div>
+                  <p class="direction-blurb">Fixing systems that are already deployed: correcting what a model knows without retraining it or breaking the rest.</p>
+                  <ul class="direction-list">
+                    <li><a href="https://arxiv.org/abs/2505.18343" target="_blank" rel="noopener noreferrer">Lifelong Model Editing with Graph-Based External Memory</a> <span class="direction-venue">ACL Findings 2025</span> — curvature-aware, traceable edits that survive multi-hop reasoning.</li>
+                    <li><a href="https://arxiv.org/abs/2609.38543" target="_blank" rel="noopener noreferrer">MedKIT</a> <span class="direction-venue">NeurIPS 2026 D&amp;B</span> — how editing and update methods absorb new clinical facts.</li>
+                    <li><a href="https://aclanthology.org/2023.emnlp-main.133/" target="_blank" rel="noopener noreferrer">Topic Coherence with Simplicial Complex and Sheaf Graph</a> <span class="direction-venue">EMNLP 2023</span> — structure that keeps information consistent across documents.</li>
+                  </ul>
                 </div>
-                <ul class="direction-list">
-                  <li><a href="https://arxiv.org/abs/2505.18343" target="_blank" rel="noopener noreferrer">Model Editing with Graph-Based External Memory</a> — targeted, verifiable updates for models that must keep learning after deployment.</li>
-                  <li><a href="https://link.springer.com/article/10.1007/s11695-026-08746-7" target="_blank" rel="noopener noreferrer">Temporally Anchored RAG for Bariatric Surgery Patient Education</a> — adapting deployed generation to time-sensitive clinical evidence and patient needs.</li>
-                </ul>
+                <div class="direction-block" data-topic="c">
+                  <div class="direction-title">Adapt</div>
+                  <p class="direction-blurb">Continual learning: models that keep taking in new information and stay consistent as the world changes.</p>
+                  <ul class="direction-list">
+                    <li><a href="https://link.springer.com/article/10.1007/s11695-026-08746-7" target="_blank" rel="noopener noreferrer">Temporally Anchored RAG for Bariatric Surgery Patient Education</a> <span class="direction-venue">Obesity Surgery 2026</span> — retrieval that tracks time-sensitive clinical guidance.</li>
+                    <li><a href="https://link.springer.com/chapter/10.1007/978-3-031-33383-5_1" target="_blank" rel="noopener noreferrer">Inline Citation Classification</a> <span class="direction-venue">PAKDD 2023</span> — evidence use with time-evolving augmentation.</li>
+                  </ul>
+                </div>
+                <div class="direction-block" data-topic="r">
+                  <div class="direction-title">Verify</div>
+                  <p class="direction-blurb">Testing whether updates actually hold up, especially in medicine.</p>
+                  <ul class="direction-list">
+                    <li><a href="https://arxiv.org/abs/2609.38543" target="_blank" rel="noopener noreferrer">MedKIT</a> <span class="direction-venue">NeurIPS 2026 D&amp;B</span> — generalization and knowledge preservation after clinical updates.</li>
+                    <li><a href="https://arxiv.org/abs/2604.23051" target="_blank" rel="noopener noreferrer">Temporal Consistency in Multi-Turn Language Models</a> <span class="direction-venue">ACL 2026</span> — auditing coherence as time and context shift.</li>
+                    <li><a href="https://aclanthology.org/2020.findings-emnlp.254/" target="_blank" rel="noopener noreferrer">Corpora Evaluation and System Bias Detection</a> <span class="direction-venue">EMNLP Findings 2020</span> — shared evaluation for summarization systems and datasets.</li>
+                    <li><a href="https://dl.acm.org/doi/abs/10.1145/3487351.3488361" target="_blank" rel="noopener noreferrer">Identifying Mislabeled Samples</a> <span class="direction-venue">ASONAM 2021</span> — dataset quality as a prerequisite for reliable models.</li>
+                  </ul>
+                </div>
               </div>
-
-              <div class="direction-block">
-                <div class="direction-title">Coherent Summarization &amp; Multimodal Abstraction</div>
-                <ul class="direction-list">
-                  <li><a href="https://aclanthology.org/2023.emnlp-main.133/" target="_blank" rel="noopener noreferrer">Topic Coherence with Simplicial Complex and Sheaf Graph</a> — improving faithfulness and structure in multi-document summarization.</li>
-                  <li><a href="https://dl.acm.org/doi/10.1145/3580305.3599830" target="_blank" rel="noopener noreferrer">Fusing Multimodal Signals in Hyper-Complex Space</a> — learning from text, visual, and structural signals for scientific summarization.</li>
-                  <li><a href="https://ieeexplore.ieee.org/abstract/document/10261260" target="_blank" rel="noopener noreferrer">Selective Attention Span and Reinforcement Learning</a> — identifying salient content for multi-document summarization.</li>
-                  <li><a href="https://dl.acm.org/doi/10.1016/j.knosys.2021.107152" target="_blank" rel="noopener noreferrer">See, Hear, Read</a> — guided multimodal attention for abstractive summarization.</li>
-                </ul>
-              </div>
-
-              <div class="direction-block">
-                <div class="direction-title">Efficient Data Selection &amp; Summarization Systems</div>
-                <ul class="direction-list">
-                  <li><a href="https://arxiv.org/abs/2312.06022" target="_blank" rel="noopener noreferrer">Exploiting Representation Bias for Data Distillation</a> — selecting compact, high-utility training data for summarization models.</li>
-                  <li><a href="attachments/patent.jpg" target="_blank" rel="noopener noreferrer">System and Method for Text Summarization</a> — translating summarization research into deployable system design.</li>
-                </ul>
-              </div>
-
-              <div class="direction-block">
-                <div class="direction-title">Evaluation, Data Quality &amp; Auditability</div>
-                <ul class="direction-list">
-                  <li><a href="https://arxiv.org/abs/2604.23051" target="_blank" rel="noopener noreferrer">Evaluating Temporal Consistency in Multi-Turn Language Models</a> — auditing whether conversational systems stay coherent as time and context shift.</li>
-                  <li><a href="https://aclanthology.org/2020.findings-emnlp.254/" target="_blank" rel="noopener noreferrer">Corpora Evaluation and System Bias Detection</a> — shared evaluation methods for summarization systems and datasets.</li>
-                  <li><a href="https://dl.acm.org/doi/abs/10.1145/3487351.3488361" target="_blank" rel="noopener noreferrer">Identifying Mislabeled Samples</a> — auditing dataset quality as a prerequisite for reliable models.</li>
-                  <li><a href="https://link.springer.com/chapter/10.1007/978-3-031-33383-5_1" target="_blank" rel="noopener noreferrer">Inline Citation Classification</a> — evaluating evidence use with peripheral context and time-evolving augmentation.</li>
-                </ul>
-              </div>
-
             </div>
           </div>
 
@@ -1381,15 +1594,33 @@
             <h2 class="section-heading" style="margin-bottom:0;">Publications</h2>
           </div>
           <div class="pub-stats">
-            <div class="pub-stat"><span>10</span> papers</div>
+            <div class="pub-stat"><span>11</span> papers</div>
             <div class="pub-stat"><span>1</span> preprint</div>
             <div class="pub-stat"><span>1</span> patent</div>
           </div>
         </div>
 
+
+        <div class="pub-filter" id="pubFilter" role="group" aria-label="Filter publications by topic">
+          <button type="button" class="active" data-f="all">All</button>
+          <button type="button" data-f="u">Repair</button>
+          <button type="button" data-f="c">Adapt</button>
+          <button type="button" data-f="r">Verify</button>
+          <button type="button" data-f="f">Earlier work</button>
+        </div>
+
         <div id="pubList">
 
-          <div class="pub-card" data-url="https://arxiv.org/abs/2604.23051">
+          <div class="pub-card" data-topic="u r" data-url="https://arxiv.org/abs/2609.38543">
+            <div class="pub-title">MedKIT: Evaluating Knowledge Integration and Generalization in Large Language Models</div>
+            <div class="pub-authors">Lukas Thede, <strong>Yash Kumar Atri</strong>, David Chen, Danielle Bitterman, Matthias Bethge, Thomas Hartvigsen, Zeynep Akata</div>
+            <div class="pub-footer">
+              <a href="https://arxiv.org/abs/2609.38543" target="_blank" rel="noopener noreferrer" class="pub-link" onclick="event.stopPropagation()">Paper</a>
+              <span class="venue-badge venue-kdd">NeurIPS 2026 Evaluations &amp; Datasets (Poster)</span>
+            </div>
+          </div>
+
+          <div class="pub-card" data-topic="r" data-url="https://arxiv.org/abs/2604.23051">
             <div class="pub-title">Evaluating Temporal Consistency in Multi-Turn Language Models</div>
             <div class="pub-authors"><strong>Yash Kumar Atri</strong>, Steven L. Johnson, Thomas Hartvigsen</div>
             <div class="pub-footer">
@@ -1398,7 +1629,7 @@
             </div>
           </div>
 
-          <div class="pub-card" data-url="https://link.springer.com/article/10.1007/s11695-026-08746-7">
+          <div class="pub-card" data-topic="c" data-url="https://link.springer.com/article/10.1007/s11695-026-08746-7">
             <div class="pub-title">A temporally Anchored Retrieval-Augmented Generation Framework for Metabolic and Bariatric Surgery Patient Education: An IFSO Artificial Intelligence Task Force Multinational Validation Study</div>
             <div class="pub-authors"><strong>Yash Kumar Atri</strong>, Tom Hartvigsen, Yung Lee, Allan Okrainec, Mohammad Kermansaravi, Shahab Shahabi, Silvia Leite, Mary O’Kane, Ricardo Cohen, Thomas H. Shin</div>
             <div class="pub-footer">
@@ -1407,8 +1638,8 @@
             </div>
           </div>
 
-          <div class="pub-card" data-url="https://arxiv.org/abs/2505.18343">
-            <div class="pub-title">Model Editing with Graph-Based External Memory</div>
+          <div class="pub-card" data-topic="u" data-url="https://arxiv.org/abs/2505.18343">
+            <div class="pub-title">Lifelong Model Editing with Graph-Based External Memory</div>
             <div class="pub-authors"><strong>Yash Kumar Atri</strong>, Ahmed Alaa, Thomas Hartvigsen</div>
             <div class="pub-footer">
               <a href="https://arxiv.org/abs/2505.18343" target="_blank" rel="noopener noreferrer" class="pub-link" onclick="event.stopPropagation()">Paper</a>
@@ -1416,7 +1647,7 @@
             </div>
           </div>
 
-          <div class="pub-card" data-url="https://aclanthology.org/2023.emnlp-main.133/">
+          <div class="pub-card" data-topic="u" data-url="https://aclanthology.org/2023.emnlp-main.133/">
             <div class="pub-title">Promoting Topic Coherence and Inter-Document Consorts in Multi-Document Summarization via Simplicial Complex and Sheaf Graph</div>
             <div class="pub-authors"><strong>Yash Kumar Atri</strong>, Arun Iyer, Tanmoy Chakraborty, Vikram Goyal</div>
             <div class="pub-footer">
@@ -1425,7 +1656,7 @@
             </div>
           </div>
 
-          <div class="pub-card" data-url="https://dl.acm.org/doi/10.1145/3580305.3599830">
+          <div class="pub-card" data-topic="f" data-url="https://dl.acm.org/doi/10.1145/3580305.3599830">
             <div class="pub-title">Fusing Multimodal Signals on Hyper-Complex Space for Extreme Abstractive Text Summarization (TL;DR) of Scientific Contents</div>
             <div class="pub-authors"><strong>Yash Kumar Atri</strong>, Vikram Goyal, Tanmoy Chakraborty</div>
             <div class="pub-footer">
@@ -1444,7 +1675,7 @@
             </div>
           </div>
 
-          <div class="pub-card hidden extra-publication" data-url="https://arxiv.org/abs/2312.06022">
+          <div class="pub-card hidden extra-publication" data-topic="f" data-url="https://arxiv.org/abs/2312.06022">
             <div class="pub-title">Exploiting Representation Bias for Data Distillation in Abstractive Text Summarization</div>
             <div class="pub-authors"><strong>Yash Kumar Atri</strong>, Vikram Goyal, Tanmoy Chakraborty</div>
             <div class="pub-footer">
@@ -1453,16 +1684,16 @@
             </div>
           </div>
 
-          <div class="pub-card hidden extra-publication" data-url="https://ieeexplore.ieee.org/abstract/document/10261260">
+          <div class="pub-card hidden extra-publication" data-topic="f" data-url="https://ieeexplore.ieee.org/abstract/document/10261260">
             <div class="pub-title">Multi-Document Summarization Using Selective Attention Span and Reinforcement Learning</div>
             <div class="pub-authors"><strong>Yash Kumar Atri</strong>, Vikram Goyal, Tanmoy Chakraborty</div>
             <div class="pub-footer">
               <a href="https://ieeexplore.ieee.org/abstract/document/10261260" target="_blank" rel="noopener noreferrer" class="pub-link" onclick="event.stopPropagation()">Paper</a>
-              <span class="venue-badge venue-other">TASL 2023</span>
+              <span class="venue-badge venue-other">TASLP 2023</span>
             </div>
           </div>
 
-          <div class="pub-card hidden extra-publication" data-url="https://link.springer.com/chapter/10.1007/978-3-031-33383-5_1">
+          <div class="pub-card hidden extra-publication" data-topic="c" data-url="https://link.springer.com/chapter/10.1007/978-3-031-33383-5_1">
             <div class="pub-title">Inline Citation Classification Using Peripheral Context and Time-Evolving Augmentation</div>
             <div class="pub-authors">Priyanshi Gupta, <strong>Yash Kumar Atri</strong>, Apurva Nagvenkar, Sourish Dasgupta, Tanmoy Chakraborty</div>
             <div class="pub-footer">
@@ -1471,7 +1702,7 @@
             </div>
           </div>
 
-          <div class="pub-card hidden extra-publication" data-url="https://dl.acm.org/doi/10.1016/j.knosys.2021.107152">
+          <div class="pub-card hidden extra-publication" data-topic="f" data-url="https://dl.acm.org/doi/10.1016/j.knosys.2021.107152">
             <div class="pub-title">See, Hear, Read: Leveraging Multimodality with Guided Attention for Abstractive Text Summarization</div>
             <div class="pub-authors"><strong>Yash Kumar Atri*</strong>, Shraman Pramanick*, Vikram Goyal, Tanmoy Chakraborty</div>
             <div class="pub-footer">
@@ -1480,7 +1711,7 @@
             </div>
           </div>
 
-          <div class="pub-card hidden extra-publication" data-url="https://dl.acm.org/doi/abs/10.1145/3487351.3488361">
+          <div class="pub-card hidden extra-publication" data-topic="r" data-url="https://dl.acm.org/doi/abs/10.1145/3487351.3488361">
             <div class="pub-title">Assessing the Quality of the Datasets by Identifying Mislabeled Samples</div>
             <div class="pub-authors">Vaibhav Pulastya, Gaurav Nuti, <strong>Yash Kumar Atri</strong>, Tanmoy Chakraborty</div>
             <div class="pub-footer">
@@ -1489,7 +1720,7 @@
             </div>
           </div>
 
-          <div class="pub-card hidden extra-publication" data-url="https://aclanthology.org/2020.findings-emnlp.254/">
+          <div class="pub-card hidden extra-publication" data-topic="r" data-url="https://aclanthology.org/2020.findings-emnlp.254/">
             <div class="pub-title">Corpora Evaluation and System Bias Detection in Multi-Document Summarization</div>
             <div class="pub-authors">Alvin Dey*, Tanya Chowdhury*, <strong>Yash Kumar Atri*</strong>, Tanmoy Chakraborty</div>
             <div class="pub-footer">
@@ -1559,12 +1790,14 @@
 
               <div class="exp-card">
                 <div class="exp-title">Research Support</div>
-                <div class="exp-detail">Google Cloud Research Credits ($5,000) · Cohere Labs Catalyst Grant · 2026</div>
+                <div class="exp-detail">Google Cloud Research Credits ($5,000) · Cohere Labs Catalyst Grant ($1,000) · 2026</div>
               </div>
 
               <div class="exp-card">
                 <div class="exp-title">Fellowships &amp; Travel</div>
-                <div class="exp-detail">DAAD AInet Fellow · Microsoft, iHub-Anubhuti, ACM-India travel grants</div>
+                <div class="exp-detail">DAAD AInet Fellow (Postdoc-NeT-AI, Germany) · 2024</div>
+                <div class="exp-detail">Travel grants, EMNLP 2023 (Singapore): Microsoft, iHub-Anubhuti</div>
+                <div class="exp-detail">Travel grants, KDD 2023 (Long Beach, USA): Microsoft, iHub-Anubhuti, ACM India (IARCS)</div>
               </div>
             </div>
 
@@ -1573,8 +1806,11 @@
               <div class="card list-card">
                 <div class="service-item"><strong>IC2S2 2026</strong> — Present Bias in Interactive AI, parallel talk</div>
                 <div class="service-item"><strong>MSLD 2026</strong> — Temporal scope stability in conversational AI, poster</div>
+                <div class="service-item"><strong>UVA FAIR Symposium 2026</strong> — The persistence of correctness in LLMs, invited talk</div>
+                <div class="service-item"><strong>IIT Hyderabad 2026</strong> — Lifelong model editing with external memory, invited talk</div>
                 <div class="service-item"><strong>IIT Jodhpur 2026</strong> — Lifelong model editing for adaptive language models, invited talk</div>
                 <div class="service-item"><strong>Lamarr Institute 2025</strong> — Waking LLMs from CryoSleep with continual learning</div>
+                <div class="service-item"><strong>UVA SDS Seminar 2024</strong> — Model editing using graphs, invited talk</div>
               </div>
             </div>
           </div>
@@ -1604,7 +1840,7 @@
                 <div class="exp-org">Jaypee University Anoopshahr, India</div>
                 <div class="exp-detail">
                   Advisor: Dr. Amit Kumar<br>
-                  Thesis: Machine translation in Indian languages
+                  Thesis: Machine translation in Indic languages
                 </div>
               </div>
             </div>
@@ -1619,11 +1855,10 @@
             </div>
 
             <div class="subsection">
-              <div class="subsection-title">Teaching &amp; Mentoring</div>
+              <div class="subsection-title">Teaching</div>
               <div class="card list-card">
                 <div class="service-item"><strong>Head TA</strong> — Data Mining; Big Data Analytics, IIIT Delhi</div>
-                <div class="service-item"><strong>Guest Lecturer</strong> — AI-driven mental health counseling, ICON 2023</div>
-                <div class="service-item"><strong>Mentor</strong> — Undergraduate research in summarization and fairness</div>
+                <div class="service-item"><strong>Tutorial</strong> — building blocks of AI-driven mental health counseling, ICON 2023</div>
               </div>
             </div>
           </div>
@@ -1739,6 +1974,339 @@
           if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
         });
       });
+
+      /* ── Planets: drift, cursor gravity, and an orbit-placement game ── */
+      (function() {
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const layer = document.querySelector('.cosmic-bg');
+        const els = document.querySelectorAll('.celestial');
+        if (reduce || !layer || !els.length) return;
+
+        const ORDER = ['mercury', 'venus', 'earth', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune', 'pluto'];
+        const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX'];
+        const LANES = ROMAN.map((name, i) => ({ r: 60 + i * 34, w: 2.1 * Math.pow(60 / (60 + i * 34), 0.9), name, a: 0, who: null }));
+        let sc = 1;
+        const GM = 1.6e7, SOFT = 1600, PULL = 120, VMAX = 560;
+        const info = {
+          neptune:  { drift: [-4.7, 1.9],  start: [0.78, 0.14], spin: 8,  label: 'Neptune' },
+          jupiter:  { drift: [-5.7, -2.1], start: [0.82, 0.72], spin: 8,  label: 'Jupiter' },
+          asteroid: { drift: [7, -2.7],    start: [0.09, 0.56], spin: 14, label: 'Asteroid' },
+          mercury:  { drift: [9, 3.2],     start: [0.30, 0.20], spin: 0,  label: 'Mercury' },
+          venus:    { drift: [-6.5, 3.6],  start: [0.62, 0.84], spin: 0,  label: 'Venus' },
+          earth:    { drift: [5.2, -3.2],  start: [0.45, 0.62], spin: 6,  label: 'Earth' },
+          mars:     { drift: [-8, -2.4],   start: [0.92, 0.38], spin: 6,  label: 'Mars' },
+          saturn:   { drift: [4.2, 2.6],   start: [0.15, 0.80], spin: 0,  label: 'Saturn' },
+          uranus:   { drift: [-3.8, -3],   start: [0.55, 0.08], spin: 5,  label: 'Uranus' },
+          pluto:    { drift: [6.2, 1.6],   start: [0.05, 0.30], spin: 0,  label: 'Pluto' }
+        };
+        const bodies = [...els].map(el => {
+          const key = Object.keys(info).find(k => el.classList.contains(k));
+          const i = info[key];
+          el.style.left = '0'; el.style.top = '0';
+          return { el, key, label: i.label, w: el.offsetWidth, h: el.offsetHeight, game: ORDER.indexOf(key),
+                   x: innerWidth * i.start[0], y: innerHeight * i.start[1],
+                   vx: i.drift[0], vy: i.drift[1], dx: i.drift[0], dy: i.drift[1],
+                   rot: 0, spin: i.spin, lane: -1, ang: 0, rad: 0, dir: 1, trail: [], dragging: false };
+        });
+
+        const cv = document.createElement('canvas');
+        cv.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;';
+        layer.insertBefore(cv, layer.firstChild);
+        const ctx = cv.getContext('2d');
+        let dpr = 1, W = 0, H = 0;
+        const fit = () => {
+          dpr = Math.min(devicePixelRatio || 1, 2); W = innerWidth; H = innerHeight;
+          sc = Math.max(0.5, Math.min(1, W / 1000));
+          cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        };
+        fit(); addEventListener('resize', fit);
+
+        /* ── game state & UI ── */
+        const game = { on: false, solved: false, hint: false, hold: 0, bursts: 0 };
+        const sun = { x: 0, y: 0 };
+        const playBtn = document.getElementById('playBtn');
+        const hud = document.createElement('div');
+        hud.className = 'orbit-hud'; hud.hidden = true;
+        hud.innerHTML = '<span class="orbit-hud-msg"></span><button type="button" data-a="hint" data-g>Hint</button><button type="button" data-a="shuffle" data-g>Shuffle</button><button type="button" data-a="mode"></button><button type="button" data-a="quit">Quit</button>';
+        const hint = document.createElement('div');
+        hint.className = 'orbit-hint'; hint.hidden = true;
+        hint.textContent = 'From the Sun outward: ' + ORDER.map(k => info[k].label).join(' · ');
+        document.body.append(hud, hint);
+        const msg = hud.querySelector('.orbit-hud-msg');
+        const modeBtn = hud.querySelector('[data-a=mode]');
+        let play = false;
+
+        const placed = () => bodies.filter(b => b.game >= 0 && b.lane >= 0).length;
+        const updateHud = () => {
+          if (!game.on) { msg.textContent = 'Move your cursor: planets will orbit it'; return; }
+          const n = placed();
+          const right = bodies.every(b => b.game < 0 || b.lane === b.game);
+          msg.textContent = game.solved ? 'Solved. Nicely done.' : (n === 9 ? (right ? 'Locking it in…' : 'All placed, but not quite right yet') : `${n}/9 in orbit · drag planets onto the rings`);
+        };
+        const freeUp = b => { if (b.lane >= 0) { LANES[b.lane].who = null; b.lane = -1; } };
+        const resetDrift = () => bodies.forEach(b => { freeUp(b); b.dragging = false; b.trail.length = 0; const i = info[b.key]; b.dx = b.vx = i.drift[0]; b.dy = b.vy = i.drift[1]; });
+        const shuffle = () => {
+          game.solved = false; game.hold = 0;
+          sun.x = innerWidth / 2; sun.y = innerHeight / 2;
+          const outer = LANES[8].r * sc + 50;
+          bodies.forEach(b => {
+            freeUp(b); b.dragging = false; b.trail.length = 0;
+            if (b.game < 0) return;
+            const ang = Math.random() * Math.PI * 2, d = outer + Math.random() * Math.max(40, Math.min(W, H) / 2 - outer + 90);
+            b.x = Math.max(24, Math.min(W - 24, sun.x + Math.cos(ang) * d));
+            b.y = Math.max(24, Math.min(H - 24, sun.y + Math.sin(ang) * d));
+            const sp = 6 + Math.random() * 8, a2 = Math.random() * Math.PI * 2;
+            b.dx = b.vx = Math.cos(a2) * sp; b.dy = b.vy = Math.sin(a2) * sp;
+          });
+          updateHud();
+        };
+        const setMode = m => {
+          game.on = m === 'game'; layer.classList.toggle('game', game.on);
+          bodies.forEach(b => { b.el.style.visibility = (game.on && b.game < 0) ? 'hidden' : ''; });
+          cur = null; closeCongrats(); hint.hidden = !game.on || !game.hint;
+          hud.querySelectorAll('[data-g]').forEach(el => { el.hidden = !game.on; });
+          modeBtn.textContent = game.on ? 'Cursor mode' : 'Game mode';
+          if (game.on) shuffle(); else { resetDrift(); updateHud(); }
+        };
+        const startPlay = () => {
+          play = true; hud.hidden = false;
+          playBtn.setAttribute('aria-pressed', 'true'); playBtn.querySelector('span').textContent = 'Stop';
+          playBtn.querySelector('i').className = 'fas fa-stop';
+          setMode('game');
+        };
+        const stopPlay = () => {
+          play = false; hud.hidden = true; hint.hidden = true; game.on = false; cur = null;
+          layer.classList.remove('game'); closeCongrats(); resetDrift();
+          bodies.forEach(b => { b.el.style.visibility = ''; });
+          playBtn.setAttribute('aria-pressed', 'false'); playBtn.querySelector('span').textContent = 'Play';
+          playBtn.querySelector('i').className = 'fas fa-play';
+        };
+        playBtn.hidden = false;
+        playBtn.addEventListener('click', () => (play ? stopPlay() : startPlay()));
+        hud.addEventListener('click', e => {
+          const a = e.target.dataset && e.target.dataset.a;
+          if (a === 'quit') stopPlay();
+          if (a === 'mode') setMode(game.on ? 'free' : 'game');
+          if (a === 'shuffle') { closeCongrats(); shuffle(); }
+          if (a === 'hint') { game.hint = !game.hint; hint.hidden = !game.hint; }
+        });
+
+        /* drag */
+        let drag = null;
+        bodies.forEach(b => {
+          if (b.game < 0) return;
+          b.el.addEventListener('pointerdown', e => {
+            if (!game.on) return;
+            e.preventDefault(); try { b.el.setPointerCapture(e.pointerId); } catch (_) {}
+            freeUp(b); b.dragging = true; b.vx = b.vy = 0; drag = b; game.solved = false; game.hold = 0; closeCongrats(); updateHud();
+          });
+        });
+        const drop = () => {
+          if (!drag) return;
+          const b = drag; drag = null; b.dragging = false;
+          const d = Math.hypot(b.x - sun.x, b.y - sun.y);
+          let best = -1, bd = 1e9;
+          LANES.forEach((L, i) => { const g = Math.abs(L.r * sc - d); if (g < bd) { bd = g; best = i; } });
+          if (best >= 0 && bd <= 24 * sc + 6) {
+            const o = LANES[best].who;
+            if (o && o !== b) { freeUp(o); const a2 = Math.random() * 6.28; o.vx = Math.cos(a2) * 40; o.vy = Math.sin(a2) * 40; o.dx = o.vx * 0.2; o.dy = o.vy * 0.2; }
+            LANES[best].who = b; b.lane = best; b.ang = Math.atan2(b.y - sun.y, b.x - sun.x); b.rad = d; b.dir = 1;
+          } else { b.vx = b.dx; b.vy = b.dy; }
+          updateHud();
+        };
+
+        /* pointer for gravity mode */
+        let cur = null, c = null, accent = '#0f766e', tick = 0;
+        const setCur = e => { cur = { x: e.clientX, y: e.clientY }; if (!c) c = { x: cur.x, y: cur.y }; };
+        addEventListener('pointermove', e => {
+          if (drag) { drag.x = e.clientX; drag.y = e.clientY; return; }
+          if (play && !game.on) setCur(e);
+        }, { passive: true });
+        addEventListener('pointerdown', e => { if (play && !game.on) setCur(e); }, { passive: true });
+        addEventListener('pointerup', e => { if (drag) drop(); else if (e.pointerType !== 'mouse') cur = null; });
+        addEventListener('pointercancel', () => { if (drag) drop(); cur = null; });
+        document.addEventListener('mouseleave', () => { cur = null; });
+
+        /* ── celebration ── */
+        let fx = null, fxc = null, parts = [], bubble = null;
+        function closeCongrats() { if (bubble) { bubble.remove(); bubble = null; } }
+        function celebrate() {
+          document.body.classList.remove('boom'); void document.body.offsetWidth; document.body.classList.add('boom');
+          const flash = document.createElement('div'); flash.className = 'boom-flash'; document.body.append(flash);
+          setTimeout(() => flash.remove(), 700);
+          if (!fx) {
+            fx = document.createElement('canvas'); fx.className = 'fx-canvas'; document.body.append(fx);
+            fx.width = innerWidth * dpr; fx.height = innerHeight * dpr; fxc = fx.getContext('2d'); fxc.setTransform(dpr, 0, 0, dpr, 0, 0);
+          }
+          const cols = ['#ff453a', '#ff9f0a', '#ffd60a', '#32d74b', '#0a84ff', '#bf5af2', '#ff375f'];
+          for (let i = 0; i < 170; i++) parts.push({ t: 'c', x: Math.random() * W, y: -20 - Math.random() * 300, vx: (Math.random() - 0.5) * 120, vy: 140 + Math.random() * 220,
+            rot: Math.random() * 6, vr: (Math.random() - 0.5) * 12, w: 6 + Math.random() * 6, h: 9 + Math.random() * 7, col: cols[i % cols.length], life: 1 });
+          const burst = () => {
+            const bx = W * (0.2 + Math.random() * 0.6), by = H * (0.2 + Math.random() * 0.35), col = cols[(Math.random() * cols.length) | 0];
+            for (let i = 0; i < 70; i++) { const a = Math.random() * 6.283, v = 80 + Math.random() * 260;
+              parts.push({ t: 'f', x: bx, y: by, vx: Math.cos(a) * v, vy: Math.sin(a) * v, col, life: 1 }); }
+          };
+          for (let i = 0; i < 7; i++) setTimeout(burst, i * 420);
+          closeCongrats();
+          bubble = document.createElement('div'); bubble.className = 'imsg';
+          bubble.innerHTML = '<div class="imsg-from">Yash</div><div class="imsg-typing"><i></i><i></i><i></i></div>';
+          document.body.append(bubble);
+          setTimeout(() => {
+            if (!bubble) return;
+            bubble.innerHTML = '<div class="imsg-from">Yash</div><div class="imsg-bubble">Congratulations! 🎉<br>You put all nine planets in their orbits.</div><div class="imsg-actions"><button type="button" data-a="again">Play again</button><button type="button" data-a="close">Close</button></div>';
+            bubble.classList.add('in');
+            bubble.querySelector('[data-a=again]').onclick = () => { closeCongrats(); shuffle(); };
+            bubble.querySelector('[data-a=close]').onclick = closeCongrats;
+          }, 1100);
+          if (!fx._run) { fx._run = true; let lt = performance.now();
+            const loop = now => {
+              const dt = Math.min((now - lt) / 1000, 0.05); lt = now;
+              fxc.clearRect(0, 0, W, H);
+              parts = parts.filter(p => p.life > 0 && p.y < H + 40);
+              for (const p of parts) {
+                if (p.t === 'c') { p.x += p.vx * dt; p.y += p.vy * dt; p.vx *= 0.995; p.rot += p.vr * dt;
+                  fxc.save(); fxc.translate(p.x, p.y); fxc.rotate(p.rot); fxc.fillStyle = p.col; fxc.fillRect(-p.w / 2, -p.h / 2, p.w, p.h * Math.abs(Math.cos(p.rot * 2)) + 1); fxc.restore(); }
+                else { p.vy += 140 * dt; p.vx *= 0.985; p.vy *= 0.985; p.x += p.vx * dt; p.y += p.vy * dt; p.life -= dt * 0.7;
+                  fxc.globalAlpha = Math.max(p.life, 0); fxc.fillStyle = p.col; fxc.beginPath(); fxc.arc(p.x, p.y, 2.4, 0, 6.283); fxc.fill(); fxc.globalAlpha = 1; }
+              }
+              if (parts.length || performance.now() - lt < 4000) requestAnimationFrame(loop); else { fx.remove(); fx = null; }
+            };
+            requestAnimationFrame(loop);
+          }
+        }
+
+        const release = b => { freeUp(b); };
+        let last = performance.now();
+        function frame(now) {
+          const dt = Math.min((now - last) / 1000, 0.05); last = now;
+          if ((tick++ % 60) === 0) accent = getComputedStyle(document.body).getPropertyValue('--accent').trim() || accent;
+
+          let center = null, cvx = 0, cvy = 0;
+          if (game.on) center = sun;
+          else if (cur && c) {
+            const k = 1 - Math.exp(-9 * dt), nx = c.x + (cur.x - c.x) * k, ny = c.y + (cur.y - c.y) * k;
+            cvx = (nx - c.x) / dt; cvy = (ny - c.y) / dt; c.x = nx; c.y = ny; center = c;
+          }
+          const flung = !game.on && Math.hypot(cvx, cvy) > 1300;
+
+          for (const b of bodies) {
+            if (b.dragging) { b.rot += 0; }
+            else {
+              if (!game.on && b.lane >= 0 && (!cur || flung)) {
+                const L = LANES[b.lane], t = b.dir * L.w * b.rad;
+                b.vx = -Math.sin(b.ang) * t + cvx * 0.5; b.vy = Math.cos(b.ang) * t + cvy * 0.5; release(b);
+              }
+              let sp = 0;
+              if (b.lane >= 0) {
+                const L = LANES[b.lane];
+                b.ang += b.dir * L.w * dt;
+                b.rad += (L.r * sc - b.rad) * (1 - Math.exp(-(game.on ? 7 : 2.5) * dt));
+                b.x = center.x + Math.cos(b.ang) * b.rad; b.y = center.y + Math.sin(b.ang) * b.rad;
+                sp = L.w * b.rad;
+              } else {
+                if (!game.on && cur && c && b.game >= 0) {
+                  const rx = c.x - b.x, ry = c.y - b.y, d2 = rx * rx + ry * ry, d = Math.sqrt(d2) || 1;
+                  const nx = rx / d, ny = ry / d, a = PULL + GM / (d2 + SOFT);
+                  const side = (b.vx * -ny + b.vy * nx) >= 0 ? 1 : -1;
+                  b.vx += (nx * a - ny * side * a * 0.45) * dt;
+                  b.vy += (ny * a + nx * side * a * 0.45) * dt;
+                  if (d < 460) { const dm = Math.exp(-0.7 * dt); b.vx *= dm; b.vy *= dm; }
+                  if (d < LANES[8].r * sc + 40) {
+                    let best = -1, bd = 1e9;
+                    LANES.forEach((L, i) => { if (!L.who && Math.abs(L.r * sc - d) < bd) { bd = Math.abs(L.r * sc - d); best = i; } });
+                    if (best >= 0) { LANES[best].who = b; b.lane = best; b.ang = Math.atan2(b.y - c.y, b.x - c.x); b.rad = d; b.dir = (rx * b.vy - ry * b.vx) > 0 ? -1 : 1; }
+                  }
+                } else {
+                  const k = 1 - Math.exp(-0.5 * dt); b.vx += (b.dx - b.vx) * k; b.vy += (b.dy - b.vy) * k;
+                }
+                sp = Math.hypot(b.vx, b.vy);
+                if (sp > VMAX) { b.vx *= VMAX / sp; b.vy *= VMAX / sp; sp = VMAX; }
+                b.x += b.vx * dt; b.y += b.vy * dt;
+                const m = 60;
+                if (game.on || !cur) {
+                  if (b.x < -m) b.x = W + m; else if (b.x > W + m) b.x = -m;
+                  if (b.y < -m) b.y = H + m; else if (b.y > H + m) b.y = -m;
+                }
+              }
+              if (info[b.key].spin) b.rot += (info[b.key].spin + sp * 0.3) * dt;
+              b.trail.push({ x: b.x, y: b.y });
+              const cap = (sp > 40 && !game.on) ? 46 : 0;
+              if (b.trail.length > cap) b.trail.splice(0, b.trail.length - cap);
+            }
+            b.el.style.transform = `translate3d(${(b.x - b.w / 2).toFixed(1)}px, ${(b.y - b.h / 2).toFixed(1)}px, 0) rotate(${b.rot.toFixed(1)}deg)`;
+          }
+
+          /* win check */
+          if (game.on && !game.solved) {
+            const ok = bodies.every(b => b.game < 0 || (b.lane === b.game && !b.dragging));
+            game.hold = ok ? game.hold + dt : 0;
+            if (game.hold > 0.9) { game.solved = true; updateHud(); celebrate(); }
+          }
+
+          /* draw */
+          ctx.clearRect(0, 0, W, H);
+          ctx.lineCap = 'round';
+          LANES.forEach((L, i) => {
+            const target = game.on ? (L.who ? 0.22 : 0.11) : (L.who ? 0.09 : (cur ? 0.03 : 0));
+            L.a += (target - L.a) * (1 - Math.exp(-6 * dt));
+            if (L.a < 0.005 || !center) return;
+            ctx.save(); ctx.globalAlpha = L.a; ctx.strokeStyle = accent; ctx.lineWidth = L.who ? 1.2 : 1;
+            ctx.setLineDash(L.who ? [] : [3, 7]);
+            ctx.beginPath(); ctx.arc(center.x, center.y, L.r * sc, 0, Math.PI * 2); ctx.stroke(); ctx.restore();
+            if (game.on) { ctx.globalAlpha = 0.6; ctx.fillStyle = accent; ctx.font = '500 10px "DM Mono", monospace'; ctx.textAlign = 'center';
+              ctx.fillText(L.name, center.x, center.y - L.r * sc - 5); ctx.textAlign = 'start'; ctx.globalAlpha = 1; }
+          });
+          if (game.on) {
+            const g = ctx.createRadialGradient(sun.x, sun.y, 0, sun.x, sun.y, 26);
+            g.addColorStop(0, 'rgba(253,224,71,1)'); g.addColorStop(0.35, 'rgba(251,146,60,0.9)'); g.addColorStop(1, 'rgba(251,146,60,0)');
+            ctx.fillStyle = g; ctx.beginPath(); ctx.arc(sun.x, sun.y, 26, 0, 6.283); ctx.fill();
+          }
+          for (const b of bodies) {
+            if (game.on && b.game < 0) continue;
+            const n = b.trail.length;
+            if (n > 2) {
+              ctx.strokeStyle = accent; ctx.lineWidth = 1.4;
+              for (let i = 1; i < n; i++) {
+                ctx.globalAlpha = (i / n) * (b.lane >= 0 ? 0.18 : 0.1);
+                ctx.beginPath(); ctx.moveTo(b.trail[i - 1].x, b.trail[i - 1].y); ctx.lineTo(b.trail[i].x, b.trail[i].y); ctx.stroke();
+              }
+              ctx.globalAlpha = 1;
+            }
+            if (b.lane >= 0 || game.on) {
+              ctx.globalAlpha = game.on ? 0.55 : 0.4; ctx.fillStyle = accent; ctx.font = '500 10px "DM Mono", monospace';
+              ctx.fillText(game.on ? b.label : `${ROMAN[b.lane]} · ${b.label}`, b.x + b.w / 2 + 6, b.y - b.h / 2 - 2); ctx.globalAlpha = 1;
+            }
+          }
+          if (!game.on && c && cur && LANES.some(L => L.who)) {
+            ctx.globalAlpha = 0.22; ctx.fillStyle = accent; ctx.beginPath(); ctx.arc(c.x, c.y, 2.5, 0, Math.PI * 2); ctx.fill(); ctx.globalAlpha = 1;
+          }
+          requestAnimationFrame(frame);
+        }
+        requestAnimationFrame(frame);
+      })();
+
+
+      (function() {
+        const wrap = document.getElementById('pubFilter');
+        if (!wrap) return;
+        const cards = [...document.querySelectorAll('#pubList .pub-card')];
+        const more = document.getElementById('morePublicationsBtn');
+        wrap.querySelectorAll('button[data-f]').forEach(btn => {
+          const f = btn.dataset.f;
+          if (f !== 'all') btn.textContent += ' (' + cards.filter(c => (c.dataset.topic || '').split(' ').includes(f)).length + ')';
+          btn.addEventListener('click', () => {
+            wrap.querySelectorAll('button').forEach(x => x.classList.toggle('active', x === btn));
+            const expanded = more && more.getAttribute('aria-expanded') === 'true';
+            cards.forEach(c => {
+              const match = f === 'all' || (c.dataset.topic || '').split(' ').includes(f);
+              c.style.display = match ? '' : 'none';
+              if (f === 'all') c.classList.toggle('hidden', c.classList.contains('extra-publication') && !expanded);
+              else c.classList.remove('hidden');
+            });
+            if (more) more.parentElement.style.display = f === 'all' ? '' : 'none';
+          });
+        });
+      })();
 
       const toggle = document.getElementById('darkToggle');
       if (localStorage.getItem('dark') === 'true') document.body.classList.add('dark');

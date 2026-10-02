@@ -1,13 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Yash Kumar Atri">
-  <defs>
-    <linearGradient id="bg" x1="12" y1="8" x2="52" y2="58" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#0f766e"/>
-      <stop offset="0.58" stop-color="#1d4ed8"/>
-      <stop offset="1" stop-color="#5b21b6"/>
-    </linearGradient>
-  </defs>
-  <rect width="64" height="64" rx="15" fill="#f6f8fb"/>
-  <rect x="6" y="6" width="52" height="52" rx="13" fill="url(#bg)"/>
-  <path d="M17 18h8.2l7 13.1L39.4 18H47L36 37.1V46h-8v-8.8L17 18z" fill="#fff"/>
-  <circle cx="47" cy="18" r="4" fill="#dbeafe"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="UVA Cavaliers">
+  <rect width="64" height="64" rx="14" fill="#232d4b"/>
+  <!-- crossed sabres -->
+  <g stroke="#e57200" stroke-linecap="round">
+    <path d="M10 52 L50 12" stroke-width="3.2"/>
+    <path d="M54 52 L14 12" stroke-width="3.2"/>
+  </g>
+  <g fill="#e57200">
+    <path d="M7 49l4 4-3.5 3.5-4-4z"/>
+    <path d="M57 49l-4 4 3.5 3.5 4-4z"/>
+  </g>
+  <!-- V -->
+  <path d="M15 18h10.5L32 37.5 38.5 18H49L37.5 50h-11z" fill="#fff"/>
 </svg>
